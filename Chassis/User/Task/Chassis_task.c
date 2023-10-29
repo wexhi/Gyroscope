@@ -31,9 +31,6 @@ int16_t avg_speed = 0;
 
 int8_t chassis_mode = 1; // 判断底盘状态，用于UI编写
 
-// super_cap
-void power_limit(int *speed);
-
 int chassis_mode_flag = 0;
 
 #define angle_valve 5
