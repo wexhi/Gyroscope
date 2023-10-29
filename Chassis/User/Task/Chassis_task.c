@@ -9,6 +9,7 @@
 #define motor_max 900
 #define motor_min -900
 
+fp32 speed_limit = 10000; // 速度限制
 pid_struct_t motor_pid_chassis[4];
 pid_struct_t supercap_pid;
 motor_info_t motor_info_chassis[8];        // 电机信息结构体
@@ -36,6 +37,8 @@ int chassis_mode_flag = 0;
 #define angle_valve 5
 #define angle_weight 55
 
+static void Chassis_loop_Init();
+
 void Chassis_task(void const *pvParameters)
 {
   for (uint8_t i = 0; i < 4; i++)
@@ -46,6 +49,8 @@ void Chassis_task(void const *pvParameters)
 
   for (;;) // 底盘运动任务
   {
+    Chassis_loop_Init();
+
     // 选择底盘运动模式
     mode_chooce();
 
@@ -56,6 +61,13 @@ void Chassis_task(void const *pvParameters)
     chassis_current_give();
     osDelay(1);
   }
+}
+
+static void Chassis_loop_Init()
+{
+  Vx = 0;
+  Vy = 0;
+  Wz = 0;
 }
 
 void mode_chooce()
@@ -180,8 +192,6 @@ void RC_to_motor(void)
       motor_speed_target[i] = 0;
     }
   }
-  // 电机电流控制
-  chassis_current_give();
 }
 
 void test_motor(int16_t avg)
@@ -201,8 +211,6 @@ void test_motor(int16_t avg)
       motor_speed_target[i] = 0;
     }
   }
-  // 电机电流控制
-  chassis_current_give();
 }
 
 void RC_Move(void)
@@ -219,4 +227,10 @@ void RC_Move(void)
   Vx = map_range(Vx, RC_MIN, RC_MAX, motor_min, motor_max);
   Vy = map_range(Vy, RC_MIN, RC_MAX, motor_min, motor_max);
   Wz = map_range(Wz, RC_MIN, RC_MAX, motor_min, motor_max);
+}
+
+// 小陀螺模式
+void gyroscope(void)
+{
+  Wz = 900;
 }
