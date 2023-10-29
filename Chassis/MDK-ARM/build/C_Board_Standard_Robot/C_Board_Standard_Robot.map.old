@@ -1676,6 +1676,7 @@ Section Cross References
     Chassis_task.o(i.chassis_current_give) refers to Chassis_task.o(.data) for .data
     Chassis_task.o(i.chassis_current_give) refers to Chassis_task.o(.bss) for .bss
     Chassis_task.o(i.chassis_motol_speed_calculate) refers to Chassis_task.o(.data) for .data
+    Chassis_task.o(i.gyroscope) refers to Chassis_task.o(.data) for .data
     Chassis_task.o(i.map_range) refers to dflti.o(.text) for __aeabi_i2d
     Chassis_task.o(i.map_range) refers to dadd.o(.text) for __aeabi_dsub
     Chassis_task.o(i.map_range) refers to ddiv.o(.text) for __aeabi_ddiv
@@ -2821,7 +2822,7 @@ Removing Unused input sections from the image.
     Removing Chassis_task.o(.revsh_text), (4 bytes).
     Removing Chassis_task.o(.rrx_text), (6 bytes).
     Removing Chassis_task.o(i.Motor_Speed_limiting), (126 bytes).
-    Removing Chassis_task.o(i.gyroscope), (2 bytes).
+    Removing Chassis_task.o(i.gyroscope), (16 bytes).
     Removing Chassis_task.o(i.test_motor), (44 bytes).
     Removing Chassis_task.o(.bss), (18 bytes).
     Removing Chassis_task.o(.data), (4 bytes).
@@ -2937,7 +2938,7 @@ Removing Unused input sections from the image.
     Removing dsqrt.o(.text), (162 bytes).
     Removing cdcmple.o(.text), (48 bytes).
 
-937 unused section(s) (total 280403 bytes) removed from the image.
+937 unused section(s) (total 280417 bytes) removed from the image.
 
 ==============================================================================
 

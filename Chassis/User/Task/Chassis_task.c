@@ -84,6 +84,7 @@ void mode_chooce()
     LEDB_ON(); // BLUE LED
     LEDR_OFF();
     LEDG_OFF();
+    gyroscope();
   }
   else if (rc_ctrl.rc.s[0] == 2)
   {
