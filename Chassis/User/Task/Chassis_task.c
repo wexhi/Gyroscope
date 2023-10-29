@@ -46,40 +46,52 @@ void Chassis_task(void const *pvParameters)
 
   for (;;) // 底盘运动任务
   {
-    // 遥控器控制
-    // chanel 0 left max==-660,right max==660
-    // chanel 1 up max==660,down max==-660
-    // chanel 2 left max==-660,right max==660
-    // chanel 3 up max==660,down max==-660
-    // chanel 4 The remote control does not have this channel
+    // 选择底盘运动模式
+    mode_chooce();
 
-    if (rc_ctrl.rc.s[0] == 1)
-    {
-      LEDB_ON(); // BLUE LED
-      LEDR_OFF();
-      LEDG_OFF();
-    }
-    else if (rc_ctrl.rc.s[0] == 2)
-    {
-      LEDG_ON(); // GREEN LED
-      LEDR_OFF();
-      LEDB_OFF();
-      RC_to_motor();
-    }
-    else if (rc_ctrl.rc.s[0] == 3)
-    {
-      LEDR_ON(); // RED LED
-      LEDB_OFF();
-      LEDG_OFF();
-      RC_Move();
-    }
-    else
-    {
-      LEDR_OFF();
-      LEDB_OFF();
-      LEDG_OFF();
-    }
+    // 电机速度解算
+    chassis_motol_speed_calculate();
+
+    // 电机电流控制
+    chassis_current_give();
     osDelay(1);
+  }
+}
+
+void mode_chooce()
+{
+  // 遥控器控制
+  // chanel 0 left max==-660,right max==660
+  // chanel 1 up max==660,down max==-660
+  // chanel 2 left max==-660,right max==660
+  // chanel 3 up max==660,down max==-660
+  // chanel 4 The remote control does not have this channel
+
+  if (rc_ctrl.rc.s[0] == 1)
+  {
+    LEDB_ON(); // BLUE LED
+    LEDR_OFF();
+    LEDG_OFF();
+  }
+  else if (rc_ctrl.rc.s[0] == 2)
+  {
+    LEDG_ON(); // GREEN LED
+    LEDR_OFF();
+    LEDB_OFF();
+    RC_to_motor();
+  }
+  else if (rc_ctrl.rc.s[0] == 3)
+  {
+    LEDR_ON(); // RED LED
+    LEDB_OFF();
+    LEDG_OFF();
+    RC_Move();
+  }
+  else
+  {
+    LEDR_OFF();
+    LEDB_OFF();
+    LEDG_OFF();
   }
 }
 
@@ -87,10 +99,15 @@ void Chassis_task(void const *pvParameters)
 void chassis_motol_speed_calculate()
 {
 
-  motor_speed_target[CHAS_LF] = 0;
-  motor_speed_target[CHAS_RF] = 0;
-  motor_speed_target[CHAS_RB] = 0;
-  motor_speed_target[CHAS_LB] = 0;
+  // 根据分解的速度调整电机速度目标
+  // motor_speed_target[CHAS_LF] = Vx - Vy - Wz;
+  // motor_speed_target[CHAS_RF] = Vx + Vy + Wz;
+  // motor_speed_target[CHAS_RB] = Vx - Vy + Wz;
+  // motor_speed_target[CHAS_LB] = Vx + Vy - Wz;
+  motor_speed_target[CHAS_LF] = Wz + Vx + Vy;
+  motor_speed_target[CHAS_RF] = Wz - Vx + Vy;
+  motor_speed_target[CHAS_RB] = Wz - Vx - Vy;
+  motor_speed_target[CHAS_LB] = Wz + Vx - Vy;
 }
 // 运动解算
 // 速度限制函数
@@ -202,17 +219,4 @@ void RC_Move(void)
   Vx = map_range(Vx, RC_MIN, RC_MAX, motor_min, motor_max);
   Vy = map_range(Vy, RC_MIN, RC_MAX, motor_min, motor_max);
   Wz = map_range(Wz, RC_MIN, RC_MAX, motor_min, motor_max);
-
-  // 根据分解的速度调整电机速度目标
-  // motor_speed_target[CHAS_LF] = Vx - Vy - Wz;
-  // motor_speed_target[CHAS_RF] = Vx + Vy + Wz;
-  // motor_speed_target[CHAS_RB] = Vx - Vy + Wz;
-  // motor_speed_target[CHAS_LB] = Vx + Vy - Wz;
-  motor_speed_target[CHAS_LF] = Wz + Vx + Vy;
-  motor_speed_target[CHAS_RF] = Wz - Vx + Vy;
-  motor_speed_target[CHAS_RB] = Wz - Vx - Vy;
-  motor_speed_target[CHAS_LB] = Wz + Vx - Vy;
-
-  // 电机电流控制
-  chassis_current_give();
 }

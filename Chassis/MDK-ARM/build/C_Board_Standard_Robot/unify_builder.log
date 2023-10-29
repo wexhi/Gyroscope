@@ -84,3 +84,175 @@ command:
 [2023-10-29 20:27:39]	[done]
 	build successfully !
 
+[2023-10-29 20:36:06]	compilation failed at : "c:\Users\14775\Desktop\study\robomaster\Gyroscope\Chassis\User\Task\Chassis_task.c", exit code: 1
+command: 
+  "C:\Keil_v5\ARM\ARMCC\bin\armcc.exe" -c --apcs=interwork -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Application -I../Bsp -I../Components -I../Components/Algorithm -I../Components/Controller -I../Components/Devices -I../Components/Algorithm/Include -I.cmsis/include -IRTE/_C_Board_Standard_Robot -I.eide/deps -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING --cpu Cortex-M4.fp --li --c99 -D__MICROLIB -O3 --split_sections --diag_suppress=1 --diag_suppress=1295 -g -o .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o --no_depend_system_headers --depend .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.d .\..\User\Task\Chassis_task.c
+   at unify_builder.Program.Main(String[] args_)
+---
+".\..\User\Task\Chassis_task.h", line 30: Error:  #99: a declaration here must declare a parameter
+  void mode_chooce() void Chassis_task(void const *pvParameters);
+                          ^
+".\..\User\Task\Chassis_task.h", line 31: Error:  #99: a declaration here must declare a parameter
+  void RC_to_Vector(void);
+       ^
+".\..\User\Task\Chassis_task.h", line 32: Error:  #99: a declaration here must declare a parameter
+  void chassis_motol_speed_calculate(void);
+       ^
+".\..\User\Task\Chassis_task.h", line 33: Error:  #99: a declaration here must declare a parameter
+  void Motor_Speed_limiting(volatile int16_t *motor_speed, int16_t limit_speed);
+       ^
+".\..\User\Task\Chassis_task.h", line 34: Error:  #99: a declaration here must declare a parameter
+  void chassis_current_give(void);
+       ^
+".\..\User\Task\Chassis_task.h", line 35: Error:  #99: a declaration here must declare a parameter
+  void RC_to_motor(void);
+       ^
+".\..\User\Task\Chassis_task.h", line 36: Error:  #99: a declaration here must declare a parameter
+  void RC_Move(void);
+       ^
+".\..\User\Task\Chassis_task.h", line 37: Error:  #99: a declaration here must declare a parameter
+  void test_motor(int16_t avg);
+       ^
+"../Inc/FreeRTOSConfig.h", line 53: Error:  #85: invalid storage class for a parameter
+    extern uint32_t SystemCoreClock;
+    ^
+"../Inc/FreeRTOSConfig.h", line 53: Error:  #99: a declaration here must declare a parameter
+    extern uint32_t SystemCoreClock;
+                    ^
+"../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h", line 35: Warning:  #99-D: a declaration here must declare a parameter
+  typedef void (*TaskFunction_t)( void * );
+  ^
+"../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h", line 35: Warning:  #231-D: declaration is not visible outside of function
+  typedef void (*TaskFunction_t)( void * );
+                 ^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 55: Warning:  #99-D: a declaration here must declare a parameter
+  typedef 
+ortSTACK_TYPE StackType_t;
+  ^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 55: Warning:  #231-D: declaration is not visible outside of function
+  typedef 
+ortSTACK_TYPE StackType_t;
+                         ^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 56: Warning:  #99-D: a declaration here must declare a parameter
+  typedef long BaseType_t;
+  ^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 56: Warning:  #231-D: declaration is not visible outside of function
+  typedef long BaseType_t;
+               ^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 57: Warning:  #99-D: a declaration here must declare a parameter
+  typedef unsigned long UBaseType_t;
+  ^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 57: Warning:  #231-D: declaration is not visible outside of function
+  typedef unsigned long UBaseType_t;
+                        ^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 63: Warning:  #99-D: a declaration here must declare a parameter
+  	typedef uint32_t TickType_t;
+  	^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 63: Warning:  #231-D: declaration is not visible outside of function
+  	typedef uint32_t TickType_t;
+  	                 ^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 102: Error:  #85: invalid storage class for a parameter
+  extern void vPortEnterCritical( void );
+  ^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 102: Error:  #99: a declaration here must declare a parameter
+  extern void vPortEnterCritical( void );
+              ^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 103: Error:  #85: invalid storage class for a parameter
+  extern void vPortExitCritical( void );
+  ^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 103: Error:  #99: a declaration here must declare a parameter
+  extern void vPortExitCritical( void );
+              ^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 116: Error:  #85: invalid storage class for a parameter
+  	extern void vPortSuppressTicksAndSleep( TickType_t xExpectedIdleTime );
+  	^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 116: Error:  #99: a declaration here must declare a parameter
+  	extern void vPortSuppressTicksAndSleep( TickType_t xExpectedIdleTime );
+  	            ^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 152: Error:  #99: a declaration here must declare a parameter
+  	void vPortValidateInterruptPriority( void );
+  	     ^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 167: Error:  #85: invalid storage class for a parameter
+  static 
+ortFORCE_INLINE void vPortSetBASEPRI( uint32_t ulBASEPRI )
+  ^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 167: Warning:  #85-D: invalid storage class for a parameter
+  static 
+ortFORCE_INLINE void vPortSetBASEPRI( uint32_t ulBASEPRI )
+         ^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 167: Error:  #99: a declaration here must declare a parameter
+  static portFORCE_INLINE void vPortSetBASEPRI( uint32_t ulBASEPRI )
+                               ^
+"no source": Error:  #325: inline specifier allowed on function declarations only
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 167: Error:  #655-D: the modifier "__forceinline" is not allowed on this declaration
+  static portFORCE_INLINE void vPortSetBASEPRI( uint32_t ulBASEPRI )
+                               ^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 168: Error:  #65: expected a ";"
+  {
+  ^
+"../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h", line 200: Error:  #10: "#" not expected here
+  		msr basepri, #0
+  		             ^
+"../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h", line 117: Warning:  #12-D: parsing restarts here after previous syntax error
+  		StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t pxCode, void *pvParameters ) 
+RIVILEGED_FUNCTION;
+  		                                                                                                                              ^
+"../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h", line 123: Warning:  #231-D: declaration is not visible outside of function
+  typedef struct HeapRegion
+                 ^
+"../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h", line 123: Warning:  #99-D: a declaration here must declare a parameter
+  typedef struct HeapRegion
+  ^
+"../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h", line 127: Warning:  #231-D: declaration is not visible outside of function
+  } HeapRegion_t;
+    ^
+"../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h", line 130: Warning:  #231-D: declaration is not visible outside of function
+  typedef struct xHeapStats
+                 ^
+"../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h", line 130: Warning:  #99-D: a declaration here must declare a parameter
+  typedef struct xHeapStats
+  ^
+"../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h", line 139: Warning:  #231-D: declaration is not visible outside of function
+  } HeapStats_t;
+    ^
+"../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h", line 152: Error:  #99: a declaration here must declare a parameter
+  void vPortDefineHeapRegions( const HeapRegion_t * const pxHeapRegions ) 
+RIVILEGED_FUNCTION;
+       ^
+"../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h", line 158: Error:  #99: a declaration here must declare a parameter
+  void vPortGetHeapStats( HeapStats_t *pxHeapStats );
+       ^
+"../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h", line 163: Error:  #99: a declaration here must declare a parameter
+  void *pvPortMalloc( size_t xSize ) 
+RIVILEGED_FUNCTION;
+        ^
+"../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h", line 164: Error:  #99: a declaration here must declare a parameter
+  void vPortFree( void *pv ) 
+RIVILEGED_FUNCTION;
+       ^
+"../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h", line 165: Error:  #99: a declaration here must declare a parameter
+  void vPortInitialiseBlocks( void ) 
+RIVILEGED_FUNCTION;
+       ^
+"../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h", line 166: Error:  #99: a declaration here must declare a parameter
+  size_t xPortGetFreeHeapSize( void ) 
+RIVILEGED_FUNCTION;
+         ^
+"../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h", line 167: Error:  #99: a declaration here must declare a parameter
+  size_t xPortGetMinimumEverFreeHeapSize( void ) 
+RIVILEGED_FUNCTION;
+         ^
+.\..\User\Task\Chassis_task.c: 18 warnings, 30 errors
+
+[2023-10-29 20:36:14]	[done]
+	build successfully !
+
+[2023-10-29 20:36:21]	[done]
+	build successfully !
+
+[2023-10-29 20:37:05]	[done]
+	build successfully !
+
+[2023-10-29 20:41:31]	[done]
+	build successfully !
+
