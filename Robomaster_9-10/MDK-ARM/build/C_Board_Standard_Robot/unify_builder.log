@@ -1,0 +1,83 @@
+[2023-09-25 15:37:15]	[done]
+	build successfully !
+
+[2023-09-25 15:39:32]	[done]
+	build successfully !
+
+[2023-09-25 19:50:22]	compilation failed at : "c:\Users\14775\Desktop\study\robomaster\Robomaster_9-10\User\Task\Chassis_task.c", exit code: 1
+command: 
+  "C:\Keil_v5\ARM\ARMCC\bin\armcc.exe" -c --apcs=interwork -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Application -I../Bsp -I../Components -I../Components/Algorithm -I../Components/Controller -I../Components/Devices -I../Components/Algorithm/Include -I.cmsis/include -IRTE/_C_Board_Standard_Robot -I.eide/deps -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING --cpu Cortex-M4.fp --li --c99 -D__MICROLIB -O3 --split_sections --diag_suppress=1 --diag_suppress=1295 -g -o .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o --no_depend_system_headers --depend .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.d .\..\User\Task\Chassis_task.c
+   at unify_builder.Program.Main(String[] args_)
+---
+".\..\User\Task\Chassis_task.c", line 189: Error:  #20: identifier "int16" is undefined
+  void test_motor(int16 avg)
+                  ^
+".\..\User\Task\Chassis_task.c", line 35: Warning:  #177-D: function "Get_Err" was declared but never referenced
+  static void Get_Err();
+              ^
+".\..\User\Task\Chassis_task.c", line 98: Warning:  #177-D: function "Chassis_loop_Init" was declared but never referenced
+  static void Chassis_loop_Init()
+              ^
+.\..\User\Task\Chassis_task.c: 2 warnings, 1 error
+
+[2023-09-25 19:51:11]	compilation failed at : "c:\Users\14775\Desktop\study\robomaster\Robomaster_9-10\User\Task\Chassis_task.c", exit code: 1
+command: 
+  "C:\Keil_v5\ARM\ARMCC\bin\armcc.exe" -c --apcs=interwork -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Application -I../Bsp -I../Components -I../Components/Algorithm -I../Components/Controller -I../Components/Devices -I../Components/Algorithm/Include -I.cmsis/include -IRTE/_C_Board_Standard_Robot -I.eide/deps -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING --cpu Cortex-M4.fp --li --c99 -D__MICROLIB -O3 --split_sections --diag_suppress=1 --diag_suppress=1295 -g -o .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o --no_depend_system_headers --depend .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.d .\..\User\Task\Chassis_task.c
+   at unify_builder.Program.Main(String[] args_)
+---
+".\..\User\Task\Chassis_task.c", line 93: Warning:  #223-D: function "test_motor" declared implicitly
+      test_motor(500);
+      ^
+".\..\User\Task\Chassis_task.c", line 189: Error:  #159: declaration is incompatible with previous "test_motor" (declared at line 93)
+  void test_motor(int16_t avg)
+       ^
+".\..\User\Task\Chassis_task.c", line 35: Warning:  #177-D: function "Get_Err" was declared but never referenced
+  static void Get_Err();
+              ^
+".\..\User\Task\Chassis_task.c", line 98: Warning:  #177-D: function "Chassis_loop_Init" was declared but never referenced
+  static void Chassis_loop_Init()
+              ^
+.\..\User\Task\Chassis_task.c: 3 warnings, 1 error
+
+[2023-09-25 19:52:11]	[done]
+	build successfully !
+
+[2023-09-25 19:56:00]	[done]
+	build successfully !
+
+[2023-09-25 20:02:49]	[done]
+	build successfully !
+
+[2023-09-25 20:04:47]	[done]
+	build successfully !
+
+[2023-09-25 20:06:03]	[done]
+	build successfully !
+
+[2023-09-25 20:08:21]	[done]
+	build successfully !
+
+[2023-09-25 20:15:38]	[done]
+	build successfully !
+
+[2023-09-25 21:30:03]	[done]
+	build successfully !
+
+[2023-09-25 21:31:01]	[done]
+	build successfully !
+
+[2023-09-25 21:37:40]	[done]
+	build successfully !
+
+[2023-10-20 20:59:08]	[done]
+	build successfully !
+
+[2023-10-20 20:59:59]	[done]
+	build successfully !
+
+[2023-10-29 19:53:10]	[done]
+	build successfully !
+
+[2023-10-29 19:53:22]	[done]
+	build successfully !
+
