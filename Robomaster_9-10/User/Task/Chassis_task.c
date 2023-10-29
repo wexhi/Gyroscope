@@ -31,14 +31,10 @@ int16_t avg_speed = 0;
 
 int8_t chassis_mode = 1; // 判断底盘状态，用于UI编写
 
-
-
 // super_cap
 void power_limit(int *speed);
 
 int chassis_mode_flag = 0;
-
-void qe();
 
 #define angle_valve 5
 #define angle_weight 55
@@ -89,7 +85,6 @@ void Chassis_task(void const *pvParameters)
     osDelay(1);
   }
 }
-
 
 // 运动解算
 void chassis_motol_speed_calculate()
@@ -203,8 +198,8 @@ void RC_Move(void)
   // int16_t left_right_input = rc_ctrl.rc.ch[0];       // 左右输入
   // int16_t rotation_input = rc_ctrl.rc.ch[2];         // 旋转输入
   Vx = rc_ctrl.rc.ch[3]; // 前后输入
-  Vy = rc_ctrl.rc.ch[2];       // 左右输入
-  Wz = rc_ctrl.rc.ch[0];         // 旋转输入
+  Vy = rc_ctrl.rc.ch[2]; // 左右输入
+  Wz = rc_ctrl.rc.ch[0]; // 旋转输入
 
   /*************记得加上线性映射***************/
   Vx = map_range(Vx, RC_MIN, RC_MAX, motor_min, motor_max);
