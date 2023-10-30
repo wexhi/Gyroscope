@@ -42,7 +42,6 @@ static void Gimbal_loop_Init()
     gimbal.motor_info = motor_info_chassis[3]; // 云台电机的信息结构体
 
     // 初始化pid结构体
-
     pid_init(&gimbal.pid, gimbal.pid_parameter, 6000, 6000); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
 }
 
