@@ -4,6 +4,8 @@
 #include "INS_task.h"
 #include "exchange.h"
 #include "drv_can.h"
+#define MAX_SPEED 200
+
 extern motor_info_t motor_info_chassis[8]; // 电机信息结构体[3]为云台电机
 gimbal_t gimbal;
 
@@ -47,7 +49,8 @@ static void Gimbal_loop_Init()
 // 给电流，CAN1调试用，没板子。。。。。。
 static void gimbal_current_give()
 {
-    gimbal.motor_info.set_current = pid_calc(&gimbal.pid, motor_info_chassis[3].rotor_speed, gimbal.speed_target);
+    gimbal.motor_info = motor_info_chassis[3];
+    gimbal.motor_info.set_current = pid_calc(&gimbal.pid, gimbal.motor_info.rotor_speed, gimbal.speed_target);
     set_motor_current_can1(0, 0, 0, 0, gimbal.motor_info.set_current);
 }
 
@@ -56,7 +59,7 @@ static void RC_gimbal_control()
 {
     if (rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1] <= 660)
     {
-        gimbal.speed_target = rc_ctrl.rc.ch[1] / 660.0 * 100;
+        gimbal.speed_target = rc_ctrl.rc.ch[1] / 660.0 * MAX_SPEED;
     }
     else
     {
