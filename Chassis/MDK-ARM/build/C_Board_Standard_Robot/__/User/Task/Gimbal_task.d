@@ -41,6 +41,7 @@
 .\build\C_Board_Standard_Robot\__\User\Task\Gimbal_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 .\build\C_Board_Standard_Robot\__\User\Task\Gimbal_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 .\build\C_Board_Standard_Robot\__\User\Task\Gimbal_task.o: ../Inc/gpio.h
+.\build\C_Board_Standard_Robot\__\User\Task\Gimbal_task.o: .\..\User\Task\Chassis_task.h
 .\build\C_Board_Standard_Robot\__\User\Task\Gimbal_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 .\build\C_Board_Standard_Robot\__\User\Task\Gimbal_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 .\build\C_Board_Standard_Robot\__\User\Task\Gimbal_task.o: ../Inc/FreeRTOSConfig.h

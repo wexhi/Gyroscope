@@ -12,3 +12,7 @@ void Gimbal_task(void const *pvParameters)
         osDelay(1);
     }
 }
+
+static void gimbal_current_give()
+{
+}
