@@ -63,4 +63,6 @@
 .\build\C_Board_Standard_Robot\__\Src\freertos.o: ../Inc/exchange.h
 .\build\C_Board_Standard_Robot\__\Src\freertos.o: ../Inc/super_cap.h
 .\build\C_Board_Standard_Robot\__\Src\freertos.o: ../Inc/UI_task.h
+.\build\C_Board_Standard_Robot\__\Src\freertos.o: ../User/Task/Gimbal_task.h
+.\build\C_Board_Standard_Robot\__\Src\freertos.o: ../Inc/gpio.h
 .\build\C_Board_Standard_Robot\__\Src\freertos.o: ../Inc/stm32f4xx_it.h

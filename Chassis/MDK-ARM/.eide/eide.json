@@ -249,6 +249,9 @@
             "path": "../User/Task/Chassis_task.c"
           },
           {
+            "path": "../User/Task/Gimbal_task.c"
+          },
+          {
             "path": "../User/Task/UI_task.c"
           },
           {
@@ -446,7 +449,9 @@
           "../Components/Algorithm/Include",
           ".cmsis/include",
           "RTE/_C_Board_Standard_Robot",
-          ".eide/deps"
+          ".eide/deps",
+          "../Src",
+          "../User/Task"
         ],
         "libList": [],
         "sourceDirList": [],
