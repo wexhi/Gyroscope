@@ -1,10 +1,7 @@
 >>> cc
 
-".\..\User\Task\Gimbal_task.c", line 36: Warning:  #223-D: function "set_motor_current_can1" declared implicitly
-      set_motor_current_can1(0, 0, 0, 0, motor_info_chassis[3].set_current);
-      ^
-.\..\User\Task\Gimbal_task.c: 1 warning, 0 errors
+
 
 >>> ld
 
-Program Size: Code=46836 RO-data=3704 RW-data=768 ZI-data=47704  
+Program Size: Code=47088 RO-data=3704 RW-data=768 ZI-data=47704  

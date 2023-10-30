@@ -32,7 +32,8 @@
         "RTE/_C_Board_Standard_Robot",
         ".eide/deps",
         "../Src",
-        "../User/Task"
+        "../User/Task",
+        "../User/DriverLayer"
     ],
     "libDirs": [],
     "defines": [
