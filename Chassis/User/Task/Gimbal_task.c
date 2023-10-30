@@ -5,9 +5,7 @@
 #include "exchange.h"
 #include "drv_can.h"
 extern motor_info_t motor_info_chassis[8]; // 电机信息结构体[3]为云台电机
-fp32 gimbal_motor_pid[3] = {20, 0, 0};     // 云台电机的pid
-pid_struct_t gimbal_pid_chassis;           // 云台电机的pid结构体
-fp32 gimbal_speed_target = 0;            // 云台电机的目标速度
+gimbal_t gimbal;
 
 extern RC_ctrl_t rc_ctrl; // 遥控器信息结构体
 
@@ -34,14 +32,23 @@ void Gimbal_task(void const *pvParameters)
 // 云台电机的初始化
 static void Gimbal_loop_Init()
 {
-    pid_init(&gimbal_pid_chassis, gimbal_motor_pid, 6000, 6000); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
+    // 初始化pid参数
+    gimbal.pid_parameter[0] = 20;
+    gimbal.pid_parameter[1] = 0;
+    gimbal.pid_parameter[2] = 0;
+
+    gimbal.motor_info = motor_info_chassis[3]; // 云台电机的信息结构体
+
+    // 初始化pid结构体
+
+    pid_init(&gimbal.pid, gimbal.pid_parameter, 6000, 6000); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
 }
 
 // 给电流，CAN1调试用，没板子。。。。。。
 static void gimbal_current_give()
 {
-    motor_info_chassis[3].set_current = pid_calc(&gimbal_pid_chassis, motor_info_chassis[3].rotor_speed, gimbal_speed_target);
-    set_motor_current_can1(0, 0, 0, 0, motor_info_chassis[3].set_current);
+    gimbal.motor_info.set_current = pid_calc(&gimbal.pid, motor_info_chassis[3].rotor_speed, gimbal.speed_target);
+    set_motor_current_can1(0, 0, 0, 0, gimbal.motor_info.set_current);
 }
 
 // 遥控器控制云台电机
@@ -49,10 +56,10 @@ static void RC_gimbal_control()
 {
     if (rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1] <= 660)
     {
-        gimbal_speed_target = rc_ctrl.rc.ch[1] / 660.0 * 100;
+        gimbal.speed_target = rc_ctrl.rc.ch[1] / 660.0 * 100;
     }
     else
     {
-        gimbal_speed_target = 0;
+        gimbal.speed_target = 0;
     }
 }

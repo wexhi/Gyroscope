@@ -8,8 +8,16 @@
 #include "main.h"
 #include "gpio.h"
 
+extern motor_info_t motor_info_chassis[8]; // 电机信息结构体[3]为云台电机
+
+typedef struct
+{
+    motor_info_t motor_info; // 电机信息结构体
+    fp32 pid_parameter[3];   // 云台电机的pid参数
+    pid_struct_t pid;        // 云台电机的pid结构体
+    fp32 speed_target;       // 云台电机的目标速度
+} gimbal_t;
+
 void Gimbal_task(void const *pvParameters);
 
 #endif // !
-
-
