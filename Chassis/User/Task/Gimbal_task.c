@@ -9,6 +9,7 @@
 extern INS_t INS;
 extern motor_info_t motor_info_chassis[8]; // 电机信息结构体[3]为云台电机
 gimbal_t gimbal;
+fp32 yaw_angle;
 
 extern RC_ctrl_t rc_ctrl; // 遥控器信息结构体
 
@@ -25,6 +26,7 @@ static void RC_gimbal_control();
 static void gimbal_yaw_control();
 
 static void detel_calc(fp32 *angle);
+static fp32 mapRange(fp32 value, fp32 fromMin, fp32 fromMax, fp32 toMin, fp32 toMax);
 
 void Gimbal_task(void const *pvParameters)
 {
@@ -83,10 +85,11 @@ static void RC_gimbal_control()
 // yaw轴控制电机
 void gimbal_yaw_control()
 {
-    gimbal.angle_target = gimbal.init_angle + 2 * INS.Yaw;
+    yaw_angle = mapRange(INS.Yaw, -180, 180, 0, 360);
+    gimbal.angle_target = gimbal.init_angle + 2 * yaw_angle;
     detel_calc(&gimbal.angle_target);
     gimbal.motor_info = motor_info_chassis[3];
-    gimbal.speed_target = gimbal_PID_calc(&gimbal.pid_angle, INS.Yaw, gimbal.angle_target);
+    gimbal.speed_target = gimbal_PID_calc(&gimbal.pid_angle, yaw_angle, gimbal.angle_target);
 }
 
 static void detel_calc(fp32 *angle)
@@ -100,4 +103,10 @@ static void detel_calc(fp32 *angle)
     {
         *angle += 360;
     }
+}
+
+static fp32 mapRange(fp32 value, fp32 fromMin, fp32 fromMax, fp32 toMin, fp32 toMax)
+{
+    // 将value从[fromMin, fromMax]映射到[toMin, toMax]范围
+    return (value - fromMin) * (toMax - toMin) / (fromMax - fromMin) + toMin;
 }
