@@ -21,12 +21,18 @@ static void gimbal_current_give();
 // 遥控器控制云台电机
 static void RC_gimbal_control();
 
+// yaw轴控制电机
+static void gimbal_yaw_control();
+
+static void detel_calc(fp32 *angle);
+
 void Gimbal_task(void const *pvParameters)
 {
     Gimbal_loop_Init();
     for (;;)
     {
-        RC_gimbal_control();
+        // RC_gimbal_control();
+        gimbal_yaw_control();
         gimbal_current_give();
         osDelay(1);
     }
@@ -40,10 +46,17 @@ static void Gimbal_loop_Init()
     gimbal.pid_parameter[1] = 0;
     gimbal.pid_parameter[2] = 0;
 
+    gimbal.pid_angle_parameter[0] = 10;
+    gimbal.pid_angle_parameter[1] = 0;
+    gimbal.pid_angle_parameter[2] = 0;
+
     gimbal.motor_info = motor_info_chassis[3]; // 云台电机的信息结构体
+    // gimbal.init_angle = gimbal.motor_info.rotor_angle * 360 / 8192;
+    gimbal.init_angle = 0;
 
     // 初始化pid结构体
-    pid_init(&gimbal.pid, gimbal.pid_parameter, 6000, 6000); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
+    pid_init(&gimbal.pid, gimbal.pid_parameter, 6000, 6000);           // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
+    pid_init(&gimbal.pid_angle, gimbal.pid_angle_parameter, 360, 360); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
 }
 
 // 给电流，CAN1调试用，没板子。。。。。。
@@ -64,5 +77,27 @@ static void RC_gimbal_control()
     else
     {
         gimbal.speed_target = 0;
+    }
+}
+
+// yaw轴控制电机
+void gimbal_yaw_control()
+{
+    gimbal.angle_target = gimbal.init_angle + 2 * INS.Yaw;
+    detel_calc(&gimbal.angle_target);
+    gimbal.motor_info = motor_info_chassis[3];
+    gimbal.speed_target = gimbal_PID_calc(&gimbal.pid_angle, INS.Yaw, gimbal.angle_target);
+}
+
+static void detel_calc(fp32 *angle)
+{
+    if (*angle > 360)
+    {
+        *angle -= 360;
+    }
+
+    else if (*angle < 0)
+    {
+        *angle += 360;
     }
 }

@@ -28,8 +28,6 @@ extern void pid_init(pid_struct_t *pid,
 
 
 extern fp32 pid_calc(pid_struct_t *pid, fp32 ref, fp32 set);
-
-
-
+extern fp32 gimbal_PID_calc(pid_struct_t *pid, fp32 fdb, fp32 set);
 
 #endif

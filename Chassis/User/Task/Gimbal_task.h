@@ -12,10 +12,14 @@ extern motor_info_t motor_info_chassis[8]; // 电机信息结构体[3]为云台�
 
 typedef struct
 {
-    motor_info_t motor_info; // 电机信息结构体
-    fp32 pid_parameter[3];   // 云台电机的pid参数
-    pid_struct_t pid;        // 云台电机的pid结构体
-    fp32 speed_target;       // 云台电机的目标速度
+    motor_info_t motor_info;     // 电机信息结构体
+    fp32 pid_parameter[3];       // 云台电机的pid参数
+    fp32 pid_angle_parameter[3]; // 云台电机的pid参数
+    pid_struct_t pid;            // 云台电机的pid结构体
+    pid_struct_t pid_angle;      // 云台电机的pid结构体
+    fp32 speed_target;           // 云台电机的目标速度
+    fp32 angle_target;           // 云台电机的目标角度
+    fp32 init_angle;             // 云台电机的初始角度
 } gimbal_t;
 
 void Gimbal_task(void const *pvParameters);

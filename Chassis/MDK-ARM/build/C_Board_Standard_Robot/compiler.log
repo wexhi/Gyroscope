@@ -1,7 +1,10 @@
 >>> cc
 
-
+".\..\User\Task\Gimbal_task.c", line 71: Warning:  #177-D: function "RC_gimbal_control" was declared but never referenced
+  static void RC_gimbal_control()
+              ^
+.\..\User\Task\Gimbal_task.c: 1 warning, 0 errors
 
 >>> ld
 
-Program Size: Code=47152 RO-data=3704 RW-data=748 ZI-data=47740  
+Program Size: Code=47300 RO-data=3704 RW-data=748 ZI-data=47828  
