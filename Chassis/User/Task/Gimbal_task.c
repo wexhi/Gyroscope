@@ -6,6 +6,7 @@
 #include "drv_can.h"
 #define MAX_SPEED 200
 
+extern INS_t INS;
 extern motor_info_t motor_info_chassis[8]; // 电机信息结构体[3]为云台电机
 gimbal_t gimbal;
 
