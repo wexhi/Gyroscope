@@ -92,6 +92,15 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) // 接受中断�
         can_cnt_1++;
       }
     }
+    if ((rx_header.StdId >= FEEDBACK_ID_BASE_6020) &&              // 205-211,注意把ID调成大于3,不然就会和读取3508的函数产生冲突
+        (rx_header.StdId < FEEDBACK_ID_BASE_6020 + MOTOR_MAX_NUM)) // 判断标识符，标识符为0x204+ID
+    {
+      uint8_t index = rx_header.StdId - FEEDBACK_ID_BASE_6020; // get motor index by can_id
+      motor_info_chassis[index].rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+      motor_info_chassis[index].rotor_speed = ((rx_data[2] << 8) | rx_data[3]);
+      motor_info_chassis[index].torque_current = ((rx_data[4] << 8) | rx_data[5]);
+      motor_info_chassis[index].temp = rx_data[6];
+    }
     if (rx_header.StdId == 0x211)
     {
 
@@ -160,5 +169,5 @@ void set_motor_current_can1(uint8_t id_range, int16_t v1, int16_t v2, int16_t v3
   tx_data[5] = (v3)&0xff;
   tx_data[6] = (v4 >> 8) & 0xff;
   tx_data[7] = (v4)&0xff;
-  HAL_CAN_AddTxMessage(&hcan1, &tx_header, tx_data, (uint32_t *)CAN_TX_MAILBOX0);
+  HAL_CAN_AddTxMessage(&hcan2, &tx_header, tx_data, (uint32_t *)CAN_TX_MAILBOX0);
 }

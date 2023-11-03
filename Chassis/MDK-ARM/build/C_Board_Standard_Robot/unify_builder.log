@@ -253,3 +253,98 @@ command:
 [2023-11-03 11:15:03]	[done]
 	build successfully !
 
+[2023-11-03 17:26:42]	[done]
+	build successfully !
+
+[2023-11-03 17:37:00]	[done]
+	build successfully !
+
+[2023-11-03 17:40:43]	[done]
+	build successfully !
+
+[2023-11-03 17:42:34]	compilation failed at : "c:\Users\14775\Desktop\study\robomaster\Gyroscope\Chassis\User\Task\Gimbal_task.c", exit code: 1
+command: 
+  "C:\Keil_v5\ARM\ARMCC\bin\armcc.exe" -c --apcs=interwork -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Application -I../Bsp -I../Components -I../Components/Algorithm -I../Components/Controller -I../Components/Devices -I../Components/Algorithm/Include -I.cmsis/include -IRTE/_C_Board_Standard_Robot -I.eide/deps -I../Src -I../User/Task -I../User/DriverLayer -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING --cpu Cortex-M4.fp --li --c99 -D__MICROLIB -O3 --split_sections --diag_suppress=1 --diag_suppress=1295 -g -o .\build\C_Board_Standard_Robot\__\User\Task\Gimbal_task.o --no_depend_system_headers --depend .\build\C_Board_Standard_Robot\__\User\Task\Gimbal_task.d .\..\User\Task\Gimbal_task.c
+   at unify_builder.Program.Main(String[] args_)
+---
+".\..\User\Task\Gimbal_task.c", line 89: Error:  #65: expected a ";"
+  {
+  ^
+".\..\User\Task\Gimbal_task.c", line 123: Warning:  #12-D: parsing restarts here after previous syntax error
+          gimbal.angle_target = 0;
+                                 ^
+".\..\User\Task\Gimbal_task.c", line 125: Error:  #169: expected a declaration
+  }
+  ^
+".\..\User\Task\Gimbal_task.c", line 138: Warning: At end of source:  #12-D: parsing restarts here after previous syntax error
+".\..\User\Task\Gimbal_task.c", line 67: Warning:  #177-D: function "mode_select" was declared but never referenced
+  static void mode_select()
+              ^
+".\..\User\Task\Gimbal_task.c", line 26: Error:  #114: function "RC_gimbal_control" was referenced but not defined
+  static void RC_gimbal_control();
+              ^
+".\..\User\Task\Gimbal_task.c", line 29: Error:  #114: function "gimbal_yaw_control" was referenced but not defined
+  static void gimbal_yaw_control();
+              ^
+".\..\User\Task\Gimbal_task.c", line 31: Warning:  #177-D: function "detel_calc" was declared but never referenced
+  static void detel_calc(fp32 *angle);
+              ^
+.\..\User\Task\Gimbal_task.c: 4 warnings, 4 errors
+
+[2023-11-03 17:43:10]	[done]
+	build successfully !
+
+[2023-11-03 20:36:46]	[done]
+	build successfully !
+
+[2023-11-03 20:40:49]	[done]
+	build successfully !
+
+[2023-11-03 20:43:01]	[done]
+	build successfully !
+
+[2023-11-03 20:43:35]	[done]
+	build successfully !
+
+[2023-11-03 20:45:45]	[done]
+	build successfully !
+
+[2023-11-03 20:46:06]	[done]
+	build successfully !
+
+[2023-11-03 20:48:57]	[done]
+	build successfully !
+
+[2023-11-03 20:56:10]	[done]
+	build successfully !
+
+[2023-11-03 20:58:13]	[done]
+	build successfully !
+
+[2023-11-03 20:58:57]	[done]
+	build successfully !
+
+[2023-11-03 20:59:22]	[done]
+	build successfully !
+
+[2023-11-03 21:13:29]	[done]
+	build successfully !
+
+[2023-11-03 21:14:44]	[done]
+	build successfully !
+
+[2023-11-03 21:17:01]	[done]
+	build successfully !
+
+[2023-11-03 21:20:14]	[done]
+	build successfully !
+
+[2023-11-03 21:35:25]	[done]
+	build successfully !
+
+[2023-11-03 21:35:58]	[done]
+	build successfully !
+
+[2023-11-03 21:36:03]	[done]
+	build successfully !
+
