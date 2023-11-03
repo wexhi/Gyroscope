@@ -3,11 +3,8 @@
 ".\..\User\Task\Gimbal_task.c", line 73: Warning:  #177-D: function "RC_gimbal_control" was declared but never referenced
   static void RC_gimbal_control()
               ^
-".\..\User\Task\Gimbal_task.c", line 107: Warning:  #177-D: function "mapRange" was declared but never referenced
-  static fp32 mapRange(fp32 value, fp32 fromMin, fp32 fromMax, fp32 toMin, fp32 toMax)
-              ^
-.\..\User\Task\Gimbal_task.c: 2 warnings, 0 errors
+.\..\User\Task\Gimbal_task.c: 1 warning, 0 errors
 
 >>> ld
 
-Program Size: Code=47292 RO-data=3704 RW-data=748 ZI-data=47828  
+Program Size: Code=47644 RO-data=3704 RW-data=756 ZI-data=47828  
