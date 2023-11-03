@@ -85,11 +85,10 @@ static void RC_gimbal_control()
 // yaw轴控制电机
 void gimbal_yaw_control()
 {
-    yaw_angle = mapRange(INS.Yaw, -180, 180, 0, 360);
-    gimbal.angle_target = gimbal.init_angle + 2 * yaw_angle;
+    gimbal.angle_target = gimbal.init_angle;
     detel_calc(&gimbal.angle_target);
     gimbal.motor_info = motor_info_chassis[3];
-    gimbal.speed_target = gimbal_PID_calc(&gimbal.pid_angle, yaw_angle, gimbal.angle_target);
+    gimbal.speed_target = gimbal_PID_calc(&gimbal.pid_angle, INS.Yaw, gimbal.angle_target);
 }
 
 static void detel_calc(fp32 *angle)
