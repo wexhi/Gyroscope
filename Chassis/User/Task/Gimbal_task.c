@@ -50,9 +50,9 @@ static void Gimbal_loop_Init()
     gimbal.pid_parameter[1] = 0;
     gimbal.pid_parameter[2] = 0;
 
-    gimbal.pid_angle_parameter[0] = 15;
+    gimbal.pid_angle_parameter[0] = 5;
     gimbal.pid_angle_parameter[1] = 0;
-    gimbal.pid_angle_parameter[2] = 10;
+    gimbal.pid_angle_parameter[2] = 50;
 
     gimbal.motor_info = motor_info_chassis[4]; // 云台电机的信息结构体
     // gimbal.init_angle = gimbal.motor_info.rotor_angle * 360 / 8192;
