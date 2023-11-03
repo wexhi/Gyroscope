@@ -36,7 +36,8 @@ void Gimbal_task(void const *pvParameters)
     for (;;)
     {
         // RC_gimbal_control();
-        gimbal_yaw_control();
+        //gimbal_yaw_control();
+        mode_select();
         gimbal_current_give();
         osDelay(1);
     }
@@ -46,13 +47,13 @@ void Gimbal_task(void const *pvParameters)
 static void Gimbal_loop_Init()
 {
     // 初始化pid参数
-    gimbal.pid_parameter[0] = 20;
+    gimbal.pid_parameter[0] = 40;
     gimbal.pid_parameter[1] = 0;
     gimbal.pid_parameter[2] = 0;
 
-    gimbal.pid_angle_parameter[0] = 5;
+    gimbal.pid_angle_parameter[0] = 30;
     gimbal.pid_angle_parameter[1] = 0;
-    gimbal.pid_angle_parameter[2] = 50;
+    gimbal.pid_angle_parameter[2] = 30;
 
     gimbal.motor_info = motor_info_chassis[4]; // 云台电机的信息结构体
     // gimbal.init_angle = gimbal.motor_info.rotor_angle * 360 / 8192;
@@ -66,7 +67,7 @@ static void Gimbal_loop_Init()
 // 模式选择
 static void mode_select()
 {
-    if (rc_ctrl.rc.s[0] == 1)
+    if (rc_ctrl.rc.s[0] == 3)
     {
         gimbal_yaw_control();
     }
@@ -112,14 +113,15 @@ static void gimbal_yaw_control()
 
         detel_calc(&err_yaw_angle);
 
-        if (err_yaw_angle < -0.1 || err_yaw_angle > 0.1)
-        {
-            gimbal.speed_target = gimbal_PID_calc(&gimbal.pid_angle, INS.Yaw, gimbal.angle_target);
-        }
-        else
-        {
-            gimbal.speed_target = 0;
-        }
+        // if (err_yaw_angle <= -0.1 || err_yaw_angle >= 0.1)
+        // {
+        //     gimbal.speed_target = gimbal_PID_calc(&gimbal.pid_angle, INS.Yaw, gimbal.angle_target);
+        // }
+        // else
+        // {
+        //     gimbal.speed_target = 0;
+        // }
+        gimbal.speed_target = gimbal_PID_calc(&gimbal.pid_angle, 0, err_yaw_angle);
     }
     else
     {
@@ -129,12 +131,12 @@ static void gimbal_yaw_control()
 
 static void detel_calc(fp32 *angle)
 {
-    if (*angle > 360)
+    if (*angle > 180)
     {
         *angle -= 360;
     }
 
-    else if (*angle < 0)
+    else if (*angle < -180)
     {
         *angle += 360;
     }

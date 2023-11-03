@@ -1,13 +1,7 @@
 >>> cc
 
-".\..\User\Task\Gimbal_task.c", line 115: Warning:  #1035-D: single-precision operand implicitly converted to double-precision
-          if (err_yaw_angle < -0.1 || err_yaw_angle > 0.1)
-                                      ^
-".\..\User\Task\Gimbal_task.c", line 67: Warning:  #177-D: function "mode_select" was declared but never referenced
-  static void mode_select()
-              ^
-.\..\User\Task\Gimbal_task.c: 2 warnings, 0 errors
+
 
 >>> ld
 
-Program Size: Code=47732 RO-data=3704 RW-data=756 ZI-data=47828  
+Program Size: Code=47816 RO-data=3704 RW-data=756 ZI-data=47828  
