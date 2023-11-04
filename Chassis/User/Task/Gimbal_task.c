@@ -123,10 +123,6 @@ static void gimbal_yaw_control()
         // }
         gimbal.speed_target = gimbal_PID_calc(&gimbal.pid_angle, 0, err_yaw_angle);
     }
-    else
-    {
-        gimbal.angle_target = 0;
-    }
 }
 
 static void detel_calc(fp32 *angle)
