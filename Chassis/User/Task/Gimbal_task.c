@@ -37,7 +37,7 @@ void Gimbal_task(void const *pvParameters)
     {
         // RC_gimbal_control();
         gimbal_yaw_control();
-        //mode_select();
+        // mode_select();
         gimbal_current_give();
         osDelay(1);
     }
@@ -56,12 +56,12 @@ static void Gimbal_loop_Init()
     gimbal.pid_angle_parameter[2] = 0;
 
     gimbal.motor_info = motor_info_chassis[4]; // 云台电机的信息结构体
-    // gimbal.init_angle = gimbal.motor_info.rotor_angle * 360 / 8192;
+    gimbal.speed_target = 0;
     gimbal.angle_target = 0;
 
     // 初始化pid结构体
-    pid_init(&gimbal.pid, gimbal.pid_parameter, 16000, 16000);             // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
-    pid_init(&gimbal.pid_angle, gimbal.pid_angle_parameter, 15000, 15000); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
+    pid_init(&gimbal.pid, gimbal.pid_parameter, 16000, 16000);
+    pid_init(&gimbal.pid_angle, gimbal.pid_angle_parameter, 15000, 15000);
 }
 
 // 模式选择
@@ -82,8 +82,7 @@ static void gimbal_current_give()
 {
     gimbal.motor_info = motor_info_chassis[4];
     gimbal.motor_info.set_current = pid_calc(&gimbal.pid, gimbal.motor_info.rotor_speed, gimbal.speed_target);
-    // set_motor_current_can1(0, 0, 0, 0, gimbal.motor_info.set_current);
-    set_motor_current_can1(1, gimbal.motor_info.set_current, 0, 0, 0);
+    set_gimbal_current(1, gimbal.motor_info.set_current, 0, 0, 0);
 }
 
 // 遥控器控制云台电机
@@ -105,7 +104,7 @@ static void gimbal_yaw_control()
     gimbal.motor_info = motor_info_chassis[4];
     if (rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1] <= 660)
     {
-        gimbal.angle_target = gimbal.angle_target + rc_ctrl.rc.ch[1] / 660.0 * 0.3;
+        gimbal.angle_target += rc_ctrl.rc.ch[1] / 660.0 * 0.3;
 
         detel_calc(&gimbal.angle_target);
 
