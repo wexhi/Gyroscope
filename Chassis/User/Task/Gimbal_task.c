@@ -36,8 +36,8 @@ void Gimbal_task(void const *pvParameters)
     for (;;)
     {
         // RC_gimbal_control();
-        //gimbal_yaw_control();
-        mode_select();
+        gimbal_yaw_control();
+        //mode_select();
         gimbal_current_give();
         osDelay(1);
     }
@@ -47,20 +47,20 @@ void Gimbal_task(void const *pvParameters)
 static void Gimbal_loop_Init()
 {
     // 初始化pid参数
-    gimbal.pid_parameter[0] = 40;
+    gimbal.pid_parameter[0] = 300;
     gimbal.pid_parameter[1] = 0;
-    gimbal.pid_parameter[2] = 0;
+    gimbal.pid_parameter[2] = 10;
 
-    gimbal.pid_angle_parameter[0] = 30;
+    gimbal.pid_angle_parameter[0] = 5;
     gimbal.pid_angle_parameter[1] = 0;
-    gimbal.pid_angle_parameter[2] = 30;
+    gimbal.pid_angle_parameter[2] = 0;
 
     gimbal.motor_info = motor_info_chassis[4]; // 云台电机的信息结构体
     // gimbal.init_angle = gimbal.motor_info.rotor_angle * 360 / 8192;
     gimbal.angle_target = 0;
 
     // 初始化pid结构体
-    pid_init(&gimbal.pid, gimbal.pid_parameter, 15000, 15000);             // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
+    pid_init(&gimbal.pid, gimbal.pid_parameter, 16000, 16000);             // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
     pid_init(&gimbal.pid_angle, gimbal.pid_angle_parameter, 15000, 15000); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
 }
 
