@@ -35,9 +35,9 @@ void Gimbal_task(void const *pvParameters)
     Gimbal_loop_Init();
     for (;;)
     {
-        // RC_gimbal_control();
-        gimbal_yaw_control();
-        // mode_select();
+        RC_gimbal_control();
+        // gimbal_yaw_control();
+        //  mode_select();
         gimbal_current_give();
         osDelay(1);
     }
@@ -47,9 +47,9 @@ void Gimbal_task(void const *pvParameters)
 static void Gimbal_loop_Init()
 {
     // 初始化pid参数
-    gimbal.pid_parameter[0] = 300;
+    gimbal.pid_parameter[0] = 30;
     gimbal.pid_parameter[1] = 0;
-    gimbal.pid_parameter[2] = 10;
+    gimbal.pid_parameter[2] = 0;
 
     gimbal.pid_angle_parameter[0] = 5;
     gimbal.pid_angle_parameter[1] = 0;
@@ -90,7 +90,10 @@ static void RC_gimbal_control()
 {
     if (rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1] <= 660)
     {
-        gimbal.speed_target = rc_ctrl.rc.ch[1] / 660.0 * MAX_SPEED;
+        // gimbal.speed_target = rc_ctrl.rc.ch[1] / 660.0 * MAX_SPEED;
+        gimbal.angle_target += rc_ctrl.rc.ch[1] / 660.0 * 0.3;
+        detel_calc(&gimbal.angle_target);
+        gimbal.speed_target = gimbal_PID_calc(&gimbal.pid_angle, INS.Yaw, gimbal.angle_target);
     }
     else
     {
