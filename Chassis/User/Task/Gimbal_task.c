@@ -57,7 +57,8 @@ static void Gimbal_loop_Init()
 
     gimbal.motor_info = motor_info_chassis[4]; // 云台电机的信息结构体
     gimbal.speed_target = 0;
-    gimbal.angle_target = 0;
+    // gimbal.angle_target = 0;
+    gimbal.angle_target = gimbal.motor_info.real_angle;
 
     // 初始化pid结构体
     pid_init(&gimbal.pid, gimbal.pid_parameter, 16000, 16000);
@@ -93,7 +94,7 @@ static void RC_gimbal_control()
         // gimbal.speed_target = rc_ctrl.rc.ch[1] / 660.0 * MAX_SPEED;
         gimbal.angle_target += rc_ctrl.rc.ch[1] / 660.0 * 0.3;
         detel_calc(&gimbal.angle_target);
-        gimbal.speed_target = gimbal_PID_calc(&gimbal.pid_angle, INS.Yaw, gimbal.angle_target);
+        gimbal.speed_target = gimbal_PID_calc(&gimbal.pid_angle, gimbal.motor_info.real_angle, gimbal.angle_target);
     }
     else
     {
