@@ -72,7 +72,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) // 接受中断�
       motor_info_chassis[index].rotor_speed = ((rx_data[2] << 8) | rx_data[3]);
       motor_info_chassis[index].torque_current = ((rx_data[4] << 8) | rx_data[5]);
       motor_info_chassis[index].temp = rx_data[6];
-      motor_info_chassis[index].real_angle = motor_info_chassis[index].rotor_angle * 360 / 8192;
+      motor_info_chassis[index].real_angle = motor_info_chassis[index].rotor_angle * 360.0 / 8192;
     }
   }
   // 电机信息接收
@@ -88,7 +88,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) // 接受中断�
       motor_info_chassis[index].rotor_speed = ((rx_data[2] << 8) | rx_data[3]);
       motor_info_chassis[index].torque_current = ((rx_data[4] << 8) | rx_data[5]);
       motor_info_chassis[index].temp = rx_data[6];
-      motor_info_chassis[index].real_angle = motor_info_chassis[index].rotor_angle * 360 / 8192;
+      motor_info_chassis[index].real_angle = motor_info_chassis[index].rotor_angle * 360.0 / 8192;
       if (index == 0)
       {
         can_cnt_1++;
@@ -102,7 +102,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) // 接受中断�
       motor_info_chassis[index].rotor_speed = ((rx_data[2] << 8) | rx_data[3]);
       motor_info_chassis[index].torque_current = ((rx_data[4] << 8) | rx_data[5]);
       motor_info_chassis[index].temp = rx_data[6];
-      motor_info_chassis[index].real_angle = motor_info_chassis[index].rotor_angle * 360 / 8192;
+      motor_info_chassis[index].real_angle = motor_info_chassis[index].rotor_angle * 360.0 / 8192;
     }
     if (rx_header.StdId == 0x211)
     {
