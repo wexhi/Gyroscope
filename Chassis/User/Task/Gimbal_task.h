@@ -19,7 +19,6 @@ typedef struct
     pid_struct_t pid_angle;      // 云台电机的pid结构体
     fp32 speed_target;           // 云台电机的目标速度
     fp32 angle_target;           // 云台电机的目标角度
-    fp32 init_angle;             // 云台电机的初始角度
 } gimbal_t;
 
 void Gimbal_task(void const *pvParameters);

@@ -27,7 +27,7 @@ static void gimbal_current_give();
 static void RC_gimbal_control();
 
 // 云台旋转固定角度
-static void gimbal_turn_angle();
+static void gimbal_turn_angle(fp32 angle);
 
 // yaw轴控制电机
 static void gimbal_yaw_control();
@@ -73,7 +73,7 @@ static void mode_select()
 {
     if (rc_ctrl.rc.s[0] == 1) // BLUE LED
     {
-        gimbal_turn_angle();
+        gimbal_turn_angle(45);
         mode_flag = 1;
     }
     if (rc_ctrl.rc.s[0] == 2) // GREEN LED
@@ -99,6 +99,11 @@ static void gimbal_current_give()
 // 遥控器控制云台电机
 static void RC_gimbal_control()
 {
+    if (mode_flag != 2)
+    {
+        gimbal.angle_target = gimbal.motor_info.real_angle;
+    }
+
     if (rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1] <= 660)
     {
         // gimbal.speed_target = rc_ctrl.rc.ch[1] / 660.0 * MAX_SPEED;
@@ -113,11 +118,11 @@ static void RC_gimbal_control()
 }
 
 // 云台旋转固定角度
-static void gimbal_turn_angle()
+static void gimbal_turn_angle(fp32 angle)
 {
     if (mode_flag != 1)
     {
-        gimbal.angle_target = gimbal.motor_info.real_angle + 45;
+        gimbal.angle_target = gimbal.motor_info.real_angle + angle;
     }
 
     detel_calc2(&gimbal.angle_target);
@@ -127,6 +132,11 @@ static void gimbal_turn_angle()
 // yaw轴控制电机
 static void gimbal_yaw_control()
 {
+    if (mode_flag != 3)
+    {
+        gimbal.angle_target = 0;
+    }
+
     gimbal.motor_info = motor_info_chassis[4];
     if (rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1] <= 660)
     {
