@@ -6,7 +6,7 @@
 #define MAX_SPEED 200
 
 extern INS_t INS;
-gimbal_t gimbal_Yaw;
+gimbal_t gimbal_Yaw, gimbal_Pitch;
 fp32 err_yaw_angle;
 
 extern RC_ctrl_t rc_ctrl; // 遥控器信息结构体
@@ -43,20 +43,20 @@ void Gimbal_task(void const *pvParameters)
 static void Gimbal_loop_Init()
 {
     // 初始化pid参数
-    gimbal_Yaw.pid_parameter[0] = 20;
-    gimbal_Yaw.pid_parameter[1] = 0;
-    gimbal_Yaw.pid_parameter[2] = 0;
-
-    gimbal_Yaw.pid_angle_parameter[0] = 5;
-    gimbal_Yaw.pid_angle_parameter[1] = 0;
-    gimbal_Yaw.pid_angle_parameter[2] = 50;
-
-    // gimbal_Yaw.init_angle = gimbal_Yaw.motor_info.rotor_angle * 360 / 8192;
+    gimbal_Yaw.pid_parameter[0] = 20, gimbal_Yaw.pid_parameter[1] = 0, gimbal_Yaw.pid_parameter[2] = 0;
+    gimbal_Yaw.pid_angle_parameter[0] = 5, gimbal_Yaw.pid_angle_parameter[1] = 0, gimbal_Yaw.pid_angle_parameter[2] = 50;
     gimbal_Yaw.angle_target = 0;
 
+    gimbal_Pitch.pid_parameter[0] = 20, gimbal_Pitch.pid_parameter[1] = 0, gimbal_Pitch.pid_parameter[2] = 0;
+    gimbal_Pitch.pid_angle_parameter[0] = 5, gimbal_Pitch.pid_angle_parameter[1] = 0, gimbal_Pitch.pid_angle_parameter[2] = 50;
+    gimbal_Pitch.angle_target = 0;
+
     // 初始化pid结构体
-    pid_init(&gimbal_Yaw.pid, gimbal_Yaw.pid_parameter, 15000, 15000);             // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
-    pid_init(&gimbal_Yaw.pid_angle, gimbal_Yaw.pid_angle_parameter, 15000, 15000); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
+    pid_init(&gimbal_Yaw.pid, gimbal_Yaw.pid_parameter, 15000, 15000);
+    pid_init(&gimbal_Yaw.pid_angle, gimbal_Yaw.pid_angle_parameter, 15000, 15000);
+
+    pid_init(&gimbal_Pitch.pid, gimbal_Pitch.pid_parameter, 15000, 15000);
+    pid_init(&gimbal_Pitch.pid_angle, gimbal_Pitch.pid_angle_parameter, 15000, 15000);
 }
 
 // 模式选择

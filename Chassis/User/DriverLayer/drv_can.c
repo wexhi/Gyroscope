@@ -5,7 +5,7 @@ extern RC_ctrl_t rc_ctrl;
 uint16_t can_cnt_1 = 0;
 
 extern motor_info_t motor_info_chassis[10];
-extern gimbal_t gimbal_Yaw;
+extern gimbal_t gimbal_Yaw, gimbal_Pitch;
 extern chassis_t chassis;
 
 float powerdata[4];
@@ -107,14 +107,12 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) // 接受中断�
       }
     }
 
-    if ((rx_header.StdId >= FEEDBACK_ID_BASE_6020) &&              // 205-211,注意把ID调成大于3,不然就会和读取3508的函数产生冲突
-        (rx_header.StdId < FEEDBACK_ID_BASE_6020 + MOTOR_MAX_NUM)) // 判断标识符，标识符为0x204+ID
+    if (rx_header.StdId == 0x20b ) // 判断标识符，标识符为0x204+ID
     {
-      uint8_t index = rx_header.StdId - FEEDBACK_ID_BASE_6020 + 3; // get motor index by can_id
-      motor_info_chassis[index].rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
-      motor_info_chassis[index].rotor_speed = ((rx_data[2] << 8) | rx_data[3]);
-      motor_info_chassis[index].torque_current = ((rx_data[4] << 8) | rx_data[5]);
-      motor_info_chassis[index].temp = rx_data[6];
+      gimbal_Pitch.motor_info.rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+      gimbal_Pitch.motor_info.rotor_speed = ((rx_data[2] << 8) | rx_data[3]);
+      gimbal_Pitch.motor_info.torque_current = ((rx_data[4] << 8) | rx_data[5]);
+      gimbal_Pitch.motor_info.temp = rx_data[6];
     }
     if (rx_header.StdId == 0x211)
     {
