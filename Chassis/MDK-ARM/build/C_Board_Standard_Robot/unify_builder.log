@@ -478,3 +478,80 @@ command:
 [2023-11-17 17:31:48]	[done]
 	build successfully !
 
+[2023-11-17 17:39:26]	compilation failed at : "c:\Users\14775\Desktop\study\robomaster\Gyroscope\Chassis\User\Task\Gimbal_task.c", exit code: 1
+command: 
+  "C:\Keil_v5\ARM\ARMCC\bin\armcc.exe" -c --apcs=interwork -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Application -I../Bsp -I../Components -I../Components/Algorithm -I../Components/Controller -I../Components/Devices -I../Components/Algorithm/Include -I.cmsis/include -IRTE/_C_Board_Standard_Robot -I.eide/deps -I../Src -I../User/Task -I../User/DriverLayer -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING --cpu Cortex-M4.fp --li --c99 -D__MICROLIB -O3 --split_sections --diag_suppress=1 --diag_suppress=1295 -g -o .\build\C_Board_Standard_Robot\__\User\Task\Gimbal_task.o --no_depend_system_headers --depend .\build\C_Board_Standard_Robot\__\User\Task\Gimbal_task.d .\..\User\Task\Gimbal_task.c
+   at unify_builder.Program.Main(String[] args_)
+---
+".\..\User\Task\Gimbal_task.c", line 10: Error:  #147: declaration is incompatible with "motor_info_t motor_info_chassis[8]" (declared at line 11 of ".\..\User\Task\Gimbal_task.h")
+  extern motor_info_t motor_info_chassis[10]; // Áî?Êú?‰ø?ÊÅ?Áª?Êû?‰Ω?[8]‰∏?‰∫?Âè?Áî?Êú?
+                      ^
+".\..\User\Task\Gimbal_task.c", line 57: Warning:  #175-D: subscript out of range
+      gimbal.motor_info = motor_info_chassis[8]; // ‰∫?Âè?Áî?Êú?Áö?‰ø?ÊÅ?Áª?Êû?‰Ω?
+                          ^
+".\..\User\Task\Gimbal_task.c", line 82: Warning:  #175-D: subscript out of range
+      gimbal.motor_info = motor_info_chassis[8];
+                          ^
+".\..\User\Task\Gimbal_task.c", line 104: Warning:  #175-D: subscript out of range
+      gimbal.motor_info = motor_info_chassis[8];
+                          ^
+".\..\User\Task\Gimbal_task.c", line 115: Warning:  #1035-D: single-precision operand implicitly converted to double-precision
+          if (err_yaw_angle < -0.1 || err_yaw_angle > 0.1)
+                                      ^
+".\..\User\Task\Gimbal_task.c", line 67: Warning:  #177-D: function "mode_select" was declared but never referenced
+  static void mode_select()
+              ^
+.\..\User\Task\Gimbal_task.c: 5 warnings, 1 error
+
+[2023-11-17 17:40:15]	compilation failed at : "c:\Users\14775\Desktop\study\robomaster\Gyroscope\Chassis\User\Task\Gimbal_task.c", exit code: 1
+command: 
+  "C:\Keil_v5\ARM\ARMCC\bin\armcc.exe" -c --apcs=interwork -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Application -I../Bsp -I../Components -I../Components/Algorithm -I../Components/Controller -I../Components/Devices -I../Components/Algorithm/Include -I.cmsis/include -IRTE/_C_Board_Standard_Robot -I.eide/deps -I../Src -I../User/Task -I../User/DriverLayer -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING --cpu Cortex-M4.fp --li --c99 -D__MICROLIB -O3 --split_sections --diag_suppress=1 --diag_suppress=1295 -g -o .\build\C_Board_Standard_Robot\__\User\Task\Gimbal_task.o --no_depend_system_headers --depend .\build\C_Board_Standard_Robot\__\User\Task\Gimbal_task.d .\..\User\Task\Gimbal_task.c
+   at unify_builder.Program.Main(String[] args_)
+---
+".\..\User\Task\Gimbal_task.c", line 9: Error:  #147: declaration is incompatible with "motor_info_t motor_info_chassis[8]" (declared at line 11 of ".\..\User\Task\Gimbal_task.h")
+  extern motor_info_t motor_info_chassis[10]; // Áî?Êú?‰ø?ÊÅ?Áª?Êû?‰Ω?[8]‰∏?‰∫?Âè?Áî?Êú?
+                      ^
+".\..\User\Task\Gimbal_task.c", line 56: Warning:  #175-D: subscript out of range
+      gimbal.motor_info = motor_info_chassis[8]; // ‰∫?Âè?Áî?Êú?Áö?‰ø?ÊÅ?Áª?Êû?‰Ω?
+                          ^
+".\..\User\Task\Gimbal_task.c", line 81: Warning:  #175-D: subscript out of range
+      gimbal.motor_info = motor_info_chassis[8];
+                          ^
+".\..\User\Task\Gimbal_task.c", line 103: Warning:  #175-D: subscript out of range
+      gimbal.motor_info = motor_info_chassis[8];
+                          ^
+".\..\User\Task\Gimbal_task.c", line 114: Warning:  #1035-D: single-precision operand implicitly converted to double-precision
+          if (err_yaw_angle < -0.1 || err_yaw_angle > 0.1)
+                                      ^
+".\..\User\Task\Gimbal_task.c", line 66: Warning:  #177-D: function "mode_select" was declared but never referenced
+  static void mode_select()
+              ^
+.\..\User\Task\Gimbal_task.c: 5 warnings, 1 error
+
+[2023-11-17 17:40:47]	[done]
+	build successfully !
+
+[2023-11-17 17:43:12]	[done]
+	build successfully !
+
+[2023-11-17 17:45:37]	[done]
+	build successfully !
+
+[2023-11-17 18:30:49]	[done]
+	build successfully !
+
+[2023-11-17 18:31:10]	[done]
+	build successfully !
+
+[2023-11-17 18:31:29]	[done]
+	build successfully !
+
+[2023-11-17 18:40:18]	[done]
+	build successfully !
+
+[2023-11-17 18:41:52]	[done]
+	build successfully !
+
+[2023-11-17 18:42:44]	[done]
+	build successfully !
+

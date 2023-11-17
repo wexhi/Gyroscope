@@ -8,7 +8,6 @@
 #include "main.h"
 #include "gpio.h"
 
-extern motor_info_t motor_info_chassis[8]; // 电机信息结构体[3]为云台电机
 
 // typedef struct
 // {

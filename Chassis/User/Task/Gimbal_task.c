@@ -1,5 +1,4 @@
 #include "Gimbal_task.h"
-#include "Chassis_task.h"
 #include "cmsis_os.h"
 #include "INS_task.h"
 #include "exchange.h"
@@ -7,7 +6,6 @@
 #define MAX_SPEED 200
 
 extern INS_t INS;
-extern motor_info_t motor_info_chassis[8]; // 电机信息结构体[4]为云台电机
 gimbal_t gimbal;
 fp32 err_yaw_angle;
 
@@ -35,8 +33,7 @@ void Gimbal_task(void const *pvParameters)
     Gimbal_loop_Init();
     for (;;)
     {
-        // RC_gimbal_control();
-        gimbal_yaw_control();
+        mode_select();
         gimbal_current_give();
         osDelay(1);
     }
@@ -54,7 +51,6 @@ static void Gimbal_loop_Init()
     gimbal.pid_angle_parameter[1] = 0;
     gimbal.pid_angle_parameter[2] = 50;
 
-    gimbal.motor_info = motor_info_chassis[4]; // 云台电机的信息结构体
     // gimbal.init_angle = gimbal.motor_info.rotor_angle * 360 / 8192;
     gimbal.angle_target = 0;
 
@@ -79,7 +75,6 @@ static void mode_select()
 // 给电流，CAN1调试用，没板子。。。。。。
 static void gimbal_current_give()
 {
-    gimbal.motor_info = motor_info_chassis[4];
     gimbal.motor_info.set_current = pid_calc(&gimbal.pid, gimbal.motor_info.rotor_speed, gimbal.speed_target);
     // set_motor_current_can1(0, 0, 0, 0, gimbal.motor_info.set_current);
     set_motor_current_can1(1, gimbal.motor_info.set_current, 0, 0, 0);
@@ -101,7 +96,6 @@ static void RC_gimbal_control()
 // yaw轴控制电机
 static void gimbal_yaw_control()
 {
-    gimbal.motor_info = motor_info_chassis[4];
     if (rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1] <= 660)
     {
         gimbal.angle_target = gimbal.angle_target + rc_ctrl.rc.ch[1] / 660.0 * 0.3;
