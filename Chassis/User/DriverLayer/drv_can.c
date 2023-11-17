@@ -161,7 +161,7 @@ void set_motor_current_can2(uint8_t id_range, int16_t v1, int16_t v2, int16_t v3
   tx_data[5] = (v3)&0xff;
   tx_data[6] = (v4 >> 8) & 0xff;
   tx_data[7] = (v4)&0xff;
-  HAL_CAN_AddTxMessage(&hcan2, &tx_header, tx_data, (uint32_t *)CAN_TX_MAILBOX0);
+  HAL_CAN_AddTxMessage(&hcan1, &tx_header, tx_data, (uint32_t *)CAN_TX_MAILBOX0);
 }
 
 // CAN1发送函数 --调试用

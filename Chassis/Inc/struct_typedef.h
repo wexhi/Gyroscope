@@ -16,6 +16,48 @@ typedef unsigned char bool_t;
 typedef float fp32;
 typedef double fp64;
 
+typedef struct
+{
+    uint16_t can_id;        // ID号
+    int16_t set_current;    // 发送信息
+    uint16_t rotor_angle;   // 现在的角度
+    int16_t rotor_speed;    // 现在的转速
+    int16_t torque_current; // 实际转矩电流
+    uint8_t temp;           // 电机温度
+} motor_info_t;
+
+typedef struct
+{
+
+    fp32 Kp;
+    fp32 Ki;
+    fp32 Kd;
+
+    fp32 max_out;
+    fp32 max_iout;
+
+    fp32 set;
+    fp32 fdb;
+
+    fp32 out;
+    fp32 Pout;
+    fp32 Iout;
+    fp32 Dout;
+    fp32 Dbuf[3];
+    fp32 error[3];
+
+} pid_struct_t;
+typedef struct
+{
+    motor_info_t motor_info;     // 电机信息结构体
+    fp32 pid_parameter[3];       // 云台电机的pid参数
+    fp32 pid_angle_parameter[3]; // 云台电机的pid参数
+    pid_struct_t pid;            // 云台电机的pid结构体
+    pid_struct_t pid_angle;      // 云台电机的pid结构体
+    fp32 speed_target;           // 云台电机的目标速度
+    fp32 angle_target;           // 云台电机的目标角度
+    fp32 init_angle;             // 云台电机的初始角度
+} gimbal_t;
 
 #endif
 
