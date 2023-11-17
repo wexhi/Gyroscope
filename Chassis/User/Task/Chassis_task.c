@@ -8,47 +8,48 @@
 #define RC_MIN -660
 #define motor_max 900
 #define motor_min -900
+#define angle_valve 5
+#define angle_weight 55
 
 chassis_t chassis;
 
-fp32 speed_limit = 10000; // 速度限制
 pid_struct_t supercap_pid;
-motor_info_t motor_info_chassis[10];       // 电机信息结构体
-fp32 chassis_motor_pid[3] = {30, 0.5, 10}; // 用的原来的pid
+motor_info_t motor_info_chassis[10]; // 电机信息结构体
 fp32 superpid[3] = {120, 0.1, 0};
-volatile int16_t Vx = 0, Vy = 0, Wz = 0;
-int16_t Temp_Vx;
-int16_t Temp_Vy;
-int fllowflag = 0;
-extern RC_ctrl_t rc_ctrl;
-extern ins_data_t ins_data;
+
+int8_t chassis_mode;
+
+extern RC_ctrl_t rc_ctrl; // 遥控器信息结构体
 extern float powerdata[4];
-extern uint16_t shift_flag;
 
 uint8_t rc[18];
-uint8_t motor_flag[4] = {1, 1, 1, 1}; // LF RF RB LB
-int16_t avg_speed = 0;
-// Save imu data
-
-int8_t chassis_mode = 1; // 判断底盘状态，用于UI编写
-
-int chassis_mode_flag = 0;
-
-#define angle_valve 5
-#define angle_weight 55
 
 static void Chassis_Init();
 
 static void Chassis_loop_Init();
 
+// 模式选择
+static void mode_chooce();
+
+// 遥控器控制底盘电机
+static void RC_Move(void);
+
+// 小陀螺模式
+static void gyroscope(void);
+
+// 速度限制函数
+static void Motor_Speed_limiting(volatile int16_t *motor_speed, int16_t limit_speed);
+
+// 电机电流控制
+static void chassis_current_give();
+
+// 运动解算
+static void chassis_motol_speed_calculate();
+
+
 void Chassis_task(void const *pvParameters)
 {
   Chassis_Init();
-  for (uint8_t i = 0; i < 4; i++)
-  {
-    pid_init(&chassis.pid[i], chassis.pid_parameter, 6000, 6000); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
-  }
-  pid_init(&supercap_pid, superpid, 3000, 3000); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
 
   for (;;) // 底盘运动任务
   {
@@ -68,20 +69,25 @@ void Chassis_task(void const *pvParameters)
 
 static void Chassis_Init()
 {
-  chassis.pid_parameter[0] = 30;
-  chassis.pid_parameter[1] = 0.5;
-  chassis.pid_parameter[2] = 10;
+  chassis.pid_parameter[0] = 30, chassis.pid_parameter[1] = 0.5, chassis.pid_parameter[2] = 10;
 
+  for (uint8_t i = 0; i < 4; i++)
+  {
+    pid_init(&chassis.pid[i], chassis.pid_parameter, 6000, 6000); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
+  }
+  pid_init(&supercap_pid, superpid, 3000, 3000); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
+
+  chassis.Vx = 0, chassis.Vy = 0, chassis.Wz = 0;
 }
 
 static void Chassis_loop_Init()
 {
-  Vx = 0;
-  Vy = 0;
-  Wz = 0;
+  chassis.Vx = 0;
+  chassis.Vy = 0;
+  chassis.Wz = 0;
 }
 
-void mode_chooce()
+static void mode_chooce()
 {
   // 遥控器控制
   // chanel 0 left max==-660,right max==660
@@ -119,22 +125,22 @@ void mode_chooce()
 }
 
 // 运动解算
-void chassis_motol_speed_calculate()
+static void chassis_motol_speed_calculate()
 {
 
   // 根据分解的速度调整电机速度目标
-  // chassis.speed_target[CHAS_LF] = Vx - Vy - Wz;
-  // chassis.speed_target[CHAS_RF] = Vx + Vy + Wz;
-  // chassis.speed_target[CHAS_RB] = Vx - Vy + Wz;
-  // chassis.speed_target[CHAS_LB] = Vx + Vy - Wz;
-  chassis.speed_target[CHAS_LF] = Wz + Vx + Vy;
-  chassis.speed_target[CHAS_RF] = Wz - Vx + Vy;
-  chassis.speed_target[CHAS_RB] = Wz - Vx - Vy;
-  chassis.speed_target[CHAS_LB] = Wz + Vx - Vy;
+  // chassis.speed_target[CHAS_LF] = chassis.Vx - chassis.Vy - chassis.Wz;
+  // chassis.speed_target[CHAS_RF] = chassis.Vx + chassis.Vy + chassis.Wz;
+  // chassis.speed_target[CHAS_RB] = chassis.Vx - chassis.Vy + chassis.Wz;
+  // chassis.speed_target[CHAS_LB] = chassis.Vx + chassis.Vy - chassis.Wz;
+  chassis.speed_target[CHAS_LF] = chassis.Wz + chassis.Vx + chassis.Vy;
+  chassis.speed_target[CHAS_RF] = chassis.Wz - chassis.Vx + chassis.Vy;
+  chassis.speed_target[CHAS_RB] = chassis.Wz - chassis.Vx - chassis.Vy;
+  chassis.speed_target[CHAS_LB] = chassis.Wz + chassis.Vx - chassis.Vy;
 }
 // 运动解算
 // 速度限制函数
-void Motor_Speed_limiting(volatile int16_t *motor_speed, int16_t limit_speed)
+static void Motor_Speed_limiting(volatile int16_t *motor_speed, int16_t limit_speed)
 {
   uint8_t i = 0;
   int16_t max = 0;
@@ -161,7 +167,7 @@ void Motor_Speed_limiting(volatile int16_t *motor_speed, int16_t limit_speed)
   }
 }
 // 电机电流控制
-void chassis_current_give()
+static void chassis_current_give()
 {
 
   uint8_t i = 0;
@@ -185,22 +191,21 @@ static int16_t map_range(int value, int from_min, int from_max, int to_min, int 
   return mapped_value;
 }
 
-
-void RC_Move(void)
+static void RC_Move(void)
 {
   // 从遥控器获取控制输入
-  Vx = rc_ctrl.rc.ch[3]; // 前后输入
-  Vy = rc_ctrl.rc.ch[2]; // 左右输入
-  Wz = rc_ctrl.rc.ch[4]; // 旋转输入
+  chassis.Vx = rc_ctrl.rc.ch[3]; // 前后输入
+  chassis.Vy = rc_ctrl.rc.ch[2]; // 左右输入
+  chassis.Wz = rc_ctrl.rc.ch[4]; // 旋转输入
 
   /*************记得加上线性映射***************/
-  Vx = map_range(Vx, RC_MIN, RC_MAX, motor_min, motor_max);
-  Vy = map_range(Vy, RC_MIN, RC_MAX, motor_min, motor_max);
-  Wz = map_range(Wz, RC_MIN, RC_MAX, motor_min, motor_max);
+  chassis.Vx = map_range(chassis.Vx, RC_MIN, RC_MAX, motor_min, motor_max);
+  chassis.Vy = map_range(chassis.Vy, RC_MIN, RC_MAX, motor_min, motor_max);
+  chassis.Wz = map_range(chassis.Wz, RC_MIN, RC_MAX, motor_min, motor_max);
 }
 
 // 小陀螺模式
-void gyroscope(void)
+static void gyroscope(void)
 {
-  Wz = 900;
+  chassis.Wz = 900;
 }

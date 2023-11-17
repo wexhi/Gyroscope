@@ -8,7 +8,6 @@
 #include "INS_task.h"
 #include "pid.h"
 #include "drv_usart.h"
-extern int chassis_mode_flag;
 
 uint8_t UI_Seq;                         //包序号
 
@@ -16,7 +15,6 @@ uint8_t referee_uart_tx_buf[2][150];    //裁判系统学生串口发送DMA缓�
 uint8_t referee_tx_fifo = 0;            //正在使用的缓存池
 
 extern float powerdata[4];
-extern int8_t chassis_choice_flag;
 
 extern JUDGE_MODULE_DATA Judge_Hero;
 extern UART_HandleTypeDef huart6;
