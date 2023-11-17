@@ -37,13 +37,16 @@ int chassis_mode_flag = 0;
 #define angle_valve 5
 #define angle_weight 55
 
+static void Chassis_Init();
+
 static void Chassis_loop_Init();
 
 void Chassis_task(void const *pvParameters)
 {
+  Chassis_Init();
   for (uint8_t i = 0; i < 4; i++)
   {
-    pid_init(&chassis.pid[i], chassis_motor_pid, 6000, 6000); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
+    pid_init(&chassis.pid[i], chassis.pid_parameter, 6000, 6000); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
   }
   pid_init(&supercap_pid, superpid, 3000, 3000); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
 
@@ -61,6 +64,14 @@ void Chassis_task(void const *pvParameters)
     chassis_current_give();
     osDelay(1);
   }
+}
+
+static void Chassis_Init()
+{
+  chassis.pid_parameter[0] = 30;
+  chassis.pid_parameter[1] = 0.5;
+  chassis.pid_parameter[2] = 10;
+
 }
 
 static void Chassis_loop_Init()

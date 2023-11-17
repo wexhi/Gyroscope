@@ -1,13 +1,17 @@
 >>> cc
 
-".\..\User\Task\Gimbal_task.c", line 80: Warning:  #223-D: function "set_motor_current_gimbal" declared implicitly
+".\..\User\Task\Chassis_task.c", line 173: Warning:  #223-D: function "set_motor_current_chassis" declared implicitly
+    set_motor_current_chassis(0, chassis.motor_info[0].set_current, chassis.motor_info[1].set_current, chassis.motor_info[2].set_current, chassis.motor_info[3].set_current);
+    ^
+.\..\User\Task\Chassis_task.c: 1 warning, 0 errors
+".\..\User\Task\Gimbal_task.c", line 79: Warning:  #223-D: function "set_motor_current_gimbal" declared implicitly
       set_motor_current_gimbal(1, gimbal.motor_info.set_current, 0, 0, 0);
       ^
-".\..\User\Task\Gimbal_task.c", line 109: Warning:  #1035-D: single-precision operand implicitly converted to double-precision
+".\..\User\Task\Gimbal_task.c", line 108: Warning:  #1035-D: single-precision operand implicitly converted to double-precision
           if (err_yaw_angle < -0.1 || err_yaw_angle > 0.1)
                                       ^
 .\..\User\Task\Gimbal_task.c: 2 warnings, 0 errors
 
 >>> ld
 
-Program Size: Code=47740 RO-data=3704 RW-data=744 ZI-data=47912  
+Program Size: Code=47764 RO-data=3704 RW-data=732 ZI-data=47916  
