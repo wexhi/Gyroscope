@@ -46,7 +46,6 @@ static void chassis_current_give();
 // 运动解算
 static void chassis_motol_speed_calculate();
 
-
 void Chassis_task(void const *pvParameters)
 {
   Chassis_Init();
@@ -129,10 +128,6 @@ static void chassis_motol_speed_calculate()
 {
 
   // 根据分解的速度调整电机速度目标
-  // chassis.speed_target[CHAS_LF] = chassis.Vx - chassis.Vy - chassis.Wz;
-  // chassis.speed_target[CHAS_RF] = chassis.Vx + chassis.Vy + chassis.Wz;
-  // chassis.speed_target[CHAS_RB] = chassis.Vx - chassis.Vy + chassis.Wz;
-  // chassis.speed_target[CHAS_LB] = chassis.Vx + chassis.Vy - chassis.Wz;
   chassis.speed_target[CHAS_LF] = chassis.Wz + chassis.Vx + chassis.Vy;
   chassis.speed_target[CHAS_RF] = chassis.Wz - chassis.Vx + chassis.Vy;
   chassis.speed_target[CHAS_RB] = chassis.Wz - chassis.Vx - chassis.Vy;
@@ -166,6 +161,7 @@ static void Motor_Speed_limiting(volatile int16_t *motor_speed, int16_t limit_sp
     }
   }
 }
+
 // 电机电流控制
 static void chassis_current_give()
 {
