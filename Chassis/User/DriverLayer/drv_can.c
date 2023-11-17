@@ -96,7 +96,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) // 接受中断�
     if ((rx_header.StdId >= 0x205)                                 // 201-207
         && (rx_header.StdId <= 0x208))                             // 判断标识符，标识符为0x200+ID
     {
-      uint8_t index = rx_header.StdId - 0x201; // get motor index by can_id
+      uint8_t index = rx_header.StdId - 0x205; // get motor index by can_id
       shooter.motor_info[index].rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
       shooter.motor_info[index].rotor_speed = ((rx_data[2] << 8) | rx_data[3]);
       shooter.motor_info[index].torque_current = ((rx_data[4] << 8) | rx_data[5]);
