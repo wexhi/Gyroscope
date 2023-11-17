@@ -12,7 +12,7 @@
 fp32 speed_limit = 10000; // 速度限制
 pid_struct_t motor_pid_chassis[4];
 pid_struct_t supercap_pid;
-motor_info_t motor_info_chassis[8];        // 电机信息结构体
+motor_info_t motor_info_chassis[10];       // 电机信息结构体
 fp32 chassis_motor_pid[3] = {30, 0.5, 10}; // 用的原来的pid
 fp32 superpid[3] = {120, 0.1, 0};
 volatile int16_t Vx = 0, Vy = 0, Wz = 0;

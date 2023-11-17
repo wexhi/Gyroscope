@@ -62,25 +62,20 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) // 接受中断�
     if (rx_header.StdId == 0x55)                                   // 上C向下C传IMU数据
     {
     }
+    
 
     /*************************************CAN1调试******************************************/
     if ((rx_header.StdId >= FEEDBACK_ID_BASE_6020) &&                // 205-211,注意把ID调成大于3,不然就会和读取3508的函数产生冲突
         (rx_header.StdId < FEEDBACK_ID_BASE_6020 + MOTOR_MAX_NUM)) // 判断标识符，标识符为0x204+ID
     {
-      uint8_t index = rx_header.StdId - FEEDBACK_ID_BASE_6020; // get motor index by can_id
+      uint8_t index = rx_header.StdId - FEEDBACK_ID_BASE_6020 + 4; // get motor index by can_id
       motor_info_chassis[index].rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
       motor_info_chassis[index].rotor_speed = ((rx_data[2] << 8) | rx_data[3]);
       motor_info_chassis[index].torque_current = ((rx_data[4] << 8) | rx_data[5]);
       motor_info_chassis[index].temp = rx_data[6];
     }
-  }
-  // 电机信息接收
-  if (hcan->Instance == CAN2)
-  {
-    uint8_t rx_data[8];
-    HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data); // receive can2 data
-    if ((rx_header.StdId >= 0x201)                                 // 201-207
-        && (rx_header.StdId < 0x208))                              // 判断标识符，标识符为0x200+ID
+    if ((rx_header.StdId >= 0x201)    // 201-207
+        && (rx_header.StdId <= 0x204)) // 判断标识符，标识符为0x200+ID
     {
       uint8_t index = rx_header.StdId - 0x201; // get motor index by can_id
       motor_info_chassis[index].rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
@@ -92,10 +87,30 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) // 接受中断�
         can_cnt_1++;
       }
     }
+  }
+  // 电机信息接收
+  if (hcan->Instance == CAN2)
+  {
+    uint8_t rx_data[8];
+    HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data); // receive can2 data
+    if ((rx_header.StdId >= 0x205)                                 // 201-207
+        && (rx_header.StdId <= 0x208))                              // 判断标识符，标识符为0x200+ID
+    {
+      uint8_t index = rx_header.StdId - 0x201; // get motor index by can_id
+      motor_info_chassis[index].rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+      motor_info_chassis[index].rotor_speed = ((rx_data[2] << 8) | rx_data[3]);
+      motor_info_chassis[index].torque_current = ((rx_data[4] << 8) | rx_data[5]);
+      motor_info_chassis[index].temp = rx_data[6];
+      if (index == 0)
+      {
+        can_cnt_1++;
+      }
+    }
+  
     if ((rx_header.StdId >= FEEDBACK_ID_BASE_6020) &&              // 205-211,注意把ID调成大于3,不然就会和读取3508的函数产生冲突
         (rx_header.StdId < FEEDBACK_ID_BASE_6020 + MOTOR_MAX_NUM)) // 判断标识符，标识符为0x204+ID
     {
-      uint8_t index = rx_header.StdId - FEEDBACK_ID_BASE_6020; // get motor index by can_id
+      uint8_t index = rx_header.StdId - FEEDBACK_ID_BASE_6020 + 3; // get motor index by can_id
       motor_info_chassis[index].rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
       motor_info_chassis[index].rotor_speed = ((rx_data[2] << 8) | rx_data[3]);
       motor_info_chassis[index].torque_current = ((rx_data[4] << 8) | rx_data[5]);
