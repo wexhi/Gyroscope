@@ -65,4 +65,5 @@
 .\build\C_Board_Standard_Robot\__\Src\freertos.o: ../Inc/UI_task.h
 .\build\C_Board_Standard_Robot\__\Src\freertos.o: ../User/Task/Gimbal_task.h
 .\build\C_Board_Standard_Robot\__\Src\freertos.o: ../Inc/gpio.h
+.\build\C_Board_Standard_Robot\__\Src\freertos.o: ../User/Task/Shoot_task.h
 .\build\C_Board_Standard_Robot\__\Src\freertos.o: ../Inc/stm32f4xx_it.h

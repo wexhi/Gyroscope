@@ -34,6 +34,7 @@
 #include "super_cap.h"
 #include "UI_task.h"
 #include "Gimbal_task.h"
+#include "Shoot_task.h"
 #include "stm32f4xx_it.h"
 /* USER CODE END Includes */
 
@@ -59,6 +60,7 @@ osThreadId myTask02Handle;
 osThreadId super_capHandle;
 osThreadId UI_taskHandle;
 osThreadId Gimbal_taskHandle;
+osThreadId shoot_taskHandle;
 /* USER CODE END Variables */
 osThreadId INSTaskHandle;
 osThreadId exchangeTaskHandle;
@@ -150,6 +152,9 @@ void MX_FREERTOS_Init(void)
 
   osThreadDef(GimbalTask, Gimbal_task, osPriorityRealtime, 0, 512);
   Gimbal_taskHandle = osThreadCreate(osThread(GimbalTask), NULL);
+  
+  osThreadDef(shootTask, Shoot_task, osPriorityRealtime, 0, 512);
+  shoot_taskHandle = osThreadCreate(osThread(shootTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
