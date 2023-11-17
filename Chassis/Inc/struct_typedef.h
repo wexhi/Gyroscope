@@ -68,5 +68,13 @@ typedef struct
     int16_t Vx, Vy, Wz;           // 底盘电机的目标速度
 } chassis_t;
 
+typedef struct 
+{
+    /* data */
+    motor_info_t motor_info[4]; // 电机信息结构体
+
+} shooter_t;
+
+
 
 #endif
