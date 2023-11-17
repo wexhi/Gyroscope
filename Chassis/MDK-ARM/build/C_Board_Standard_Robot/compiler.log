@@ -1,14 +1,17 @@
 >>> cc
 
-
-".\..\User\Task\Gimbal_task.c", line 76: Warning:  #223-D: function "set_motor_current_gimbal" declared implicitly
+".\..\User\Task\Gimbal_task.c", line 78: Warning:  #223-D: function "set_motor_current_gimbal" declared implicitly
       set_motor_current_gimbal(1, gimbal_Yaw.motor_info.set_current, 0, 0, 0);
       ^
-".\..\User\Task\Gimbal_task.c", line 105: Warning:  #1035-D: single-precision operand implicitly converted to double-precision
-          if (err_yaw_angle < -0.1 || err_yaw_angle > 0.1)
-                                      ^
+".\..\User\Task\Gimbal_task.c", line 114: Warning:  #1035-D: single-precision operand implicitly converted to double-precision
+          if (gimbal_Yaw.err_angle < -0.1 || gimbal_Yaw.err_angle > 0.1)
+                                             ^
 .\..\User\Task\Gimbal_task.c: 2 warnings, 0 errors
+".\EXCHANGE.c", line 15: Warning:  #223-D: function "osDelay" declared implicitly
+  	osDelay(1);
+  	^
+.\EXCHANGE.c: 1 warning, 0 errors
 
 >>> ld
 
-Program Size: Code=47812 RO-data=3704 RW-data=724 ZI-data=48100  
+Program Size: Code=47848 RO-data=3704 RW-data=716 ZI-data=48108  

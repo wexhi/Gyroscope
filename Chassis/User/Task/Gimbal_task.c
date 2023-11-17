@@ -6,8 +6,7 @@
 #define MAX_SPEED 200
 
 extern INS_t INS;
-gimbal_t gimbal_Yaw, gimbal_Pitch;
-fp32 err_yaw_angle;
+gimbal_t gimbal_Yaw, gimbal_Pitch; // 云台电机信息结构体
 
 extern RC_ctrl_t rc_ctrl; // 遥控器信息结构体
 
@@ -90,6 +89,12 @@ static void RC_gimbal_control()
     {
         gimbal_Yaw.speed_target = 0;
     }
+
+    // Pitch轴
+    // 1600 < gimbal_Pitch.angle_target < 3400
+    if (rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1] <= 660)
+    {
+        }
 }
 
 // yaw轴控制电机
@@ -101,11 +106,11 @@ static void gimbal_yaw_control()
 
         detel_calc(&gimbal_Yaw.angle_target);
 
-        err_yaw_angle = gimbal_Yaw.angle_target - INS.Yaw;
+        gimbal_Yaw.err_angle = gimbal_Yaw.angle_target - INS.Yaw;
 
-        detel_calc(&err_yaw_angle);
+        detel_calc(&gimbal_Yaw.err_angle);
 
-        if (err_yaw_angle < -0.1 || err_yaw_angle > 0.1)
+        if (gimbal_Yaw.err_angle < -0.1 || gimbal_Yaw.err_angle > 0.1)
         {
             gimbal_Yaw.speed_target = gimbal_PID_calc(&gimbal_Yaw.pid_angle, INS.Yaw, gimbal_Yaw.angle_target);
         }
