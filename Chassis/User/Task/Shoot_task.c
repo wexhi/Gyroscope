@@ -68,7 +68,7 @@ static void model_choice(void)
 // 拨盘电机控制
 static void dial_control(void)
 {
-    if (rc_ctrl.rc.s[1] == 1)
+    if (rc_ctrl.rc.s[0] == 1)
     {
         shooter.dial_speed_target = 2000;
     }

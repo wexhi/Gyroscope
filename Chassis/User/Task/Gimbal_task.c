@@ -64,14 +64,15 @@ static void Gimbal_loop_Init()
 // 模式选择
 static void mode_select()
 {
-    // if (rc_ctrl.rc.s[0] == 1)
-    // {
-    //     gimbal_yaw_control();
-    // }
-    // else
-    // {
-    RC_gimbal_control();
-    // }
+    if (rc_ctrl.rc.s[0] == 1)
+    {
+        RC_gimbal_control();
+        
+    }
+    else
+    {
+        gimbal_yaw_control();
+    }
 }
 
 // 给电流，CAN1调试用，没板子。。。。。。
