@@ -9,6 +9,8 @@
 #define motor_max 900
 #define motor_min -900
 
+chassis_t chassis;
+
 fp32 speed_limit = 10000; // 速度限制
 pid_struct_t motor_pid_chassis[4];
 pid_struct_t supercap_pid;
@@ -158,9 +160,9 @@ void chassis_current_give()
 
   for (i = 0; i < 4; i++)
   {
-    motor_info_chassis[i].set_current = pid_calc(&motor_pid_chassis[i], motor_info_chassis[i].rotor_speed, motor_speed_target[i]);
+    chassis.motor_info[i].set_current = pid_calc(&motor_pid_chassis[i], chassis.motor_info[i].rotor_speed, motor_speed_target[i]);
   }
-  set_motor_current_can2(0, motor_info_chassis[0].set_current, motor_info_chassis[1].set_current, motor_info_chassis[2].set_current, motor_info_chassis[3].set_current);
+  set_motor_current_can2(0, chassis.motor_info[0].set_current, chassis.motor_info[1].set_current, chassis.motor_info[2].set_current, chassis.motor_info[3].set_current);
 }
 
 // 线性映射函数

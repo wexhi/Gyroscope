@@ -1,7 +1,6 @@
 #ifndef STRUCT_TYPEDEF_H
 #define STRUCT_TYPEDEF_H
 
-
 typedef signed char int8_t;
 typedef signed short int int16_t;
 typedef signed int int32_t;
@@ -56,10 +55,15 @@ typedef struct
     pid_struct_t pid_angle;      // 云台电机的pid结构体
     fp32 speed_target;           // 云台电机的目标速度
     fp32 angle_target;           // 云台电机的目标角度
-    fp32 init_angle;             // 云台电机的初始角度
 } gimbal_t;
 
+typedef struct
+{
+    /* data */
+    motor_info_t motor_info[4]; // 电机信息结构体
+    fp32 pid_parameter[3];  // 底盘电机的pid参数
+    pid_struct_t pid;       // 底盘电机的pid结构体
+    fp32 speed_target;      // 底盘电机的目标速度
+} chassis_t;
+
 #endif
-
-
-

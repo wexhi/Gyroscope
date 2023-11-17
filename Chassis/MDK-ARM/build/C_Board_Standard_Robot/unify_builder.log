@@ -555,3 +555,56 @@ command:
 [2023-11-17 18:42:44]	[done]
 	build successfully !
 
+[2023-11-17 18:45:46]	compilation failed at : "c:\Users\14775\Desktop\study\robomaster\Gyroscope\Chassis\User\AlgorithmLayer\CRC.c", exit code: 1
+command: 
+  "C:\Keil_v5\ARM\ARMCC\bin\armcc.exe" -c --apcs=interwork -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Application -I../Bsp -I../Components -I../Components/Algorithm -I../Components/Controller -I../Components/Devices -I../Components/Algorithm/Include -I.cmsis/include -IRTE/_C_Board_Standard_Robot -I.eide/deps -I../Src -I../User/Task -I../User/DriverLayer -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING --cpu Cortex-M4.fp --li --c99 -D__MICROLIB -O3 --split_sections --diag_suppress=1 --diag_suppress=1295 -g -o .\build\C_Board_Standard_Robot\__\User\AlgorithmLayer\CRC.o --no_depend_system_headers --depend .\build\C_Board_Standard_Robot\__\User\AlgorithmLayer\CRC.d .\..\User\AlgorithmLayer\CRC.c
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+"../Inc/struct_typedef.h", line 63: Error:  #20: identifier "moto_info_t" is undefined
+      moto_info_t motor_info; // Áî?Êú?‰ø?ÊÅ?Áª?Êû?‰Ω?
+      ^
+"../Inc/struct_typedef.h", line 67: Warning:  #375-D: declaration requires a typedef name
+  };
+   ^
+.\..\User\AlgorithmLayer\CRC.c: 1 warning, 1 error
+
+[2023-11-17 18:46:05]	[done]
+	build successfully !
+
+[2023-11-17 18:47:51]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+Error: L6218E: Undefined symbol powerdata (referred from drv_can.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 1 error messages.
+
+
+[2023-11-17 18:49:02]	[done]
+	build successfully !
+
+[2023-11-17 18:51:00]	compilation failed at : "c:\Users\14775\Desktop\study\robomaster\Gyroscope\Chassis\User\DriverLayer\drv_can.c", exit code: 1
+command: 
+  "C:\Keil_v5\ARM\ARMCC\bin\armcc.exe" -c --apcs=interwork -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Application -I../Bsp -I../Components -I../Components/Algorithm -I../Components/Controller -I../Components/Devices -I../Components/Algorithm/Include -I.cmsis/include -IRTE/_C_Board_Standard_Robot -I.eide/deps -I../Src -I../User/Task -I../User/DriverLayer -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING --cpu Cortex-M4.fp --li --c99 -D__MICROLIB -O3 --split_sections --diag_suppress=1 --diag_suppress=1295 -g -o .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_can.o --no_depend_system_headers --depend .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_can.d .\..\User\DriverLayer\drv_can.c
+   at unify_builder.Program.Main(String[] args_)
+---
+".\..\User\DriverLayer\drv_can.c", line 81: Error:  #154: expression must have struct or union type
+        chassis.motor_info.rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 82: Error:  #154: expression must have struct or union type
+        chassis.motor_info.rotor_speed = ((rx_data[2] << 8) | rx_data[3]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 83: Error:  #154: expression must have struct or union type
+        chassis.motor_info.torque_current = ((rx_data[4] << 8) | rx_data[5]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 84: Error:  #154: expression must have struct or union type
+        chassis.motor_info.temp = rx_data[6];
+        ^
+.\..\User\DriverLayer\drv_can.c: 0 warnings, 4 errors
+
+[2023-11-17 18:51:24]	[done]
+	build successfully !
+
+[2023-11-17 18:55:24]	[done]
+	build successfully !
+

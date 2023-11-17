@@ -6,6 +6,7 @@ uint16_t can_cnt_1 = 0;
 
 extern motor_info_t motor_info_chassis[10];
 extern gimbal_t gimbal;
+extern chassis_t chassis;
 
 float powerdata[4];
 uint16_t pPowerdata[8];
@@ -77,10 +78,10 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) // 接受中断�
         && (rx_header.StdId <= 0x204)) // 判断标识符，标识符为0x200+ID
     {
       uint8_t index = rx_header.StdId - 0x201; // get motor index by can_id
-      motor_info_chassis[index].rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
-      motor_info_chassis[index].rotor_speed = ((rx_data[2] << 8) | rx_data[3]);
-      motor_info_chassis[index].torque_current = ((rx_data[4] << 8) | rx_data[5]);
-      motor_info_chassis[index].temp = rx_data[6];
+      chassis.motor_info[index].rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+      chassis.motor_info[index].rotor_speed = ((rx_data[2] << 8) | rx_data[3]);
+      chassis.motor_info[index].torque_current = ((rx_data[4] << 8) | rx_data[5]);
+      chassis.motor_info[index].temp = rx_data[6];
       if (index == 0)
       {
         can_cnt_1++;
