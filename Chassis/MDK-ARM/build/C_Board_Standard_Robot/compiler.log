@@ -1,7 +1,10 @@
 >>> cc
 
-
+".\..\User\Task\Shoot_task.c", line 109: Warning:  #223-D: function "set_motor_current_shoot" declared implicitly
+      set_motor_current_shoot(shooter.motor_info[0].set_current, shooter.motor_info[1].set_current, shooter.motor_info[2].set_current, shooter.motor_info[3].set_current);
+      ^
+.\..\User\Task\Shoot_task.c: 1 warning, 0 errors
 
 >>> ld
 
-Program Size: Code=48404 RO-data=3744 RW-data=720 ZI-data=48400  
+Program Size: Code=48772 RO-data=3744 RW-data=720 ZI-data=48400  
