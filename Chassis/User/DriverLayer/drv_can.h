@@ -9,5 +9,6 @@ void can_remote(uint8_t sbus_buf[], uint8_t can_send_id);
 
 void set_motor_current_chassis(uint8_t id_range, int16_t v1, int16_t v2, int16_t v3, int16_t v4);
 void set_motor_current_gimbal(uint8_t id_range, int16_t v1, int16_t v2, int16_t v3, int16_t v4);
+void set_motor_current_gimbal2(uint8_t id_range, int16_t v1, int16_t v2, int16_t v3, int16_t v4);
 
 #endif

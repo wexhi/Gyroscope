@@ -184,3 +184,25 @@ void set_motor_current_gimbal(uint8_t id_range, int16_t v1, int16_t v2, int16_t 
   tx_data[7] = (v4) & 0xff;
   HAL_CAN_AddTxMessage(&hcan1, &tx_header, tx_data, (uint32_t *)CAN_TX_MAILBOX0);
 }
+
+void set_motor_current_gimbal2(uint8_t id_range, int16_t v1, int16_t v2, int16_t v3, int16_t v4)
+{
+  CAN_TxHeaderTypeDef tx_header;
+  uint8_t tx_data[8];
+
+  tx_header.StdId = (id_range == 0) ? (0x1ff) : (0x2ff); // 如果id_range==0则等于0x1ff,id_range==1则等于0x2ff（ID号）
+  tx_header.IDE = CAN_ID_STD;                            // 标准帧
+  tx_header.RTR = CAN_RTR_DATA;                          // 数据帧
+
+  tx_header.DLC = 8; // 发送数据长度（字节）
+
+  tx_data[0] = (v1 >> 8) & 0xff; // 先发高八位
+  tx_data[1] = (v1) & 0xff;
+  tx_data[2] = (v2 >> 8) & 0xff;
+  tx_data[3] = (v2) & 0xff;
+  tx_data[4] = (v3 >> 8) & 0xff;
+  tx_data[5] = (v3) & 0xff;
+  tx_data[6] = (v4 >> 8) & 0xff;
+  tx_data[7] = (v4) & 0xff;
+  HAL_CAN_AddTxMessage(&hcan2, &tx_header, tx_data, (uint32_t *)CAN_TX_MAILBOX0);
+}
