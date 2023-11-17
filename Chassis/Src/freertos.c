@@ -152,8 +152,8 @@ void MX_FREERTOS_Init(void)
 
   osThreadDef(GimbalTask, Gimbal_task, osPriorityRealtime, 0, 512);
   Gimbal_taskHandle = osThreadCreate(osThread(GimbalTask), NULL);
-  
-  osThreadDef(shootTask, Shoot_task, osPriorityRealtime, 0, 512);
+
+  osThreadDef(shootTask, Shoot_task, osPriorityNormal, 0, 256);
   shoot_taskHandle = osThreadCreate(osThread(shootTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */

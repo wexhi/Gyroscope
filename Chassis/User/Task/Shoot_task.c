@@ -36,9 +36,9 @@ static void Shooter_Inint(void)
     shooter.pid_bay_para[0] = 10, shooter.pid_bay_para[1] = 0, shooter.pid_bay_para[2] = 0;
 
     // 初始化pid结构体
-    pid_init(&shooter.pid_dial, shooter.pid_dial_para, 16384, 16384);
-    pid_init(&shooter.pid_friction, shooter.pid_friction_para, 16384, 16384);
-    pid_init(&shooter.pid_bay, shooter.pid_bay_para, 16384, 16384);
+    pid_init(&shooter.pid_dial, shooter.pid_dial_para, 8000, 8000);
+    pid_init(&shooter.pid_friction, shooter.pid_friction_para, 8000, 8000);
+    pid_init(&shooter.pid_bay, shooter.pid_bay_para, 8000, 8000);
 
     // 初始化速度目标
     shooter.dial_speed_target = 0;
@@ -70,7 +70,7 @@ static void dial_control(void)
 {
     if (rc_ctrl.rc.s[1] == 1)
     {
-        shooter.dial_speed_target = 100;
+        shooter.dial_speed_target = 2000;
     }
     else
     {
@@ -83,8 +83,8 @@ static void friction_control(void)
 {
     if (rc_ctrl.rc.s[1] == 1)
     {
-        shooter.friction_speed_target[0] = -300;
-        shooter.friction_speed_target[1] = 300;
+        shooter.friction_speed_target[0] = -4000;
+        shooter.friction_speed_target[1] = 4000;
     }
     else
     {
@@ -106,5 +106,5 @@ static void shooter_current_given(void)
     shooter.motor_info[1].set_current = pid_calc(&shooter.pid_bay, shooter.motor_info[1].rotor_speed, shooter.bay_speed_target);// 弹舱电机
     shooter.motor_info[2].set_current = pid_calc(&shooter.pid_friction, shooter.motor_info[2].rotor_speed, shooter.friction_speed_target[0]);// 摩擦轮电机
     shooter.motor_info[3].set_current = pid_calc(&shooter.pid_friction, shooter.motor_info[3].rotor_speed, shooter.friction_speed_target[1]);// 摩擦轮电机
-    set_motor_current_shoot(shooter.motor_info[0].set_current, shooter.motor_info[1].set_current, shooter.motor_info[2].set_current, shooter.motor_info[3].set_current);
+    set_motor_current_shoot(1, shooter.motor_info[0].set_current, shooter.motor_info[1].set_current, shooter.motor_info[2].set_current,shooter.motor_info[3].set_current);
 }

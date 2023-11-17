@@ -64,14 +64,14 @@ static void Gimbal_loop_Init()
 // 模式选择
 static void mode_select()
 {
-    if (rc_ctrl.rc.s[0] == 1)
-    {
-        gimbal_yaw_control();
-    }
-    else
-    {
-        RC_gimbal_control();
-    }
+    // if (rc_ctrl.rc.s[0] == 1)
+    // {
+    //     gimbal_yaw_control();
+    // }
+    // else
+    // {
+    RC_gimbal_control();
+    // }
 }
 
 // 给电流，CAN1调试用，没板子。。。。。。
@@ -101,10 +101,8 @@ static void RC_gimbal_control()
     {
         gimbal_Pitch.angle_target += rc_ctrl.rc.ch[1] / 660.0 * 1;
         detel_calc2(&gimbal_Pitch.angle_target);
-    
-        gimbal_Pitch.speed_target = pid_calc(&gimbal_Pitch.pid_angle, gimbal_Pitch.motor_info.rotor_angle, gimbal_Pitch.angle_target);
-        
 
+        gimbal_Pitch.speed_target = pid_calc(&gimbal_Pitch.pid_angle, gimbal_Pitch.motor_info.rotor_angle, gimbal_Pitch.angle_target);
     }
 }
 
@@ -151,11 +149,15 @@ static void detel_calc(fp32 *angle)
 
 static void detel_calc2(fp32 *angle)
 {
-    if (*angle > 8192) *angle -= 8192;
-    
-    else if (*angle < 0) *angle += 8192;
+    if (*angle > 8192)
+        *angle -= 8192;
 
-    if (*angle > MAX_ANGLE) *angle = MAX_ANGLE;
+    else if (*angle < 0)
+        *angle += 8192;
 
-    else if (*angle < MIN_ANGLE) *angle = MIN_ANGLE;
+    if (*angle > MAX_ANGLE)
+        *angle = MAX_ANGLE;
+
+    else if (*angle < MIN_ANGLE)
+        *angle = MIN_ANGLE;
 }
