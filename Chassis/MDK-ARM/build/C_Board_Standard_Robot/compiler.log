@@ -1,7 +1,10 @@
 >>> cc
 
-
+".\..\User\Task\Gimbal_task.c", line 109: Warning:  #1035-D: single-precision operand implicitly converted to double-precision
+          if (err_yaw_angle < -0.1 || err_yaw_angle > 0.1)
+                                      ^
+.\..\User\Task\Gimbal_task.c: 1 warning, 0 errors
 
 >>> ld
 
-Program Size: Code=47824 RO-data=3704 RW-data=756 ZI-data=47980  
+Program Size: Code=47740 RO-data=3704 RW-data=744 ZI-data=47912  

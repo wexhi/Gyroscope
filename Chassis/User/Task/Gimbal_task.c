@@ -83,9 +83,9 @@ static void gimbal_current_give()
 // 遥控器控制云台电机
 static void RC_gimbal_control()
 {
-    if (rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1] <= 660)
+    if (rc_ctrl.rc.ch[0] >= -660 && rc_ctrl.rc.ch[0] <= 660)
     {
-        gimbal.speed_target = rc_ctrl.rc.ch[1] / 660.0 * MAX_SPEED;
+        gimbal.speed_target = -rc_ctrl.rc.ch[0] / 660.0 * MAX_SPEED;
     }
     else
     {
@@ -96,9 +96,9 @@ static void RC_gimbal_control()
 // yaw轴控制电机
 static void gimbal_yaw_control()
 {
-    if (rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1] <= 660)
+    if (rc_ctrl.rc.ch[0] >= -660 && rc_ctrl.rc.ch[0] <= 660)
     {
-        gimbal.angle_target = gimbal.angle_target + rc_ctrl.rc.ch[1] / 660.0 * 0.3;
+        gimbal.angle_target = -(gimbal.angle_target + rc_ctrl.rc.ch[0] / 660.0 * 0.3);
 
         detel_calc(&gimbal.angle_target);
 

@@ -12,7 +12,6 @@
 chassis_t chassis;
 
 fp32 speed_limit = 10000; // 速度限制
-pid_struct_t motor_pid_chassis[4];
 pid_struct_t supercap_pid;
 motor_info_t motor_info_chassis[10];       // 电机信息结构体
 fp32 chassis_motor_pid[3] = {30, 0.5, 10}; // 用的原来的pid
@@ -21,7 +20,6 @@ volatile int16_t Vx = 0, Vy = 0, Wz = 0;
 int16_t Temp_Vx;
 int16_t Temp_Vy;
 int fllowflag = 0;
-volatile int16_t motor_speed_target[4];
 extern RC_ctrl_t rc_ctrl;
 extern ins_data_t ins_data;
 extern float powerdata[4];
@@ -45,7 +43,7 @@ void Chassis_task(void const *pvParameters)
 {
   for (uint8_t i = 0; i < 4; i++)
   {
-    pid_init(&motor_pid_chassis[i], chassis_motor_pid, 6000, 6000); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
+    pid_init(&chassis.pid[i], chassis_motor_pid, 6000, 6000); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
   }
   pid_init(&supercap_pid, superpid, 3000, 3000); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
 
@@ -93,7 +91,6 @@ void mode_chooce()
     LEDG_ON(); // GREEN LED
     LEDR_OFF();
     LEDB_OFF();
-    RC_to_motor();
   }
   else if (rc_ctrl.rc.s[0] == 3)
   {
@@ -115,14 +112,14 @@ void chassis_motol_speed_calculate()
 {
 
   // 根据分解的速度调整电机速度目标
-  // motor_speed_target[CHAS_LF] = Vx - Vy - Wz;
-  // motor_speed_target[CHAS_RF] = Vx + Vy + Wz;
-  // motor_speed_target[CHAS_RB] = Vx - Vy + Wz;
-  // motor_speed_target[CHAS_LB] = Vx + Vy - Wz;
-  motor_speed_target[CHAS_LF] = Wz + Vx + Vy;
-  motor_speed_target[CHAS_RF] = Wz - Vx + Vy;
-  motor_speed_target[CHAS_RB] = Wz - Vx - Vy;
-  motor_speed_target[CHAS_LB] = Wz + Vx - Vy;
+  // chassis.speed_target[CHAS_LF] = Vx - Vy - Wz;
+  // chassis.speed_target[CHAS_RF] = Vx + Vy + Wz;
+  // chassis.speed_target[CHAS_RB] = Vx - Vy + Wz;
+  // chassis.speed_target[CHAS_LB] = Vx + Vy - Wz;
+  chassis.speed_target[CHAS_LF] = Wz + Vx + Vy;
+  chassis.speed_target[CHAS_RF] = Wz - Vx + Vy;
+  chassis.speed_target[CHAS_RB] = Wz - Vx - Vy;
+  chassis.speed_target[CHAS_LB] = Wz + Vx - Vy;
 }
 // 运动解算
 // 速度限制函数
@@ -160,9 +157,9 @@ void chassis_current_give()
 
   for (i = 0; i < 4; i++)
   {
-    chassis.motor_info[i].set_current = pid_calc(&motor_pid_chassis[i], chassis.motor_info[i].rotor_speed, motor_speed_target[i]);
+    chassis.motor_info[i].set_current = pid_calc(&chassis.pid[i], chassis.motor_info[i].rotor_speed, chassis.speed_target[i]);
   }
-  set_motor_current_can2(0, chassis.motor_info[0].set_current, chassis.motor_info[1].set_current, chassis.motor_info[2].set_current, chassis.motor_info[3].set_current);
+  set_motor_current_chassis(0, chassis.motor_info[0].set_current, chassis.motor_info[1].set_current, chassis.motor_info[2].set_current, chassis.motor_info[3].set_current);
 }
 
 // 线性映射函数
@@ -177,54 +174,13 @@ static int16_t map_range(int value, int from_min, int from_max, int to_min, int 
   return mapped_value;
 }
 
-void RC_to_motor(void)
-{
-  // 电机速度与遥控器通道的对应关系
-  avg_speed = map_range(rc_ctrl.rc.ch[3], RC_MIN, RC_MAX, motor_min, motor_max);
-  motor_speed_target[CHAS_LF] = avg_speed;
-  motor_speed_target[CHAS_RF] = -avg_speed;
-  motor_speed_target[CHAS_RB] = -avg_speed;
-  motor_speed_target[CHAS_LB] = avg_speed;
-
-  // 判断需要旋转的电机
-  for (uint8_t i = 0; i < 4; i++)
-  {
-    /* code */
-    if (motor_flag[i] == 0)
-    {
-      motor_speed_target[i] = 0;
-    }
-  }
-}
-
-void test_motor(int16_t avg)
-{
-  // 电机速度与遥控器通道的对应关系
-  motor_speed_target[CHAS_LF] = avg;
-  motor_speed_target[CHAS_RF] = -avg;
-  motor_speed_target[CHAS_RB] = -avg;
-  motor_speed_target[CHAS_LB] = avg;
-
-  // 判断需要旋转的电机
-  for (uint8_t i = 0; i < 4; i++)
-  {
-    /* code */
-    if (motor_flag[i] == 0)
-    {
-      motor_speed_target[i] = 0;
-    }
-  }
-}
 
 void RC_Move(void)
 {
   // 从遥控器获取控制输入
-  // int16_t forward_backward_input = rc_ctrl.rc.ch[1]; // 前后输入
-  // int16_t left_right_input = rc_ctrl.rc.ch[0];       // 左右输入
-  // int16_t rotation_input = rc_ctrl.rc.ch[2];         // 旋转输入
   Vx = rc_ctrl.rc.ch[3]; // 前后输入
   Vy = rc_ctrl.rc.ch[2]; // 左右输入
-  Wz = rc_ctrl.rc.ch[0]; // 旋转输入
+  Wz = rc_ctrl.rc.ch[4]; // 旋转输入
 
   /*************记得加上线性映射***************/
   Vx = map_range(Vx, RC_MIN, RC_MAX, motor_min, motor_max);

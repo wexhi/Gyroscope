@@ -608,3 +608,47 @@ command:
 [2023-11-17 18:55:24]	[done]
 	build successfully !
 
+[2023-11-17 18:57:33]	[done]
+	build successfully !
+
+[2023-11-17 18:58:46]	[done]
+	build successfully !
+
+[2023-11-17 19:00:03]	[done]
+	build successfully !
+
+[2023-11-17 19:01:39]	[done]
+	build successfully !
+
+[2023-11-17 19:03:16]	[done]
+	build successfully !
+
+[2023-11-17 19:14:56]	[done]
+	build successfully !
+
+[2023-11-17 19:16:44]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+Error: L6218E: Undefined symbol RC_to_motor (referred from Chassis_task.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 1 error messages.
+
+
+[2023-11-17 19:16:56]	[done]
+	build successfully !
+
+[2023-11-17 19:18:05]	[done]
+	build successfully !
+
+[2023-11-17 19:19:22]	[done]
+	build successfully !
+
+[2023-11-17 19:19:49]	[done]
+	build successfully !
+
+[2023-11-17 19:20:23]	[done]
+	build successfully !
+
+[2023-11-17 19:21:14]	[done]
+	build successfully !
+
