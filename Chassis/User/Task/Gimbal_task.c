@@ -77,7 +77,7 @@ static void gimbal_current_give()
 {
     gimbal.motor_info.set_current = pid_calc(&gimbal.pid, gimbal.motor_info.rotor_speed, gimbal.speed_target);
     // set_motor_current_can1(0, 0, 0, 0, gimbal.motor_info.set_current);
-    set_motor_current_can1(1, gimbal.motor_info.set_current, 0, 0, 0);
+    set_motor_current_gimbal(1, gimbal.motor_info.set_current, 0, 0, 0);
 }
 
 // 遥控器控制云台电机

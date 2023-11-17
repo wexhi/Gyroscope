@@ -165,7 +165,7 @@ void set_motor_current_chassis(uint8_t id_range, int16_t v1, int16_t v2, int16_t
 }
 
 // CAN1发送函数 --调试用
-void set_motor_current_can1(uint8_t id_range, int16_t v1, int16_t v2, int16_t v3, int16_t v4)
+void set_motor_current_gimbal(uint8_t id_range, int16_t v1, int16_t v2, int16_t v3, int16_t v4)
 {
   CAN_TxHeaderTypeDef tx_header;
   uint8_t tx_data[8];
