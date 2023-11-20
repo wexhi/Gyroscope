@@ -1,12 +1,15 @@
 >>> cc
 
-".\..\User\Task\Gimbal_task.c", line 82: Warning:  #223-D: function "set_motor_current_gimbal" declared implicitly
-      set_motor_current_gimbal(1, gimbal_Yaw.motor_info.set_current, 0, 0, 0);
-      ^
-".\..\User\Task\Gimbal_task.c", line 83: Warning:  #223-D: function "set_motor_current_gimbal2" declared implicitly
-      set_motor_current_gimbal2(1, 0, 0, gimbal_Pitch.motor_info.set_current, 0);
-      ^
-.\..\User\Task\Gimbal_task.c: 2 warnings, 0 errors
+".\..\User\Task\Chassis_task.c", line 175: Warning:  #223-D: function "set_motor_current_chassis" declared implicitly
+    set_motor_current_chassis(0, chassis.motor_info[0].set_current, chassis.motor_info[1].set_current, chassis.motor_info[2].set_current, chassis.motor_info[3].set_current);
+    ^
+".\..\User\Task\Chassis_task.c", line 204: Warning:  #177-D: function "gyroscope" was declared but never referenced
+  static void gyroscope(void)
+              ^
+".\..\User\Task\Chassis_task.c", line 138: Warning:  #177-D: function "Motor_Speed_limiting" was declared but never referenced
+  static void Motor_Speed_limiting(volatile int16_t *motor_speed, int16_t limit_speed)
+              ^
+.\..\User\Task\Chassis_task.c: 3 warnings, 0 errors
 
 >>> ld
 
