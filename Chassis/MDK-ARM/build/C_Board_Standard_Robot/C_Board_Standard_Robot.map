@@ -1690,10 +1690,10 @@ Section Cross References
     Gimbal_task.o(i.Gimbal_loop_Init) refers to pid.o(i.pid_init) for pid_init
     Gimbal_task.o(i.Gimbal_loop_Init) refers to Gimbal_task.o(.bss) for .bss
     Gimbal_task.o(i.Gimbal_task) refers to Gimbal_task.o(i.Gimbal_loop_Init) for Gimbal_loop_Init
-    Gimbal_task.o(i.Gimbal_task) refers to Gimbal_task.o(i.RC_gimbal_control) for RC_gimbal_control
+    Gimbal_task.o(i.Gimbal_task) refers to Gimbal_task.o(i.gimbal_yaw_control) for gimbal_yaw_control
     Gimbal_task.o(i.Gimbal_task) refers to Gimbal_task.o(i.gimbal_current_give) for gimbal_current_give
     Gimbal_task.o(i.Gimbal_task) refers to cmsis_os.o(i.osDelay) for osDelay
-    Gimbal_task.o(i.Gimbal_task) refers to Gimbal_task.o(i.gimbal_yaw_control) for gimbal_yaw_control
+    Gimbal_task.o(i.Gimbal_task) refers to Gimbal_task.o(i.RC_gimbal_control) for RC_gimbal_control
     Gimbal_task.o(i.Gimbal_task) refers to rc_potocal.o(.bss) for rc_ctrl
     Gimbal_task.o(i.RC_gimbal_control) refers to dflti.o(.text) for __aeabi_i2d
     Gimbal_task.o(i.RC_gimbal_control) refers to ddiv.o(.text) for __aeabi_ddiv

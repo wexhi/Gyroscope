@@ -66,11 +66,11 @@ static void mode_select()
 {
     if (rc_ctrl.rc.s[0] == 1)
     {
-        gimbal_yaw_control();
+        RC_gimbal_control();
     }
     else
     {
-        RC_gimbal_control();
+        gimbal_yaw_control(); 
     }
 }
 
@@ -111,7 +111,7 @@ static void gimbal_yaw_control()
 {
     if (rc_ctrl.rc.ch[0] >= -660 && rc_ctrl.rc.ch[0] <= 660)
     {
-        gimbal_Yaw.angle_target += rc_ctrl.rc.ch[0] / 660.0 * 0.1;
+        gimbal_Yaw.angle_target += rc_ctrl.rc.ch[0] / 660.0 * (-0.1);
 
         detel_calc(&gimbal_Yaw.angle_target);
 
