@@ -24,7 +24,7 @@ static void gimbal_current_give();
 // 遥控器控制云台电机
 static void RC_gimbal_control();
 
-// yaw轴控制电机
+// 锁云台模式
 static void gimbal_yaw_control();
 
 static void detel_calc(fp32 *angle);
@@ -106,7 +106,7 @@ static void RC_gimbal_control()
     }
 }
 
-// yaw轴控制电机
+// 锁云台模式
 static void gimbal_yaw_control()
 {
     if (rc_ctrl.rc.ch[0] >= -660 && rc_ctrl.rc.ch[0] <= 660)
@@ -116,8 +116,7 @@ static void gimbal_yaw_control()
         detel_calc(&gimbal_Yaw.angle_target);
 
         gimbal_Yaw.speed_target = gimbal_PID_calc(&gimbal_Yaw.pid_angle, INS.Yaw, gimbal_Yaw.angle_target);
-        
-    }
+        }
     else
     {
         gimbal_Yaw.angle_target = 0;
