@@ -45,8 +45,8 @@ void Gimbal_task(void const *pvParameters)
 static void Gimbal_loop_Init()
 {
     // 初始化pid参数
-    gimbal_Yaw.pid_parameter[0] = 20, gimbal_Yaw.pid_parameter[1] = 0, gimbal_Yaw.pid_parameter[2] = 0;
-    gimbal_Yaw.pid_angle_parameter[0] = 5, gimbal_Yaw.pid_angle_parameter[1] = 0, gimbal_Yaw.pid_angle_parameter[2] = 50;
+    gimbal_Yaw.pid_parameter[0] = 85, gimbal_Yaw.pid_parameter[1] = 0, gimbal_Yaw.pid_parameter[2] = 0;
+    gimbal_Yaw.pid_angle_parameter[0] = 5, gimbal_Yaw.pid_angle_parameter[1] = 0, gimbal_Yaw.pid_angle_parameter[2] = 0;
     gimbal_Yaw.angle_target = 0;
 
     gimbal_Pitch.pid_parameter[0] = 80, gimbal_Pitch.pid_parameter[1] = 0, gimbal_Pitch.pid_parameter[2] = 10;
@@ -66,12 +66,11 @@ static void mode_select()
 {
     if (rc_ctrl.rc.s[0] == 1)
     {
-        RC_gimbal_control();
-        
+        gimbal_yaw_control();
     }
     else
     {
-        gimbal_yaw_control();
+        RC_gimbal_control();
     }
 }
 
@@ -112,26 +111,24 @@ static void gimbal_yaw_control()
 {
     if (rc_ctrl.rc.ch[0] >= -660 && rc_ctrl.rc.ch[0] <= 660)
     {
-        gimbal_Yaw.angle_target = -(gimbal_Yaw.angle_target + rc_ctrl.rc.ch[0] / 660.0 * 0.3);
+        gimbal_Yaw.angle_target += rc_ctrl.rc.ch[0] / 660.0 * 0.1;
 
         detel_calc(&gimbal_Yaw.angle_target);
 
-        gimbal_Yaw.err_angle = gimbal_Yaw.angle_target - INS.Yaw;
-
-        detel_calc(&gimbal_Yaw.err_angle);
-
-        if (gimbal_Yaw.err_angle < -0.1 || gimbal_Yaw.err_angle > 0.1)
-        {
-            gimbal_Yaw.speed_target = gimbal_PID_calc(&gimbal_Yaw.pid_angle, INS.Yaw, gimbal_Yaw.angle_target);
-        }
-        else
-        {
-            gimbal_Yaw.speed_target = 0;
-        }
+        gimbal_Yaw.speed_target = gimbal_PID_calc(&gimbal_Yaw.pid_angle, INS.Yaw, gimbal_Yaw.angle_target);
+        
     }
     else
     {
         gimbal_Yaw.angle_target = 0;
+    }
+
+    if (rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1] <= 660)
+    {
+        gimbal_Pitch.angle_target += rc_ctrl.rc.ch[1] / 660.0 * 1;
+        detel_calc2(&gimbal_Pitch.angle_target);
+
+        gimbal_Pitch.speed_target = pid_calc(&gimbal_Pitch.pid_angle, gimbal_Pitch.motor_info.rotor_angle, gimbal_Pitch.angle_target);
     }
 }
 

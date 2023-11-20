@@ -9,11 +9,11 @@ shooter_t shooter; // 发射机构信息结构体
 
 extern RC_ctrl_t rc_ctrl; // 遥控器信息结构体
 
-static void Shooter_Inint(); // 发射机构的初始化
-static void model_choice();  // 模式选择
-static void dial_control();  // 拨盘电机控制
-static void friction_control(); // 摩擦轮电机控制
-static void bay_control();  // 弹舱电机控制
+static void Shooter_Inint();         // 发射机构的初始化
+static void model_choice();          // 模式选择
+static void dial_control();          // 拨盘电机控制
+static void friction_control();      // 摩擦轮电机控制
+static void bay_control();           // 弹舱电机控制
 static void shooter_current_given(); // 给电流
 
 void Shoot_task(void const *pvParameters)
@@ -49,17 +49,17 @@ static void Shooter_Inint(void)
 // 模式选择
 static void model_choice(void)
 {
+    // 取消注释开始发射
+    // friction_control();
     if (rc_ctrl.rc.s[1] == 1)
     {
         // 发射
-        dial_control();
-        friction_control();
-        bay_control();
+        // dial_control();
+        // bay_control();
     }
     else
     {
         shooter.dial_speed_target = 0;
-        shooter.friction_speed_target[0] = 0, shooter.friction_speed_target[1] = 0;
         shooter.bay_speed_target = 0;
         // 停止
     }
@@ -68,8 +68,9 @@ static void model_choice(void)
 // 拨盘电机控制
 static void dial_control(void)
 {
-    if (rc_ctrl.rc.s[0] == 1)
+    if (rc_ctrl.rc.s[1] == 1)
     {
+        LEDR_OFF();
         shooter.dial_speed_target = 2000;
     }
     else
@@ -81,15 +82,8 @@ static void dial_control(void)
 // 摩擦轮电机控制
 static void friction_control(void)
 {
-    if (rc_ctrl.rc.s[1] == 1)
-    {
-        shooter.friction_speed_target[0] = -4000;
-        shooter.friction_speed_target[1] = 4000;
-    }
-    else
-    {
-        shooter.friction_speed_target[0] = 0, shooter.friction_speed_target[1] = 0;
-    }
+    shooter.friction_speed_target[0] = -2000;
+    shooter.friction_speed_target[1] = 2000;
 }
 
 // 弹舱电机控制
@@ -102,9 +96,9 @@ static void bay_control(void)
 // 给电流
 static void shooter_current_given(void)
 {
-    shooter.motor_info[0].set_current = pid_calc(&shooter.pid_dial, shooter.motor_info[0].rotor_speed, shooter.dial_speed_target);// 拨盘电机
-    shooter.motor_info[1].set_current = pid_calc(&shooter.pid_bay, shooter.motor_info[1].rotor_speed, shooter.bay_speed_target);// 弹舱电机
-    shooter.motor_info[2].set_current = pid_calc(&shooter.pid_friction, shooter.motor_info[2].rotor_speed, shooter.friction_speed_target[0]);// 摩擦轮电机
-    shooter.motor_info[3].set_current = pid_calc(&shooter.pid_friction, shooter.motor_info[3].rotor_speed, shooter.friction_speed_target[1]);// 摩擦轮电机
-    set_motor_current_shoot(1, shooter.motor_info[0].set_current, shooter.motor_info[1].set_current, shooter.motor_info[2].set_current,shooter.motor_info[3].set_current);
+    shooter.motor_info[0].set_current = pid_calc(&shooter.pid_dial, shooter.motor_info[0].rotor_speed, shooter.dial_speed_target);            // 拨盘电机
+    shooter.motor_info[1].set_current = pid_calc(&shooter.pid_bay, shooter.motor_info[1].rotor_speed, shooter.bay_speed_target);              // 弹舱电机
+    shooter.motor_info[2].set_current = pid_calc(&shooter.pid_friction, shooter.motor_info[2].rotor_speed, shooter.friction_speed_target[0]); // 摩擦轮电机
+    shooter.motor_info[3].set_current = pid_calc(&shooter.pid_friction, shooter.motor_info[3].rotor_speed, shooter.friction_speed_target[1]); // 摩擦轮电机
+    set_motor_current_shoot(1, shooter.motor_info[0].set_current, shooter.motor_info[1].set_current, shooter.motor_info[2].set_current, shooter.motor_info[3].set_current);
 }
