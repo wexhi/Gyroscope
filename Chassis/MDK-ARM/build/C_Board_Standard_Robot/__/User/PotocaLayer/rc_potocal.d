@@ -1,11 +1,11 @@
 .\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: .\..\User\PotocaLayer\rc_potocal.c
 .\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: .\..\User\PotocaLayer\rc_potocal.h
 .\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../Inc/struct_typedef.h
-.\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../Inc/drv_can.h
-.\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../Inc/chassis_task.h
-.\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../Inc/pid.h
-.\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../Inc/drv_can.h
-.\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../Inc/rc_potocal.h
+.\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../User/DriverLayer/drv_can.h
+.\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../User/Task/chassis_task.h
+.\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../User/AlgorithmLayer/pid.h
+.\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../User/DriverLayer/drv_can.h
+.\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../User/PotocaLayer/rc_potocal.h
 .\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../Inc/main.h
 .\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 .\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../Inc/stm32f4xx_hal_conf.h

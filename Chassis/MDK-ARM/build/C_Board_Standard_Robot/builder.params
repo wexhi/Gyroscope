@@ -33,7 +33,9 @@
         ".eide/deps",
         "../Src",
         "../User/Task",
-        "../User/DriverLayer"
+        "../User/DriverLayer",
+        "../User/AlgorithmLayer",
+        "../User/PotocaLayer"
     ],
     "libDirs": [],
     "defines": [

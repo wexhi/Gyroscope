@@ -1,11 +1,11 @@
 .\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: .\..\User\Task\Shoot_task.c
 .\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: .\..\User\Task\Shoot_task.h
 .\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: ../Inc/struct_typedef.h
-.\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: ../Inc/pid.h
-.\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: ../Inc/drv_can.h
-.\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: ../Inc/chassis_task.h
-.\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: ../Inc/drv_can.h
-.\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: ../Inc/rc_potocal.h
+.\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: ../User/AlgorithmLayer/pid.h
+.\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: ../User/DriverLayer/drv_can.h
+.\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: ../User/Task/chassis_task.h
+.\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: ../User/DriverLayer/drv_can.h
+.\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: ../User/PotocaLayer/rc_potocal.h
 .\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: ../Inc/main.h
 .\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 .\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: ../Inc/stm32f4xx_hal_conf.h

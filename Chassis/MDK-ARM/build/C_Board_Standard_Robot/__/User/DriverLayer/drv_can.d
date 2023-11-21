@@ -1,10 +1,10 @@
 .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_can.o: .\..\User\DriverLayer\drv_can.c
-.\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_can.o: ../Inc/drv_can.h
+.\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_can.o: .\..\User\DriverLayer\drv_can.h
 .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_can.o: ../Inc/struct_typedef.h
-.\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_can.o: ../Inc/chassis_task.h
-.\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_can.o: ../Inc/pid.h
-.\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_can.o: ../Inc/drv_can.h
-.\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_can.o: ../Inc/rc_potocal.h
+.\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_can.o: ../User/Task/chassis_task.h
+.\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_can.o: ../User/AlgorithmLayer/pid.h
+.\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_can.o: ../User/DriverLayer/drv_can.h
+.\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_can.o: ../User/PotocaLayer/rc_potocal.h
 .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_can.o: ../Inc/main.h
 .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_can.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_can.o: ../Inc/stm32f4xx_hal_conf.h
