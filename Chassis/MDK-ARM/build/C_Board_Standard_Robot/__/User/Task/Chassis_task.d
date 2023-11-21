@@ -1,5 +1,5 @@
 .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: .\..\User\Task\Chassis_task.c
-.\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: .\..\User\Task\Chassis_task.h
+.\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../Inc/Chassis_task.h
 .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../Inc/struct_typedef.h
 .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../Inc/pid.h
 .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../Inc/drv_can.h

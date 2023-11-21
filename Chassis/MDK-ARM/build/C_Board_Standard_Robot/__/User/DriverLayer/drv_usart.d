@@ -1,5 +1,5 @@
 .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_usart.o: .\..\User\DriverLayer\drv_usart.c
-.\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_usart.o: .\..\User\DriverLayer\drv_usart.h
+.\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_usart.o: ../Inc/drv_usart.h
 .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_usart.o: ../Inc/main.h
 .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_usart.o: ../Inc/stm32f4xx_hal_conf.h
@@ -41,5 +41,5 @@
 .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_usart.o: ../Inc/pid.h
 .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_usart.o: ../Inc/drv_can.h
 .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_usart.o: ../Inc/rc_potocal.h
+.\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_usart.o: ../Inc/gpio.h
 .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_usart.o: ../Inc/judge.h
-.\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_usart.o: ../Inc/drv_usart.h

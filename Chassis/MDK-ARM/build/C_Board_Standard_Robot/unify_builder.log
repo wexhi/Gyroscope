@@ -1368,3 +1368,28 @@ command:
 [2023-11-20 22:07:21]	[done]
 	build successfully !
 
+[2023-11-21 20:35:11]	[done]
+	build successfully !
+
+[2023-11-21 20:35:24]	[done]
+	build successfully !
+
+[2023-11-21 20:35:34]	[done]
+	build successfully !
+
+[2023-11-21 20:36:32]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+Error: L6218E: Undefined symbol LEDB_OFF (referred from Chassis_task.o).
+Error: L6218E: Undefined symbol LEDB_ON (referred from Chassis_task.o).
+Error: L6218E: Undefined symbol LEDG_OFF (referred from Chassis_task.o).
+Error: L6218E: Undefined symbol LEDG_ON (referred from Chassis_task.o).
+Error: L6218E: Undefined symbol LEDR_OFF (referred from Chassis_task.o).
+Error: L6218E: Undefined symbol LEDR_ON (referred from Chassis_task.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 6 error messages.
+
+
+[2023-11-21 20:36:41]	[done]
+	build successfully !
+

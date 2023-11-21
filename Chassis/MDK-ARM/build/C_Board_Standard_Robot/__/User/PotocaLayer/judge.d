@@ -43,3 +43,4 @@
 .\build\C_Board_Standard_Robot\__\User\PotocaLayer\judge.o: ../Inc/pid.h
 .\build\C_Board_Standard_Robot\__\User\PotocaLayer\judge.o: ../Inc/drv_can.h
 .\build\C_Board_Standard_Robot\__\User\PotocaLayer\judge.o: ../Inc/rc_potocal.h
+.\build\C_Board_Standard_Robot\__\User\PotocaLayer\judge.o: ../Inc/gpio.h

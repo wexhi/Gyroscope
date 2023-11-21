@@ -1,5 +1,5 @@
 .\build\C_Board_Standard_Robot\__\User\AlgorithmLayer\pid.o: .\..\User\AlgorithmLayer\pid.c
-.\build\C_Board_Standard_Robot\__\User\AlgorithmLayer\pid.o: .\..\User\AlgorithmLayer\pid.h
+.\build\C_Board_Standard_Robot\__\User\AlgorithmLayer\pid.o: ../Inc/pid.h
 .\build\C_Board_Standard_Robot\__\User\AlgorithmLayer\pid.o: ../Inc/struct_typedef.h
 .\build\C_Board_Standard_Robot\__\User\AlgorithmLayer\pid.o: ../Inc/main.h
 .\build\C_Board_Standard_Robot\__\User\AlgorithmLayer\pid.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
