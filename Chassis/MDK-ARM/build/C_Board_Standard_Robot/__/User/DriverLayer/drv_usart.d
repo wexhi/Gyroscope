@@ -42,4 +42,6 @@
 .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_usart.o: ../Inc/drv_can.h
 .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_usart.o: ../Inc/rc_potocal.h
 .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_usart.o: ../Inc/gpio.h
+.\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_usart.o: ../User/Task/Gimbal_task.h
+.\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_usart.o: ../User/Task/Shoot_task.h
 .\build\C_Board_Standard_Robot\__\User\DriverLayer\drv_usart.o: ../Inc/judge.h

@@ -42,6 +42,8 @@
 .\build\C_Board_Standard_Robot\__\User\Task\UI_task.o: ../Inc/drv_can.h
 .\build\C_Board_Standard_Robot\__\User\Task\UI_task.o: ../Inc/rc_potocal.h
 .\build\C_Board_Standard_Robot\__\User\Task\UI_task.o: ../Inc/gpio.h
+.\build\C_Board_Standard_Robot\__\User\Task\UI_task.o: ../User/Task/Gimbal_task.h
+.\build\C_Board_Standard_Robot\__\User\Task\UI_task.o: ../User/Task/Shoot_task.h
 .\build\C_Board_Standard_Robot\__\User\Task\UI_task.o: ../Inc/CRC.h
 .\build\C_Board_Standard_Robot\__\User\Task\UI_task.o: ../Inc/judge.h
 .\build\C_Board_Standard_Robot\__\User\Task\UI_task.o: ../Inc/drv_usart.h

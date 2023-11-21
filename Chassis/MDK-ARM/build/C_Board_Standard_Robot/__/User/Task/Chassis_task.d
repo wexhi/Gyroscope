@@ -4,6 +4,8 @@
 .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../Inc/pid.h
 .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../Inc/drv_can.h
 .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../Inc/chassis_task.h
+.\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../User/Task/Gimbal_task.h
+.\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../Inc/drv_can.h
 .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../Inc/rc_potocal.h
 .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../Inc/main.h
 .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
@@ -40,6 +42,7 @@
 .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../Inc/gpio.h
+.\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../User/Task/Shoot_task.h
 .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 .\build\C_Board_Standard_Robot\__\User\Task\Chassis_task.o: ../Inc/FreeRTOSConfig.h

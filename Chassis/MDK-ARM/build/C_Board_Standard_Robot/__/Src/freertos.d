@@ -55,6 +55,8 @@
 .\build\C_Board_Standard_Robot\__\Src\freertos.o: ../Inc/drv_can.h
 .\build\C_Board_Standard_Robot\__\Src\freertos.o: ../Inc/rc_potocal.h
 .\build\C_Board_Standard_Robot\__\Src\freertos.o: ../Inc/gpio.h
+.\build\C_Board_Standard_Robot\__\Src\freertos.o: ../User/Task/Gimbal_task.h
+.\build\C_Board_Standard_Robot\__\Src\freertos.o: ../User/Task/Shoot_task.h
 .\build\C_Board_Standard_Robot\__\Src\freertos.o: ../Drivers/CMSIS/Include/arm_math.h
 .\build\C_Board_Standard_Robot\__\Src\freertos.o: ../Drivers/CMSIS/Include/core_cm4.h
 .\build\C_Board_Standard_Robot\__\Src\freertos.o: ../Application/INS_task.h
@@ -64,6 +66,4 @@
 .\build\C_Board_Standard_Robot\__\Src\freertos.o: ../Inc/exchange.h
 .\build\C_Board_Standard_Robot\__\Src\freertos.o: ../Inc/super_cap.h
 .\build\C_Board_Standard_Robot\__\Src\freertos.o: ../Inc/UI_task.h
-.\build\C_Board_Standard_Robot\__\Src\freertos.o: ../User/Task/Gimbal_task.h
-.\build\C_Board_Standard_Robot\__\Src\freertos.o: ../User/Task/Shoot_task.h
 .\build\C_Board_Standard_Robot\__\Src\freertos.o: ../Inc/stm32f4xx_it.h

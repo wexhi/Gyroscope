@@ -66,4 +66,6 @@
 .\build\C_Board_Standard_Robot\__\Src\main.o: ../Inc/pid.h
 .\build\C_Board_Standard_Robot\__\Src\main.o: ../Inc/drv_can.h
 .\build\C_Board_Standard_Robot\__\Src\main.o: ../Inc/rc_potocal.h
+.\build\C_Board_Standard_Robot\__\Src\main.o: ../User/Task/Gimbal_task.h
+.\build\C_Board_Standard_Robot\__\Src\main.o: ../User/Task/Shoot_task.h
 .\build\C_Board_Standard_Robot\__\Src\main.o: ../Inc/drv_usart.h

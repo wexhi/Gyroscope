@@ -1393,3 +1393,437 @@ Finished: 1 information, 0 warning and 6 error messages.
 [2023-11-21 20:36:41]	[done]
 	build successfully !
 
+[2023-11-21 20:41:41]	compilation failed at : "c:\Users\14775\Desktop\study\robomaster\Gyroscope\Chassis\Src\freertos.c", exit code: 1
+command: 
+  "C:\Keil_v5\ARM\ARMCC\bin\armcc.exe" -c --apcs=interwork -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Application -I../Bsp -I../Components -I../Components/Algorithm -I../Components/Controller -I../Components/Devices -I../Components/Algorithm/Include -I.cmsis/include -IRTE/_C_Board_Standard_Robot -I.eide/deps -I../Src -I../User/Task -I../User/DriverLayer -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING --cpu Cortex-M4.fp --li --c99 -D__MICROLIB -O3 --split_sections --diag_suppress=1 --diag_suppress=1295 -g -o .\build\C_Board_Standard_Robot\__\Src\freertos.o --no_depend_system_headers --depend .\build\C_Board_Standard_Robot\__\Src\freertos.d .\..\Src\freertos.c
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+"../Inc/rc_potocal.h", line 8: Error:  #130: expected a "{"
+  void USART3_rxDataHandler(uint8_t *rxBuf);
+  ^
+"../Inc/rc_potocal.h", line 12: Warning:  #12-D: parsing restarts here after previous syntax error
+  {
+  ^
+"../Inc/rc_potocal.h", line 17: Warning:  #177-D: variable "rc" was declared but never referenced
+          } rc;
+            ^
+"../Inc/rc_potocal.h", line 25: Warning:  #177-D: variable "mouse" was declared but never referenced
+          } mouse;
+            ^
+"../Inc/rc_potocal.h", line 29: Warning:  #177-D: variable "key" was declared but never referenced
+          } key;
+            ^
+"../Inc/rc_potocal.h", line 31: Error:  #77-D: this declaration has no storage class or type specifier
+  } RC_ctrl_t;
+    ^
+.\..\Src\stm32f4xx_it.c: 4 warnings, 2 errors
+".\..\User\DriverLayer\drv_can.c", line 2: Error:  #130: expected a "{"
+  extern CAN_HandleTypeDef hcan1;
+  ^
+".\..\User\DriverLayer\drv_can.c", line 18: Warning:  #12-D: parsing restarts here after previous syntax error
+  {
+  ^
+".\..\User\DriverLayer\drv_can.c", line 72: Error:  #20: identifier "gimbal_Yaw" is undefined
+        gimbal_Yaw.motor_info.rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 81: Error:  #20: identifier "chassis" is undefined
+        chassis.motor_info[index].rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 100: Error:  #20: identifier "shooter" is undefined
+        shooter.motor_info[index].rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 112: Error:  #20: identifier "gimbal_Pitch" is undefined
+        gimbal_Pitch.motor_info.rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 210: Error:  #247: function "set_motor_current_shoot" has already been defined
+  void set_motor_current_shoot(uint8_t id_range, int16_t v1, int16_t v2, int16_t v3, int16_t v4)
+       ^
+.\..\User\DriverLayer\drv_can.c: 1 warning, 6 errors
+"../Inc/drv_usart.h", line 6: Error:  #130: expected a "{"
+  void DRV_USART3_IRQHandler(UART_HandleTypeDef *huart);
+  ^
+".\..\Src\main.c", line 69: Warning:  #12-D: parsing restarts here after previous syntax error
+  float target_speed[7] = {0};                 // 实???畲罂???转??320rpm
+                          ^
+".\..\Src\main.c", line 69: Warning:  #174-D: expression has no effect
+  float target_speed[7] = {0};                 // 实???畲罂???转??320rpm
+                           ^
+".\..\Src\main.c", line 69: Error:  #65: expected a ";"
+  float target_speed[7] = {0};                 // 实???畲罂???转??320rpm
+                            ^
+".\..\Src\main.c", line 120: Warning:  #223-D: function "SystemClock_Config" declared implicitly
+    SystemClock_Config();
+    ^
+".\..\Src\main.c", line 147: Warning:  #223-D: function "USART6_Init" declared implicitly
+    USART6_Init();
+    ^
+".\..\Src\main.c", line 148: Warning:  #223-D: function "USART3_Init" declared implicitly
+    USART3_Init();
+    ^
+".\..\Src\main.c", line 150: Warning:  #223-D: function "DWT_Init" declared implicitly
+    DWT_Init(168);
+    ^
+".\..\Src\main.c", line 157: Warning:  #223-D: function "MX_FREERTOS_Init" declared implicitly
+    MX_FREERTOS_Init();
+    ^
+".\..\Src\main.c", line 177: Error:  #159: declaration is incompatible with previous "SystemClock_Config" (declared at line 120)
+  void SystemClock_Config(void)
+       ^
+.\..\Src\main.c: 7 warnings, 3 errors
+"../Inc/rc_potocal.h", line 8: Error:  #130: expected a "{"
+  void USART3_rxDataHandler(uint8_t *rxBuf);
+  ^
+"../Inc/rc_potocal.h", line 12: Warning:  #12-D: parsing restarts here after previous syntax error
+  {
+  ^
+"../Inc/rc_potocal.h", line 17: Warning:  #177-D: variable "rc" was declared but never referenced
+          } rc;
+            ^
+"../Inc/rc_potocal.h", line 25: Warning:  #177-D: variable "mouse" was declared but never referenced
+          } mouse;
+            ^
+"../Inc/rc_potocal.h", line 29: Warning:  #177-D: variable "key" was declared but never referenced
+          } key;
+            ^
+"../Inc/rc_potocal.h", line 31: Error:  #77-D: this declaration has no storage class or type specifier
+  } RC_ctrl_t;
+    ^
+"../Inc/UI_task.h", line 320: Error:  #757: variable "RC_ctrl_t" is not a type name
+      const RC_ctrl_t* rc;
+            ^
+".\..\Src\freertos.c", line 191: Warning:  #177-D: variable "TIM1_flag" was declared but never referenced
+    uint8_t TIM1_flag = 1; // 锟?锟?知锟?锟?bug
+            ^
+.\..\Src\freertos.c: 5 warnings, 3 errors
+
+[2023-11-21 20:42:23]	compilation failed at : "c:\Users\14775\Desktop\study\robomaster\Gyroscope\Chassis\Src\freertos.c", exit code: 1
+command: 
+  "C:\Keil_v5\ARM\ARMCC\bin\armcc.exe" -c --apcs=interwork -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Application -I../Bsp -I../Components -I../Components/Algorithm -I../Components/Controller -I../Components/Devices -I../Components/Algorithm/Include -I.cmsis/include -IRTE/_C_Board_Standard_Robot -I.eide/deps -I../Src -I../User/Task -I../User/DriverLayer -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING --cpu Cortex-M4.fp --li --c99 -D__MICROLIB -O3 --split_sections --diag_suppress=1 --diag_suppress=1295 -g -o .\build\C_Board_Standard_Robot\__\Src\freertos.o --no_depend_system_headers --depend .\build\C_Board_Standard_Robot\__\Src\freertos.d .\..\Src\freertos.c
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+".\..\User\DriverLayer\drv_can.c", line 2: Error:  #130: expected a "{"
+  extern CAN_HandleTypeDef hcan1;
+  ^
+".\..\User\DriverLayer\drv_can.c", line 18: Warning:  #12-D: parsing restarts here after previous syntax error
+  {
+  ^
+".\..\User\DriverLayer\drv_can.c", line 72: Error:  #20: identifier "gimbal_Yaw" is undefined
+        gimbal_Yaw.motor_info.rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 81: Error:  #20: identifier "chassis" is undefined
+        chassis.motor_info[index].rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 100: Error:  #20: identifier "shooter" is undefined
+        shooter.motor_info[index].rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 112: Error:  #20: identifier "gimbal_Pitch" is undefined
+        gimbal_Pitch.motor_info.rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 210: Error:  #247: function "set_motor_current_shoot" has already been defined
+  void set_motor_current_shoot(uint8_t id_range, int16_t v1, int16_t v2, int16_t v3, int16_t v4)
+       ^
+.\..\User\DriverLayer\drv_can.c: 1 warning, 6 errors
+"../Inc/rc_potocal.h", line 8: Error:  #130: expected a "{"
+  void USART3_rxDataHandler(uint8_t *rxBuf);
+  ^
+"../Inc/rc_potocal.h", line 12: Warning:  #12-D: parsing restarts here after previous syntax error
+  {
+  ^
+"../Inc/rc_potocal.h", line 17: Warning:  #177-D: variable "rc" was declared but never referenced
+          } rc;
+            ^
+"../Inc/rc_potocal.h", line 25: Warning:  #177-D: variable "mouse" was declared but never referenced
+          } mouse;
+            ^
+"../Inc/rc_potocal.h", line 29: Warning:  #177-D: variable "key" was declared but never referenced
+          } key;
+            ^
+"../Inc/rc_potocal.h", line 31: Error:  #77-D: this declaration has no storage class or type specifier
+  } RC_ctrl_t;
+    ^
+.\..\Src\stm32f4xx_it.c: 4 warnings, 2 errors
+"../Inc/drv_usart.h", line 6: Error:  #130: expected a "{"
+  void DRV_USART3_IRQHandler(UART_HandleTypeDef *huart);
+  ^
+".\..\Src\main.c", line 69: Warning:  #12-D: parsing restarts here after previous syntax error
+  float target_speed[7] = {0};                 // 实???畲罂???转??320rpm
+                          ^
+".\..\Src\main.c", line 69: Warning:  #174-D: expression has no effect
+  float target_speed[7] = {0};                 // 实???畲罂???转??320rpm
+                           ^
+".\..\Src\main.c", line 69: Error:  #65: expected a ";"
+  float target_speed[7] = {0};                 // 实???畲罂???转??320rpm
+                            ^
+".\..\Src\main.c", line 120: Warning:  #223-D: function "SystemClock_Config" declared implicitly
+    SystemClock_Config();
+    ^
+".\..\Src\main.c", line 147: Warning:  #223-D: function "USART6_Init" declared implicitly
+    USART6_Init();
+    ^
+".\..\Src\main.c", line 148: Warning:  #223-D: function "USART3_Init" declared implicitly
+    USART3_Init();
+    ^
+".\..\Src\main.c", line 150: Warning:  #223-D: function "DWT_Init" declared implicitly
+    DWT_Init(168);
+    ^
+".\..\Src\main.c", line 157: Warning:  #223-D: function "MX_FREERTOS_Init" declared implicitly
+    MX_FREERTOS_Init();
+    ^
+".\..\Src\main.c", line 177: Error:  #159: declaration is incompatible with previous "SystemClock_Config" (declared at line 120)
+  void SystemClock_Config(void)
+       ^
+.\..\Src\main.c: 7 warnings, 3 errors
+"../Inc/rc_potocal.h", line 8: Error:  #130: expected a "{"
+  void USART3_rxDataHandler(uint8_t *rxBuf);
+  ^
+"../Inc/rc_potocal.h", line 12: Warning:  #12-D: parsing restarts here after previous syntax error
+  {
+  ^
+"../Inc/rc_potocal.h", line 17: Warning:  #177-D: variable "rc" was declared but never referenced
+          } rc;
+            ^
+"../Inc/rc_potocal.h", line 25: Warning:  #177-D: variable "mouse" was declared but never referenced
+          } mouse;
+            ^
+"../Inc/rc_potocal.h", line 29: Warning:  #177-D: variable "key" was declared but never referenced
+          } key;
+            ^
+"../Inc/rc_potocal.h", line 31: Error:  #77-D: this declaration has no storage class or type specifier
+  } RC_ctrl_t;
+    ^
+"../Inc/UI_task.h", line 320: Error:  #757: variable "RC_ctrl_t" is not a type name
+      const RC_ctrl_t* rc;
+            ^
+".\..\Src\freertos.c", line 191: Warning:  #177-D: variable "TIM1_flag" was declared but never referenced
+    uint8_t TIM1_flag = 1; // 锟?锟?知锟?锟?bug
+            ^
+.\..\Src\freertos.c: 5 warnings, 3 errors
+
+[2023-11-21 20:43:24]	compilation failed at : "c:\Users\14775\Desktop\study\robomaster\Gyroscope\Chassis\Src\freertos.c", exit code: 1
+command: 
+  "C:\Keil_v5\ARM\ARMCC\bin\armcc.exe" -c --apcs=interwork -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Application -I../Bsp -I../Components -I../Components/Algorithm -I../Components/Controller -I../Components/Devices -I../Components/Algorithm/Include -I.cmsis/include -IRTE/_C_Board_Standard_Robot -I.eide/deps -I../Src -I../User/Task -I../User/DriverLayer -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING --cpu Cortex-M4.fp --li --c99 -D__MICROLIB -O3 --split_sections --diag_suppress=1 --diag_suppress=1295 -g -o .\build\C_Board_Standard_Robot\__\Src\freertos.o --no_depend_system_headers --depend .\build\C_Board_Standard_Robot\__\Src\freertos.d .\..\Src\freertos.c
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+"../Inc/Chassis_task.h", line 19: Error:  #130: expected a "{"
+  typedef enum
+  ^
+"../Inc/Chassis_task.h", line 21: Error:  #20: identifier "CHAS_LF" is undefined
+      CHAS_LF,
+      ^
+"../Inc/Chassis_task.h", line 22: Error:  #20: identifier "CHAS_RF" is undefined
+      CHAS_RF,
+      ^
+"../Inc/Chassis_task.h", line 23: Error:  #20: identifier "CHAS_RB" is undefined
+      CHAS_RB,
+      ^
+"../Inc/Chassis_task.h", line 24: Error:  #20: identifier "CHAS_LB" is undefined
+      CHAS_LB,
+      ^
+"../Inc/Chassis_task.h", line 25: Error:  #29: expected an expression
+  } chassis_motor_cnt_t;
+  ^
+"../Inc/Chassis_task.h", line 25: Error:  #65: expected a ";"
+  } chassis_motor_cnt_t;
+  ^
+"../Inc/Chassis_task.h", line 25: Error:  #77-D: this declaration has no storage class or type specifier
+  } chassis_motor_cnt_t;
+    ^
+.\..\Src\stm32f4xx_it.c: 0 warnings, 8 errors
+".\..\User\DriverLayer\drv_can.c", line 2: Error:  #130: expected a "{"
+  extern CAN_HandleTypeDef hcan1;
+  ^
+".\..\User\DriverLayer\drv_can.c", line 18: Warning:  #12-D: parsing restarts here after previous syntax error
+  {
+  ^
+".\..\User\DriverLayer\drv_can.c", line 72: Error:  #20: identifier "gimbal_Yaw" is undefined
+        gimbal_Yaw.motor_info.rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 81: Error:  #20: identifier "chassis" is undefined
+        chassis.motor_info[index].rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 100: Error:  #20: identifier "shooter" is undefined
+        shooter.motor_info[index].rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 112: Error:  #20: identifier "gimbal_Pitch" is undefined
+        gimbal_Pitch.motor_info.rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 210: Error:  #247: function "set_motor_current_shoot" has already been defined
+  void set_motor_current_shoot(uint8_t id_range, int16_t v1, int16_t v2, int16_t v3, int16_t v4)
+       ^
+.\..\User\DriverLayer\drv_can.c: 1 warning, 6 errors
+"../Inc/drv_usart.h", line 6: Error:  #130: expected a "{"
+  void DRV_USART3_IRQHandler(UART_HandleTypeDef *huart);
+  ^
+".\..\Src\main.c", line 69: Warning:  #12-D: parsing restarts here after previous syntax error
+  float target_speed[7] = {0};                 // 实???畲罂???转??320rpm
+                          ^
+".\..\Src\main.c", line 69: Warning:  #174-D: expression has no effect
+  float target_speed[7] = {0};                 // 实???畲罂???转??320rpm
+                           ^
+".\..\Src\main.c", line 69: Error:  #65: expected a ";"
+  float target_speed[7] = {0};                 // 实???畲罂???转??320rpm
+                            ^
+".\..\Src\main.c", line 120: Warning:  #223-D: function "SystemClock_Config" declared implicitly
+    SystemClock_Config();
+    ^
+".\..\Src\main.c", line 147: Warning:  #223-D: function "USART6_Init" declared implicitly
+    USART6_Init();
+    ^
+".\..\Src\main.c", line 148: Warning:  #223-D: function "USART3_Init" declared implicitly
+    USART3_Init();
+    ^
+".\..\Src\main.c", line 150: Warning:  #223-D: function "DWT_Init" declared implicitly
+    DWT_Init(168);
+    ^
+".\..\Src\main.c", line 157: Warning:  #223-D: function "MX_FREERTOS_Init" declared implicitly
+    MX_FREERTOS_Init();
+    ^
+".\..\Src\main.c", line 177: Error:  #159: declaration is incompatible with previous "SystemClock_Config" (declared at line 120)
+  void SystemClock_Config(void)
+       ^
+.\..\Src\main.c: 7 warnings, 3 errors
+"../Inc/rc_potocal.h", line 8: Error:  #130: expected a "{"
+  void USART3_rxDataHandler(uint8_t *rxBuf);
+  ^
+"../Inc/rc_potocal.h", line 12: Warning:  #12-D: parsing restarts here after previous syntax error
+  {
+  ^
+"../Inc/rc_potocal.h", line 17: Warning:  #177-D: variable "rc" was declared but never referenced
+          } rc;
+            ^
+"../Inc/rc_potocal.h", line 25: Warning:  #177-D: variable "mouse" was declared but never referenced
+          } mouse;
+            ^
+"../Inc/rc_potocal.h", line 29: Warning:  #177-D: variable "key" was declared but never referenced
+          } key;
+            ^
+"../Inc/rc_potocal.h", line 31: Error:  #77-D: this declaration has no storage class or type specifier
+  } RC_ctrl_t;
+    ^
+"../Inc/UI_task.h", line 320: Error:  #757: variable "RC_ctrl_t" is not a type name
+      const RC_ctrl_t* rc;
+            ^
+".\..\Src\freertos.c", line 191: Warning:  #177-D: variable "TIM1_flag" was declared but never referenced
+    uint8_t TIM1_flag = 1; // 锟?锟?知锟?锟?bug
+            ^
+.\..\Src\freertos.c: 5 warnings, 3 errors
+
+[2023-11-21 20:43:45]	compilation failed at : "c:\Users\14775\Desktop\study\robomaster\Gyroscope\Chassis\Src\main.c", exit code: 1
+command: 
+  "C:\Keil_v5\ARM\ARMCC\bin\armcc.exe" -c --apcs=interwork -I../Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Application -I../Bsp -I../Components -I../Components/Algorithm -I../Components/Controller -I../Components/Devices -I../Components/Algorithm/Include -I.cmsis/include -IRTE/_C_Board_Standard_Robot -I.eide/deps -I../Src -I../User/Task -I../User/DriverLayer -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__FPU_USED="1U" -D__FPU_PRESENT="1U" -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING --cpu Cortex-M4.fp --li --c99 -D__MICROLIB -O3 --split_sections --diag_suppress=1 --diag_suppress=1295 -g -o .\build\C_Board_Standard_Robot\__\Src\main.o --no_depend_system_headers --depend .\build\C_Board_Standard_Robot\__\Src\main.d .\..\Src\main.c
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+"../Inc/Chassis_task.h", line 19: Error:  #130: expected a "{"
+  typedef enum
+  ^
+"../Inc/Chassis_task.h", line 21: Error:  #20: identifier "CHAS_LF" is undefined
+      CHAS_LF,
+      ^
+"../Inc/Chassis_task.h", line 22: Error:  #20: identifier "CHAS_RF" is undefined
+      CHAS_RF,
+      ^
+"../Inc/Chassis_task.h", line 23: Error:  #20: identifier "CHAS_RB" is undefined
+      CHAS_RB,
+      ^
+"../Inc/Chassis_task.h", line 24: Error:  #20: identifier "CHAS_LB" is undefined
+      CHAS_LB,
+      ^
+"../Inc/Chassis_task.h", line 25: Error:  #29: expected an expression
+  } chassis_motor_cnt_t;
+  ^
+"../Inc/Chassis_task.h", line 25: Error:  #65: expected a ";"
+  } chassis_motor_cnt_t;
+  ^
+"../Inc/Chassis_task.h", line 25: Error:  #77-D: this declaration has no storage class or type specifier
+  } chassis_motor_cnt_t;
+    ^
+.\..\Src\stm32f4xx_it.c: 0 warnings, 8 errors
+".\..\User\DriverLayer\drv_can.c", line 3: Error:  #130: expected a "{"
+  extern CAN_HandleTypeDef hcan1;
+  ^
+".\..\User\DriverLayer\drv_can.c", line 19: Warning:  #12-D: parsing restarts here after previous syntax error
+  {
+  ^
+".\..\User\DriverLayer\drv_can.c", line 73: Error:  #20: identifier "gimbal_Yaw" is undefined
+        gimbal_Yaw.motor_info.rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 82: Error:  #20: identifier "chassis" is undefined
+        chassis.motor_info[index].rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 101: Error:  #20: identifier "shooter" is undefined
+        shooter.motor_info[index].rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 113: Error:  #20: identifier "gimbal_Pitch" is undefined
+        gimbal_Pitch.motor_info.rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+        ^
+".\..\User\DriverLayer\drv_can.c", line 211: Error:  #247: function "set_motor_current_shoot" has already been defined
+  void set_motor_current_shoot(uint8_t id_range, int16_t v1, int16_t v2, int16_t v3, int16_t v4)
+       ^
+.\..\User\DriverLayer\drv_can.c: 1 warning, 6 errors
+"../Inc/rc_potocal.h", line 8: Error:  #130: expected a "{"
+  void USART3_rxDataHandler(uint8_t *rxBuf);
+  ^
+"../Inc/rc_potocal.h", line 12: Warning:  #12-D: parsing restarts here after previous syntax error
+  {
+  ^
+"../Inc/rc_potocal.h", line 17: Warning:  #177-D: variable "rc" was declared but never referenced
+          } rc;
+            ^
+"../Inc/rc_potocal.h", line 25: Warning:  #177-D: variable "mouse" was declared but never referenced
+          } mouse;
+            ^
+"../Inc/rc_potocal.h", line 29: Warning:  #177-D: variable "key" was declared but never referenced
+          } key;
+            ^
+"../Inc/rc_potocal.h", line 31: Error:  #77-D: this declaration has no storage class or type specifier
+  } RC_ctrl_t;
+    ^
+"../Inc/UI_task.h", line 320: Error:  #757: variable "RC_ctrl_t" is not a type name
+      const RC_ctrl_t* rc;
+            ^
+".\..\Src\freertos.c", line 191: Warning:  #177-D: variable "TIM1_flag" was declared but never referenced
+    uint8_t TIM1_flag = 1; // 锟?锟?知锟?锟?bug
+            ^
+.\..\Src\freertos.c: 5 warnings, 3 errors
+"../Inc/drv_usart.h", line 6: Error:  #130: expected a "{"
+  void DRV_USART3_IRQHandler(UART_HandleTypeDef *huart);
+  ^
+".\..\Src\main.c", line 69: Warning:  #12-D: parsing restarts here after previous syntax error
+  float target_speed[7] = {0};                 // 实???畲罂???转??320rpm
+                          ^
+".\..\Src\main.c", line 69: Warning:  #174-D: expression has no effect
+  float target_speed[7] = {0};                 // 实???畲罂???转??320rpm
+                           ^
+".\..\Src\main.c", line 69: Error:  #65: expected a ";"
+  float target_speed[7] = {0};                 // 实???畲罂???转??320rpm
+                            ^
+".\..\Src\main.c", line 120: Warning:  #223-D: function "SystemClock_Config" declared implicitly
+    SystemClock_Config();
+    ^
+".\..\Src\main.c", line 147: Warning:  #223-D: function "USART6_Init" declared implicitly
+    USART6_Init();
+    ^
+".\..\Src\main.c", line 148: Warning:  #223-D: function "USART3_Init" declared implicitly
+    USART3_Init();
+    ^
+".\..\Src\main.c", line 150: Warning:  #223-D: function "DWT_Init" declared implicitly
+    DWT_Init(168);
+    ^
+".\..\Src\main.c", line 157: Warning:  #223-D: function "MX_FREERTOS_Init" declared implicitly
+    MX_FREERTOS_Init();
+    ^
+".\..\Src\main.c", line 177: Error:  #159: declaration is incompatible with previous "SystemClock_Config" (declared at line 120)
+  void SystemClock_Config(void)
+       ^
+.\..\Src\main.c: 7 warnings, 3 errors
+
+[2023-11-21 20:45:09]	[done]
+	build successfully !
+
+[2023-11-21 20:45:20]	[done]
+	build successfully !
+

@@ -40,5 +40,8 @@
 .\build\C_Board_Standard_Robot\__\Src\stm32f4xx_it.o: ../Inc/pid.h
 .\build\C_Board_Standard_Robot\__\Src\stm32f4xx_it.o: ../Inc/drv_can.h
 .\build\C_Board_Standard_Robot\__\Src\stm32f4xx_it.o: ../Inc/chassis_task.h
+.\build\C_Board_Standard_Robot\__\Src\stm32f4xx_it.o: ../User/Task/Gimbal_task.h
+.\build\C_Board_Standard_Robot\__\Src\stm32f4xx_it.o: ../Inc/drv_can.h
 .\build\C_Board_Standard_Robot\__\Src\stm32f4xx_it.o: ../Inc/rc_potocal.h
 .\build\C_Board_Standard_Robot\__\Src\stm32f4xx_it.o: ../Inc/gpio.h
+.\build\C_Board_Standard_Robot\__\Src\stm32f4xx_it.o: ../User/Task/Shoot_task.h
