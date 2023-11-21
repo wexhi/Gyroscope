@@ -249,6 +249,9 @@
             "path": "../User/Task/Chassis_task.c"
           },
           {
+            "path": "../User/Task/exchange.c"
+          },
+          {
             "path": "../User/Task/Gimbal_task.c"
           },
           {
@@ -256,9 +259,6 @@
           },
           {
             "path": "../User/Task/UI_task.c"
-          },
-          {
-            "path": "EXCHANGE.c"
           }
         ],
         "folders": []

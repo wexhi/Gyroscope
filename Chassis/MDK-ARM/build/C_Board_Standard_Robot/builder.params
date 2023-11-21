@@ -112,7 +112,7 @@
         "../User/Task/Gimbal_task.c",
         "../User/Task/Shoot_task.c",
         "../User/Task/UI_task.c",
-        "EXCHANGE.c",
+        "../User/Task/exchange.c",
         "startup_stm32f407xx.s"
     ],
     "sourceParams": {},

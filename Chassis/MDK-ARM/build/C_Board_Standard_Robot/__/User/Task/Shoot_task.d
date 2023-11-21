@@ -63,4 +63,4 @@
 .\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: ../Components/kalman_filter.h
 .\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: ../Drivers/CMSIS/Include/arm_math.h
 .\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: ../Drivers/CMSIS/Include/core_cm4.h
-.\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: ../Inc/exchange.h
+.\build\C_Board_Standard_Robot\__\User\Task\Shoot_task.o: .\..\User\Task\exchange.h

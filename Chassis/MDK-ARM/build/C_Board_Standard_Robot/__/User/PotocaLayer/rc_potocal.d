@@ -49,4 +49,4 @@
 .\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../Components/kalman_filter.h
 .\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../Drivers/CMSIS/Include/arm_math.h
 .\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../Drivers/CMSIS/Include/core_cm4.h
-.\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../Inc/exchange.h
+.\build\C_Board_Standard_Robot\__\User\PotocaLayer\rc_potocal.o: ../User/Task/exchange.h
