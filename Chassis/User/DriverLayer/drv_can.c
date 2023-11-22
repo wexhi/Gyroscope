@@ -144,6 +144,7 @@ void can_remote(uint8_t sbus_buf[], uint8_t can_send_id) // 调用can来发送�
   //  HAL_CAN_AddTxMessage(&hcan1, &tx_header, sbus_buf, (uint32_t *)CAN_TX_MAILBOX0);
 }
 
+// 底盤電機控制
 void set_motor_current_chassis(uint8_t id_range, int16_t v1, int16_t v2, int16_t v3, int16_t v4)
 {
   CAN_TxHeaderTypeDef tx_header;
@@ -166,7 +167,7 @@ void set_motor_current_chassis(uint8_t id_range, int16_t v1, int16_t v2, int16_t
   HAL_CAN_AddTxMessage(&hcan1, &tx_header, tx_data, (uint32_t *)CAN_TX_MAILBOX0);
 }
 
-// CAN1发送函数 --调试用
+// 雲臺電機控制
 void set_motor_current_gimbal(uint8_t id_range, int16_t v1, int16_t v2, int16_t v3, int16_t v4)
 {
   CAN_TxHeaderTypeDef tx_header;
@@ -189,6 +190,7 @@ void set_motor_current_gimbal(uint8_t id_range, int16_t v1, int16_t v2, int16_t 
   HAL_CAN_AddTxMessage(&hcan1, &tx_header, tx_data, (uint32_t *)CAN_TX_MAILBOX0);
 }
 
+// 雲臺電機控制 -- CAN2
 void set_motor_current_gimbal2(uint8_t id_range, int16_t v1, int16_t v2, int16_t v3, int16_t v4)
 {
   CAN_TxHeaderTypeDef tx_header;
@@ -211,6 +213,7 @@ void set_motor_current_gimbal2(uint8_t id_range, int16_t v1, int16_t v2, int16_t
   HAL_CAN_AddTxMessage(&hcan2, &tx_header, tx_data, (uint32_t *)CAN_TX_MAILBOX0);
 }
 
+// 發射機構電機控制
 void set_motor_current_shoot(uint8_t id_range, int16_t v1, int16_t v2, int16_t v3, int16_t v4)
 {
   CAN_TxHeaderTypeDef tx_header;
