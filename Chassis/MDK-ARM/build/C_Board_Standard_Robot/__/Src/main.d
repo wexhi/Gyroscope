@@ -69,3 +69,4 @@
 .\build\C_Board_Standard_Robot\__\Src\main.o: ../User/Task/Gimbal_task.h
 .\build\C_Board_Standard_Robot\__\Src\main.o: ../User/Task/Shoot_task.h
 .\build\C_Board_Standard_Robot\__\Src\main.o: ../User/DriverLayer/drv_usart.h
+.\build\C_Board_Standard_Robot\__\Src\main.o: ../Bsp/bsp_dwt.h
