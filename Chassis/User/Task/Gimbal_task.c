@@ -70,7 +70,7 @@ static void mode_select()
     }
     else
     {
-        gimbal_yaw_control(); 
+        gimbal_yaw_control();
     }
 }
 
@@ -116,7 +116,7 @@ static void gimbal_yaw_control()
         detel_calc(&gimbal_Yaw.angle_target);
 
         gimbal_Yaw.speed_target = gimbal_PID_calc(&gimbal_Yaw.pid_angle, INS.Yaw, gimbal_Yaw.angle_target);
-        }
+    }
     else
     {
         gimbal_Yaw.angle_target = 0;
