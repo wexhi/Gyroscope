@@ -89,6 +89,7 @@ static void RC_gimbal_control()
     if (rc_ctrl.rc.ch[0] >= -660 && rc_ctrl.rc.ch[0] <= 660)
     {
         gimbal_Yaw.speed_target = -rc_ctrl.rc.ch[0] / 660.0 * MAX_SPEED;
+        gimbal_Yaw.angle_target = INS.Yaw; // 保證切換模式時不會突變
     }
     else
     {
