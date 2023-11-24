@@ -61,10 +61,11 @@ osThreadId super_capHandle;
 osThreadId UI_taskHandle;
 osThreadId Gimbal_taskHandle;
 osThreadId shoot_taskHandle;
-/* USER CODE END Variables */
 osThreadId INSTaskHandle;
 osThreadId exchangeTaskHandle;
 osThreadId defaultTaskHandle;
+/* USER CODE END Variables */
+
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
 
@@ -135,6 +136,10 @@ void MX_FREERTOS_Init(void)
 
   /* Create the thread(s) */
   /* definition and creation of INSTask */
+
+
+  /* USER CODE BEGIN RTOS_THREADS */
+  /* add threads, ... */
   osThreadDef(INSTask, StartINSTask, osPriorityNormal, 0, 2048);
   INSTaskHandle = osThreadCreate(osThread(INSTask), NULL);
 
@@ -155,9 +160,6 @@ void MX_FREERTOS_Init(void)
 
   osThreadDef(shootTask, Shoot_task, osPriorityNormal, 0, 256);
   shoot_taskHandle = osThreadCreate(osThread(shootTask), NULL);
-
-  /* USER CODE BEGIN RTOS_THREADS */
-  /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
 }
 
