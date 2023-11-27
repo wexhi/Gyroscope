@@ -27,6 +27,10 @@ static void RC_gimbal_control();
 // 锁云台模式
 static void gimbal_yaw_control();
 
+static void RC_Yaw_speed();
+static void RC_Yaw_control();
+static void RC_Pitch_control();
+
 static void detel_calc(fp32 *angle);
 static void detel_calc2(fp32 *angle);
 
@@ -66,10 +70,12 @@ static void mode_select()
 {
     if (rc_ctrl.rc.s[0] == 1)
     {
+        // 速度模式
         RC_gimbal_control();
     }
     else
     {
+        // 锁云台模式
         gimbal_yaw_control();
     }
 }
@@ -86,6 +92,19 @@ static void gimbal_current_give()
 // 遥控器控制云台电机
 static void RC_gimbal_control()
 {
+    RC_Yaw_speed();
+    RC_Pitch_control();
+}
+
+// 锁云台模式
+static void gimbal_yaw_control()
+{
+    RC_Yaw_control();
+    RC_Pitch_control();
+}
+
+static void RC_Yaw_speed()
+{
     if (rc_ctrl.rc.ch[0] >= -660 && rc_ctrl.rc.ch[0] <= 660)
     {
         gimbal_Yaw.speed_target = -rc_ctrl.rc.ch[0] / 660.0 * MAX_SPEED;
@@ -95,20 +114,9 @@ static void RC_gimbal_control()
     {
         gimbal_Yaw.speed_target = 0;
     }
-
-    // Pitch轴
-    // 1600 < gimbal_Pitch.angle_target < 3400
-    if (rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1] <= 660)
-    {
-        gimbal_Pitch.angle_target += rc_ctrl.rc.ch[1] / 660.0 * 1;
-        detel_calc2(&gimbal_Pitch.angle_target);
-
-        gimbal_Pitch.speed_target = gimbal_Pitch_PID_cal(&gimbal_Pitch.pid_angle, gimbal_Pitch.motor_info.rotor_angle, gimbal_Pitch.angle_target);
-    }
 }
 
-// 锁云台模式
-static void gimbal_yaw_control()
+static void RC_Yaw_control()
 {
     if (rc_ctrl.rc.ch[0] >= -660 && rc_ctrl.rc.ch[0] <= 660)
     {
@@ -122,7 +130,12 @@ static void gimbal_yaw_control()
     {
         gimbal_Yaw.angle_target = 0;
     }
+}
 
+static void RC_Pitch_control()
+{
+    // Pitch轴
+    // 1600 < gimbal_Pitch.angle_target < 3400
     if (rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1] <= 660)
     {
         gimbal_Pitch.angle_target += rc_ctrl.rc.ch[1] / 660.0 * 1;
