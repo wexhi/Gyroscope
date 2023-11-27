@@ -103,7 +103,7 @@ static void RC_gimbal_control()
         gimbal_Pitch.angle_target += rc_ctrl.rc.ch[1] / 660.0 * 1;
         detel_calc2(&gimbal_Pitch.angle_target);
 
-        gimbal_Pitch.speed_target = pid_calc(&gimbal_Pitch.pid_angle, gimbal_Pitch.motor_info.rotor_angle, gimbal_Pitch.angle_target);
+        gimbal_Pitch.speed_target = gimbal_Pitch_PID_cal(&gimbal_Pitch.pid_angle, gimbal_Pitch.motor_info.rotor_angle, gimbal_Pitch.angle_target);
     }
 }
 
@@ -116,7 +116,7 @@ static void gimbal_yaw_control()
 
         detel_calc(&gimbal_Yaw.angle_target);
 
-        gimbal_Yaw.speed_target = gimbal_PID_calc(&gimbal_Yaw.pid_angle, INS.Yaw, gimbal_Yaw.angle_target);
+        gimbal_Yaw.speed_target = gimbal_Yaw_PID_calc(&gimbal_Yaw.pid_angle, INS.Yaw, gimbal_Yaw.angle_target);
     }
     else
     {
@@ -128,7 +128,7 @@ static void gimbal_yaw_control()
         gimbal_Pitch.angle_target += rc_ctrl.rc.ch[1] / 660.0 * 1;
         detel_calc2(&gimbal_Pitch.angle_target);
 
-        gimbal_Pitch.speed_target = pid_calc(&gimbal_Pitch.pid_angle, gimbal_Pitch.motor_info.rotor_angle, gimbal_Pitch.angle_target);
+        gimbal_Pitch.speed_target = gimbal_Pitch_PID_cal(&gimbal_Pitch.pid_angle, gimbal_Pitch.motor_info.rotor_angle, gimbal_Pitch.angle_target);
     }
 }
 
