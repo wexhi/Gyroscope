@@ -53,7 +53,7 @@ static void Gimbal_loop_Init()
     gimbal_Yaw.pid_angle_parameter[0] = 5, gimbal_Yaw.pid_angle_parameter[1] = 0, gimbal_Yaw.pid_angle_parameter[2] = 0;
     gimbal_Yaw.angle_target = 0;
 
-    gimbal_Pitch.pid_parameter[0] = 80, gimbal_Pitch.pid_parameter[1] = 0, gimbal_Pitch.pid_parameter[2] = 10;
+    gimbal_Pitch.pid_parameter[0] = 60, gimbal_Pitch.pid_parameter[1] = 0, gimbal_Pitch.pid_parameter[2] = 10;
     gimbal_Pitch.pid_angle_parameter[0] = 1, gimbal_Pitch.pid_angle_parameter[1] = 0, gimbal_Pitch.pid_angle_parameter[2] = 0;
     gimbal_Pitch.angle_target = 2900;
 
@@ -138,7 +138,7 @@ static void RC_Pitch_control()
     // 1600 < gimbal_Pitch.angle_target < 3400
     if (rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1] <= 660)
     {
-        gimbal_Pitch.angle_target += rc_ctrl.rc.ch[1] / 660.0 * 1;
+        gimbal_Pitch.angle_target += rc_ctrl.rc.ch[1] / 660.0 * 0.8;
         detel_calc2(&gimbal_Pitch.angle_target);
 
         gimbal_Pitch.speed_target = gimbal_Pitch_PID_cal(&gimbal_Pitch.pid_angle, gimbal_Pitch.motor_info.rotor_angle, gimbal_Pitch.angle_target);
@@ -166,9 +166,9 @@ static void detel_calc2(fp32 *angle)
     else if (*angle < 0)
         *angle += 8192;
 
-    if (*angle > MAX_ANGLE)
+    if (*angle >= MAX_ANGLE)
         *angle = MAX_ANGLE;
 
-    else if (*angle < MIN_ANGLE)
+    else if (*angle <= MIN_ANGLE)
         *angle = MIN_ANGLE;
 }
