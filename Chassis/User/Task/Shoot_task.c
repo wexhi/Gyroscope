@@ -50,12 +50,12 @@ static void Shooter_Inint(void)
 static void model_choice(void)
 {
     // 取消注释开始发射
-    // friction_control();
+    friction_control();
     if (rc_ctrl.rc.s[1] == 1)
     {
         // 发射
-        // dial_control();
-        // bay_control();
+        dial_control();
+        bay_control();
     }
     else
     {
