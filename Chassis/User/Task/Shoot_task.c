@@ -71,7 +71,7 @@ static void dial_control(void)
     if (rc_ctrl.rc.s[1] == 1)
     {
         LEDR_OFF();
-        shooter.dial_speed_target = 2000;
+        shooter.dial_speed_target = 6000;
     }
     else
     {
@@ -82,8 +82,8 @@ static void dial_control(void)
 // 摩擦轮电机控制
 static void friction_control(void)
 {
-    shooter.friction_speed_target[0] = 2000;
-    shooter.friction_speed_target[1] = -2000;
+    shooter.friction_speed_target[0] = 6000;
+    shooter.friction_speed_target[1] = -6000;
 }
 
 // 弹舱电机控制
