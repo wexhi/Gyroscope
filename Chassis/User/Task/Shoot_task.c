@@ -36,9 +36,9 @@ static void Shooter_Inint(void)
     shooter.pid_bay_para[0] = 10, shooter.pid_bay_para[1] = 0, shooter.pid_bay_para[2] = 0;
 
     // 初始化pid结构体
-    pid_init(&shooter.pid_dial, shooter.pid_dial_para, 8000, 8000);
-    pid_init(&shooter.pid_friction, shooter.pid_friction_para, 8000, 8000);
-    pid_init(&shooter.pid_bay, shooter.pid_bay_para, 8000, 8000);
+    pid_init(&shooter.pid_dial, shooter.pid_dial_para, 10000, 10000);
+    pid_init(&shooter.pid_friction, shooter.pid_friction_para, 20000, 20000);
+    pid_init(&shooter.pid_bay, shooter.pid_bay_para, 10000, 10000);
 
     // 初始化速度目标
     shooter.dial_speed_target = 0;
@@ -82,8 +82,8 @@ static void dial_control(void)
 // 摩擦轮电机控制
 static void friction_control(void)
 {
-    shooter.friction_speed_target[0] = -6000;
-    shooter.friction_speed_target[1] = 6000;
+    shooter.friction_speed_target[0] = -20000;
+    shooter.friction_speed_target[1] = 20000;
 }
 
 // 弹舱电机控制
