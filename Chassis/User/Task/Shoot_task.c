@@ -71,7 +71,7 @@ static void dial_control(void)
     if (rc_ctrl.rc.s[1] == 1)
     {
         LEDR_OFF();
-        shooter.dial_speed_target = 6000;
+        shooter.dial_speed_target = 2000;
     }
     else
     {
