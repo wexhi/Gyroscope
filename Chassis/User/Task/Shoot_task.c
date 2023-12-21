@@ -50,18 +50,21 @@ static void Shooter_Inint(void)
 static void model_choice(void)
 {
     // 取消注释开始发射
-    friction_control();
-    if (rc_ctrl.rc.s[1] == 1)
+    bay_control();
+    // 取消注释开始发射
+    if (rc_ctrl.rc.s[1] == 3 || rc_ctrl.rc.s[1] == 1)
     {
         // 发射
+        friction_control();
         dial_control();
-        bay_control();
     }
     else
     {
         shooter.dial_speed_target = 0;
         shooter.bay_speed_target = 0;
         // 停止
+        shooter.friction_speed_target[0] = 0;
+        shooter.friction_speed_target[1] = 0;
     }
 }
 
@@ -82,8 +85,8 @@ static void dial_control(void)
 // 摩擦轮电机控制
 static void friction_control(void)
 {
-    shooter.friction_speed_target[0] = -20000;
-    shooter.friction_speed_target[1] = 20000;
+    shooter.friction_speed_target[0] = -8000;
+    shooter.friction_speed_target[1] = 8000;
 }
 
 // 弹舱电机控制
