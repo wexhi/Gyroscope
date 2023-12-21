@@ -6,8 +6,8 @@
 
 #define RC_MAX 660
 #define RC_MIN -660
-#define motor_max 900
-#define motor_min -900
+#define motor_max 2000
+#define motor_min -2000
 #define angle_valve 5
 #define angle_weight 55
 
@@ -68,7 +68,7 @@ void Chassis_task(void const *pvParameters)
 
 static void Chassis_Init()
 {
-  chassis.pid_parameter[0] = 30, chassis.pid_parameter[1] = 0.5, chassis.pid_parameter[2] = 10;
+  chassis.pid_parameter[0] = 30, chassis.pid_parameter[1] = 0.5, chassis.pid_parameter[2] = 0;
 
   for (uint8_t i = 0; i < 4; i++)
   {
