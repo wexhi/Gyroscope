@@ -55,8 +55,8 @@ static void model_choice(void)
     if (rc_ctrl.rc.s[1] == 3 || rc_ctrl.rc.s[1] == 1)
     {
         // 发射
-        friction_control();
-        dial_control();
+        // friction_control();
+        // dial_control();
     }
     else
     {

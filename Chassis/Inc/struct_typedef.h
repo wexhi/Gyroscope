@@ -20,9 +20,11 @@ typedef struct
     uint16_t can_id;        // ID号
     int16_t set_current;    // 发送信息
     uint16_t rotor_angle;   // 现在的角度
+    uint16_t last_angle;    // 上一次的角度
     int16_t rotor_speed;    // 现在的转速
     int16_t torque_current; // 实际转矩电流
     uint8_t temp;           // 电机温度
+    int32_t total_round;    // 电机总转数
 } motor_info_t;
 
 typedef struct
@@ -81,9 +83,9 @@ typedef struct
     pid_struct_t pid_friction; // 摩擦轮电机的pid结构体
     pid_struct_t pid_bay;      // 弹舱电机的pid结构体
 
-    int16_t dial_speed_target;     // 拨盘电机的目标速度
+    int16_t dial_speed_target;        // 拨盘电机的目标速度
     int16_t friction_speed_target[2]; // 摩擦轮电机的目标速度
-    int16_t bay_speed_target;      // 弹舱电机的目标速度
+    int16_t bay_speed_target;         // 弹舱电机的目标速度
 
 } shooter_t;
 

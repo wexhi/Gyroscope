@@ -1,4 +1,5 @@
 #include "Chassis_task.h"
+#include "Gimbal_task.h"
 #include "cmsis_os.h"
 #include "INS_task.h"
 #include "exchange.h"
@@ -16,12 +17,13 @@ chassis_t chassis;
 pid_struct_t supercap_pid;
 motor_info_t motor_info_chassis[10]; // 电机信息结构体
 fp32 superpid[3] = {120, 0.1, 0};
+fp32 Down_abs_angle;
 
 int8_t chassis_mode;
 
 extern RC_ctrl_t rc_ctrl; // 遥控器信息结构体
 extern float powerdata[4];
-
+extern gimbal_t gimbal_Yaw;
 uint8_t rc[18];
 
 static void Chassis_Init();
@@ -46,6 +48,9 @@ static void chassis_current_give();
 // 运动解算
 static void chassis_motol_speed_calculate();
 
+// 获取上下C板角度差
+static void get_UpDown_Err();
+
 void Chassis_task(void const *pvParameters)
 {
   Chassis_Init();
@@ -53,6 +58,8 @@ void Chassis_task(void const *pvParameters)
   for (;;) // 底盘运动任务
   {
     Chassis_loop_Init();
+    
+    get_UpDown_Err();
 
     // 选择底盘运动模式
     mode_chooce();
@@ -100,7 +107,7 @@ static void mode_chooce()
     LEDB_ON(); // BLUE LED
     LEDR_OFF();
     LEDG_OFF();
-    //gyroscope();
+    // gyroscope();
   }
   else if (rc_ctrl.rc.s[0] == 2)
   {
@@ -205,4 +212,32 @@ static void RC_Move(void)
 static void gyroscope(void)
 {
   chassis.Wz = 900;
+}
+
+// 获取上下C板角度差
+static void get_UpDown_Err()
+{
+  // static fp32 Down_abs_angle;
+  Down_abs_angle = gimbal_Yaw.motor_info.rotor_angle / 8192.0f * 360.0f / 1.5f;
+  // if (rc_ctrl.rc.s[0] == 1)
+  // {
+  //   chassis.imu_err = INS.Yaw - UP_C_angle.yaw;
+  // }
+  // else
+  // {
+  //   chassis.err_angle = INS.Yaw - UP_C_angle.yaw - chassis.imu_err;
+  // }
+
+  // // 越界处理,保证转动方向不变
+  // if (chassis.err_angle < -180) //	越界时：180 -> -180
+  // {
+  //   chassis.err_angle += 360;
+  // }
+
+  // else if (chassis.err_angle > 180) //	越界时：-180 -> 180
+  // {
+  //   chassis.err_angle -= 360;
+  // }
+
+  // chassis.err_angle_rad = chassis.err_angle / 57.3f;
 }

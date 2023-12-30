@@ -62,17 +62,27 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) // 接受中断�
   {
     uint8_t rx_data[8];
     HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data); // receive can1 data
-    if (rx_header.StdId == 0x55)                                   // 上C向下C传IMU数据
-    {
-    }
+    // if (rx_header.StdId == 0x55)                                   // 上C向下C传IMU数据
+    // {
+    // }
 
     // 云台电机信息接收
     if (rx_header.StdId == 0x209) // 判断标识符，标识符为0x204+ID
     {
+      gimbal_Yaw.motor_info.last_angle = gimbal_Yaw.motor_info.rotor_angle;
       gimbal_Yaw.motor_info.rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
       gimbal_Yaw.motor_info.rotor_speed = ((rx_data[2] << 8) | rx_data[3]);
       gimbal_Yaw.motor_info.torque_current = ((rx_data[4] << 8) | rx_data[5]);
       gimbal_Yaw.motor_info.temp = rx_data[6];
+      // 多圈角度计算,前提是假设两次采样间电机转过的角度小于180°
+      if (gimbal_Yaw.motor_info.rotor_angle - gimbal_Yaw.motor_info.last_angle > 4096)
+      {
+        gimbal_Yaw.motor_info.total_round--;
+      }
+      else if (gimbal_Yaw.motor_info.rotor_angle - gimbal_Yaw.motor_info.last_angle < -4096)
+      {
+        gimbal_Yaw.motor_info.total_round++;
+      }
     }
 
     // // 云台电机信息接收
@@ -125,7 +135,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) // 接受中断�
       gimbal_Pitch.motor_info.torque_current = ((rx_data[4] << 8) | rx_data[5]);
       gimbal_Pitch.motor_info.temp = rx_data[6];
     }
-    
+
     if (rx_header.StdId == 0x211)
     {
 
