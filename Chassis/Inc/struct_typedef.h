@@ -25,6 +25,7 @@ typedef struct
     int16_t torque_current; // 实际转矩电流
     uint8_t temp;           // 电机温度
     int32_t total_round;    // 电机总转数
+    float total_angle;      // 电机的总角度
 } motor_info_t;
 
 typedef struct
@@ -68,6 +69,9 @@ typedef struct
     pid_struct_t pid[4];        // 底盘电机的pid结构体
     int16_t speed_target[4];    // 底盘电机的目标速度
     int16_t Vx, Vy, Wz;         // 底盘电机的目标速度
+    float err_angle;             // 下板与上板的角度差
+    float err_angle_rad;         // 下板与上板的角度差(弧度制)
+    float imu_err;               // 修正陀螺仪漂移量
 } chassis_t;
 
 typedef struct

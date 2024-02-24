@@ -83,6 +83,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) // 接受中断�
       {
         gimbal_Yaw.motor_info.total_round++;
       }
+      gimbal_Yaw.motor_info.total_angle = gimbal_Yaw.motor_info.rotor_angle + gimbal_Yaw.motor_info.total_round * 8192;
     }
 
     // // 云台电机信息接收
