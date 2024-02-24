@@ -20,7 +20,7 @@ chassis_t chassis;
 pid_struct_t supercap_pid;
 motor_info_t motor_info_chassis[10]; // 电机信息结构体
 fp32 superpid[3] = {120, 0.1, 0};
-float Down_abs_angle;
+float Down_abs_angle,Down_init_angle,UP_abs_angle;
 
 int8_t chassis_mode;
 
@@ -65,7 +65,7 @@ void Chassis_task(void const *pvParameters)
   {
     Chassis_loop_Init();
 
-    get_UpDown_Err();
+    // get_UpDown_Err();
 
     // 选择底盘运动模式
     mode_chooce();
@@ -90,6 +90,7 @@ static void Chassis_Init()
   pid_init(&supercap_pid, superpid, 3000, 3000); // init pid parameter, kp=40, ki=3, kd=0, output limit = 16384
 
   chassis.Vx = 0, chassis.Vy = 0, chassis.Wz = 0;
+  Down_init_angle = gimbal_Yaw.motor_info.total_angle;
 }
 
 static void Chassis_loop_Init()
@@ -208,7 +209,7 @@ static void RC_Move(void)
   chassis.Vy = rc_ctrl.rc.ch[2] * RC_OFFSET; // 左右输入
   chassis.Wz = rc_ctrl.rc.ch[4] * RC_OFFSET; // 旋转输入
 
-  rotate();
+  // rotate();
 
   /*************记得加上线性映射***************/
   // chassis.Vx = map_range(chassis.Vx, RC_MIN, RC_MAX, motor_min, motor_max);
@@ -228,16 +229,27 @@ static void gyroscope(void)
  */
 static void get_UpDown_Err()
 {
+  UP_abs_angle = INS.Yaw;
   // 获取底盘的绝对角度
-  Down_abs_angle = fmod(gimbal_Yaw.motor_info.total_angle / 8192.0f * 360.0f / 1.5f, 360.0);
+  Down_abs_angle = fmod((gimbal_Yaw.motor_info.total_angle - Down_init_angle) / 8192.0f * 360.0f / 1.5f, 360.0);
+  if (Down_abs_angle > 180)
+  {
+    Down_abs_angle -= 360;
+  }
+  else if (Down_abs_angle < -180)
+  {
+    Down_abs_angle += 360;
+  }
+
+
   // 获取底盘与云台的角度差
   if (rc_ctrl.rc.s[0] == 1)
   {
-    chassis.imu_err = Down_abs_angle + INS.Yaw;
+    chassis.imu_err = (Down_abs_angle + UP_abs_angle) / 2.0f;
   }
   else
   {
-    chassis.err_angle = (Down_abs_angle + INS.Yaw - chassis.imu_err) / 2.0f;
+    chassis.err_angle = (Down_abs_angle + UP_abs_angle) / 2.0f - chassis.imu_err;
   }
 
   // 越界处理,保证转动方向不变
