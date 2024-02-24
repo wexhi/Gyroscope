@@ -7,6 +7,7 @@
 
 #define RC_MAX 660
 #define RC_MIN -660
+#define RC_OFFSET 2000 / 660
 #define motor_max 2000
 #define motor_min -2000
 #define angle_valve 5
@@ -198,14 +199,14 @@ static int16_t map_range(int value, int from_min, int from_max, int to_min, int 
 static void RC_Move(void)
 {
   // 从遥控器获取控制输入
-  chassis.Vx = rc_ctrl.rc.ch[3]; // 前后输入
-  chassis.Vy = rc_ctrl.rc.ch[2]; // 左右输入
-  chassis.Wz = rc_ctrl.rc.ch[4]; // 旋转输入
+  chassis.Vx = rc_ctrl.rc.ch[3] * RC_OFFSET; // 前后输入
+  chassis.Vy = rc_ctrl.rc.ch[2] * RC_OFFSET; // 左右输入
+  chassis.Wz = rc_ctrl.rc.ch[4] * RC_OFFSET; // 旋转输入
 
   /*************记得加上线性映射***************/
-  chassis.Vx = map_range(chassis.Vx, RC_MIN, RC_MAX, motor_min, motor_max);
-  chassis.Vy = map_range(chassis.Vy, RC_MIN, RC_MAX, motor_min, motor_max);
-  chassis.Wz = map_range(chassis.Wz, RC_MIN, RC_MAX, motor_min, motor_max);
+  // chassis.Vx = map_range(chassis.Vx, RC_MIN, RC_MAX, motor_min, motor_max);
+  // chassis.Vy = map_range(chassis.Vy, RC_MIN, RC_MAX, motor_min, motor_max);
+  // chassis.Wz = map_range(chassis.Wz, RC_MIN, RC_MAX, motor_min, motor_max);
 }
 
 // 小陀螺模式
