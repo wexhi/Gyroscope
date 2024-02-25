@@ -67,7 +67,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) // 接受中断�
     // }
 
     // 云台电机信息接收
-    if (rx_header.StdId == 0x209) // 判断标识符，标识符为0x204+ID
+    if (rx_header.StdId == 0x205) // 判断标识符，标识符为0x204+ID 5号ID是5 无人机ID是1
     {
       gimbal_Yaw.motor_info.last_angle = gimbal_Yaw.motor_info.rotor_angle;
       gimbal_Yaw.motor_info.rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
