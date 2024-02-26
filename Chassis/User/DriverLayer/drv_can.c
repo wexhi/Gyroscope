@@ -67,24 +67,6 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) // 接受中断�
     // }
 
     // 云台电机信息接收
-    if (rx_header.StdId == 0x205) // 判断标识符，标识符为0x204+ID 5号ID是5 无人机ID是1
-    {
-      gimbal_Yaw.motor_info.last_angle = gimbal_Yaw.motor_info.rotor_angle;
-      gimbal_Yaw.motor_info.rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
-      gimbal_Yaw.motor_info.rotor_speed = ((rx_data[2] << 8) | rx_data[3]);
-      gimbal_Yaw.motor_info.torque_current = ((rx_data[4] << 8) | rx_data[5]);
-      gimbal_Yaw.motor_info.temp = rx_data[6];
-      // 多圈角度计算,前提是假设两次采样间电机转过的角度小于180°
-      if (gimbal_Yaw.motor_info.rotor_angle - gimbal_Yaw.motor_info.last_angle > 4096)
-      {
-        gimbal_Yaw.motor_info.total_round--;
-      }
-      else if (gimbal_Yaw.motor_info.rotor_angle - gimbal_Yaw.motor_info.last_angle < -4096)
-      {
-        gimbal_Yaw.motor_info.total_round++;
-      }
-      gimbal_Yaw.motor_info.total_angle = gimbal_Yaw.motor_info.rotor_angle + gimbal_Yaw.motor_info.total_round * 8192;
-    }
 
     // // 云台电机信息接收
     // if (rx_header.StdId == 0x20b) // 判断标识符，标识符为0x204+ID
@@ -115,28 +97,46 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) // 接受中断�
     uint8_t rx_data[8];
     HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data); // receive can2 data
     // 發射機構电机信息接收
-    if ((rx_header.StdId >= 0x205)     // 205-208
-        && (rx_header.StdId <= 0x208)) // 判断标识符，标识符为0x200+ID
+    if ((rx_header.StdId >= 0x201)     // 201-203
+        && (rx_header.StdId <= 0x203)) // 判断标识符，标识符为0x200+ID
     {
-      uint8_t index = rx_header.StdId - 0x205; // get motor index by can_id
+      uint8_t index = rx_header.StdId - 0x201; // get motor index by can_id
       shooter.motor_info[index].rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
       shooter.motor_info[index].rotor_speed = ((rx_data[2] << 8) | rx_data[3]);
       shooter.motor_info[index].torque_current = ((rx_data[4] << 8) | rx_data[5]);
       shooter.motor_info[index].temp = rx_data[6];
-      if (index == 0)
-      {
-        can_cnt_1++;
-      }
     }
+    //   if (index == 0)
+    //   {
+    //     can_cnt_1++;
+    //   }
+    // }
     // 云台电机信息接收
-    if (rx_header.StdId == 0x20b) // 判断标识符，标识符为0x204+ID
+    if (rx_header.StdId == 0x209) // 判断标识符，标识符为0x204+ID
     {
       gimbal_Pitch.motor_info.rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
       gimbal_Pitch.motor_info.rotor_speed = ((rx_data[2] << 8) | rx_data[3]);
       gimbal_Pitch.motor_info.torque_current = ((rx_data[4] << 8) | rx_data[5]);
       gimbal_Pitch.motor_info.temp = rx_data[6];
     }
-
+    if (rx_header.StdId == 0x20a) // 判断标识符，标识符为0x204+ID 5号ID是5 无人机ID是1
+    {
+      gimbal_Yaw.motor_info.last_angle = gimbal_Yaw.motor_info.rotor_angle;
+      gimbal_Yaw.motor_info.rotor_angle = ((rx_data[0] << 8) | rx_data[1]);
+      gimbal_Yaw.motor_info.rotor_speed = ((rx_data[2] << 8) | rx_data[3]);
+      gimbal_Yaw.motor_info.torque_current = ((rx_data[4] << 8) | rx_data[5]);
+      gimbal_Yaw.motor_info.temp = rx_data[6];
+      // 多圈角度计算,前提是假设两次采样间电机转过的角度小于180°
+      if (gimbal_Yaw.motor_info.rotor_angle - gimbal_Yaw.motor_info.last_angle > 4096)
+      {
+        gimbal_Yaw.motor_info.total_round--;
+      }
+      else if (gimbal_Yaw.motor_info.rotor_angle - gimbal_Yaw.motor_info.last_angle < -4096)
+      {
+        gimbal_Yaw.motor_info.total_round++;
+      }
+      gimbal_Yaw.motor_info.total_angle = gimbal_Yaw.motor_info.rotor_angle + gimbal_Yaw.motor_info.total_round * 8192;
+    }
     if (rx_header.StdId == 0x211)
     {
 

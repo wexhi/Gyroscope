@@ -51,12 +51,13 @@ static void model_choice(void)
 {
     // 取消注释开始发射
     bay_control();
+    // friction_control();
     // 取消注释开始发射
     if (rc_ctrl.rc.s[1] == 3 || rc_ctrl.rc.s[1] == 1)
     {
         // 发射
-        // friction_control();
-        // dial_control();
+        friction_control();
+        dial_control();
     }
     else
     {
@@ -85,8 +86,8 @@ static void dial_control(void)
 // 摩擦轮电机控制
 static void friction_control(void)
 {
-    shooter.friction_speed_target[0] = -8000;
-    shooter.friction_speed_target[1] = 8000;
+    shooter.friction_speed_target[0] = -1000;
+    shooter.friction_speed_target[1] = 1000;
 }
 
 // 弹舱电机控制
@@ -94,6 +95,7 @@ static void bay_control(void)
 {
     // 暂留
     shooter.bay_speed_target = 0;
+
 }
 
 // 给电流
@@ -103,6 +105,6 @@ static void shooter_current_given(void)
     shooter.motor_info[1].set_current = pid_calc(&shooter.pid_bay, shooter.motor_info[1].rotor_speed, shooter.bay_speed_target);              // 弹舱电机
     shooter.motor_info[2].set_current = pid_calc(&shooter.pid_friction, shooter.motor_info[2].rotor_speed, shooter.friction_speed_target[0]); // 摩擦轮电机
     shooter.motor_info[3].set_current = pid_calc(&shooter.pid_friction, shooter.motor_info[3].rotor_speed, shooter.friction_speed_target[1]); // 摩擦轮电机
-    set_motor_current_shoot(1, shooter.motor_info[0].set_current, shooter.motor_info[1].set_current, shooter.motor_info[2].set_current, shooter.motor_info[3].set_current);
+    set_motor_current_shoot(0, shooter.motor_info[0].set_current, shooter.motor_info[2].rotor_speed, shooter.motor_info[3].set_current, 0);
     // set_curruent(MOTOR_3508_1, hcan1, shooter.motor_info[0].set_current, shooter.motor_info[1].set_current, shooter.motor_info[2].set_current, shooter.motor_info[3].set_current);
 }

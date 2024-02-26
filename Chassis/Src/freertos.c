@@ -137,7 +137,6 @@ void MX_FREERTOS_Init(void)
   /* Create the thread(s) */
   /* definition and creation of INSTask */
 
-
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   osThreadDef(INSTask, StartINSTask, osPriorityNormal, 0, 2048);
@@ -146,8 +145,8 @@ void MX_FREERTOS_Init(void)
   osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
-  osThreadDef(Chassistask, Chassis_task, osPriorityRealtime, 0, 512); // �����ƶ�����
-  Chassis_taskHandle = osThreadCreate(osThread(Chassistask), NULL);
+  // osThreadDef(Chassistask, Chassis_task, osPriorityRealtime, 0, 512); // �����ƶ�����
+  // Chassis_taskHandle = osThreadCreate(osThread(Chassistask), NULL);
 
   osThreadDef(UItask, UI_Task, osPriorityRealtime, 0, 512);
   UI_taskHandle = osThreadCreate(osThread(UItask), NULL);
