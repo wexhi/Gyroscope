@@ -4,6 +4,9 @@
 #include "exchange.h"
 #include "drv_can.h"
 
+#define MAX_DIAL_SPEED 500      // 拨盘电机速度，如果方向反了，改变正负号
+#define MAX_FRICTION_SPEED 1000 // 摩擦轮电机速度，可以适当增大，可以改变正负号
+
 shooter_t shooter; // 发射机构信息结构体
 // 电机0为拨盘电机，电机1为弹舱盖电机，电机2、3为摩擦轮电机
 
@@ -75,7 +78,7 @@ static void dial_control(void)
     if (rc_ctrl.rc.s[1] == 1)
     {
         LEDR_OFF();
-        shooter.dial_speed_target = 2000;
+        shooter.dial_speed_target = MAX_DIAL_SPEED;
     }
     else
     {
@@ -86,8 +89,8 @@ static void dial_control(void)
 // 摩擦轮电机控制
 static void friction_control(void)
 {
-    shooter.friction_speed_target[0] = -1000;
-    shooter.friction_speed_target[1] = 1000;
+    shooter.friction_speed_target[0] = -MAX_FRICTION_SPEED;
+    shooter.friction_speed_target[1] = MAX_FRICTION_SPEED;
 }
 
 // 弹舱电机控制
@@ -95,7 +98,6 @@ static void bay_control(void)
 {
     // 暂留
     shooter.bay_speed_target = 0;
-
 }
 
 // 给电流
