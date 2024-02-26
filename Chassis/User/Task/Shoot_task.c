@@ -36,9 +36,9 @@ static void Shooter_Inint(void)
     shooter.pid_bay_para[0] = 10, shooter.pid_bay_para[1] = 0, shooter.pid_bay_para[2] = 0;
 
     // 初始化pid结构体
-    pid_init(&shooter.pid_dial, shooter.pid_dial_para, 10000, 10000);
-    pid_init(&shooter.pid_friction, shooter.pid_friction_para, 20000, 20000);
-    pid_init(&shooter.pid_bay, shooter.pid_bay_para, 10000, 10000);
+    pid_init(&shooter.pid_dial, shooter.pid_dial_para, 16384, 16384);
+    pid_init(&shooter.pid_friction, shooter.pid_friction_para, 16384, 16384);
+    pid_init(&shooter.pid_bay, shooter.pid_bay_para, 16384, 16384);
 
     // 初始化速度目标
     shooter.dial_speed_target = 0;
