@@ -4,8 +4,8 @@
 #include "exchange.h"
 #include "drv_can.h"
 
-#define MAX_DIAL_SPEED 500      // 拨盘电机速度，如果方向反了，改变正负号
-#define MAX_FRICTION_SPEED 1000 // 摩擦轮电机速度，可以适当增大，可以改变正负号
+#define MAX_DIAL_SPEED 300      // 拨盘电机速度，如果方向反了，改变正负号
+#define MAX_FRICTION_SPEED 800 // 摩擦轮电机速度，可以适当增大，可以改变正负号
 
 shooter_t shooter; // 发射机构信息结构体
 // 电机0为拨盘电机，电机1为弹舱盖电机，电机2、3为摩擦轮电机
@@ -56,7 +56,7 @@ static void model_choice(void)
     bay_control();
     // friction_control();
     // 取消注释开始发射
-    if (rc_ctrl.rc.s[1] == 3 || rc_ctrl.rc.s[1] == 1)
+    if (rc_ctrl.rc.s[0] == 3 || rc_ctrl.rc.s[0] == 1)
     {
         // 发射
         friction_control();
@@ -89,8 +89,8 @@ static void dial_control(void)
 // 摩擦轮电机控制
 static void friction_control(void)
 {
-    shooter.friction_speed_target[0] = -MAX_FRICTION_SPEED;
-    shooter.friction_speed_target[1] = MAX_FRICTION_SPEED;
+    shooter.friction_speed_target[0] = MAX_FRICTION_SPEED;
+    shooter.friction_speed_target[1] = -MAX_FRICTION_SPEED;
 }
 
 // 弹舱电机控制
@@ -107,6 +107,6 @@ static void shooter_current_given(void)
     shooter.motor_info[1].set_current = pid_calc(&shooter.pid_bay, shooter.motor_info[1].rotor_speed, shooter.bay_speed_target);              // 弹舱电机
     shooter.motor_info[2].set_current = pid_calc(&shooter.pid_friction, shooter.motor_info[2].rotor_speed, shooter.friction_speed_target[0]); // 摩擦轮电机
     shooter.motor_info[3].set_current = pid_calc(&shooter.pid_friction, shooter.motor_info[3].rotor_speed, shooter.friction_speed_target[1]); // 摩擦轮电机
-    set_motor_current_shoot(0, shooter.motor_info[0].set_current, shooter.motor_info[2].rotor_speed, shooter.motor_info[3].set_current, 0);
+    set_motor_current_shoot(0, shooter.motor_info[0].set_current, shooter.motor_info[2].set_current, shooter.motor_info[3].set_current, 0);
     // set_curruent(MOTOR_3508_1, hcan1, shooter.motor_info[0].set_current, shooter.motor_info[1].set_current, shooter.motor_info[2].set_current, shooter.motor_info[3].set_current);
 }
