@@ -16,12 +16,10 @@
 #define angle_weight 55
 
 chassis_t chassis;
-
 pid_struct_t supercap_pid;
 motor_info_t motor_info_chassis[10]; // 电机信息结构体
 fp32 superpid[3] = {120, 0.1, 0};
-float Down_abs_angle,Down_init_angle,UP_abs_angle;
-
+float Down_abs_angle, Down_init_angle, UP_abs_angle;
 int8_t chassis_mode;
 
 extern RC_ctrl_t rc_ctrl; // 遥控器信息结构体
@@ -140,7 +138,6 @@ static void mode_chooce()
 // 运动解算
 static void chassis_motol_speed_calculate()
 {
-
   // 根据分解的速度调整电机速度目标
   chassis.speed_target[CHAS_LF] = -chassis.Wz + chassis.Vx - chassis.Vy;
   chassis.speed_target[CHAS_RF] = -chassis.Wz - chassis.Vx - chassis.Vy;
@@ -240,7 +237,6 @@ static void get_UpDown_Err()
   {
     Down_abs_angle += 360;
   }
-
 
   // 获取底盘与云台的角度差
   if (rc_ctrl.rc.s[0] == 1)

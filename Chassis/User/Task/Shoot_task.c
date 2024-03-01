@@ -4,7 +4,7 @@
 #include "exchange.h"
 #include "drv_can.h"
 
-#define MAX_DIAL_SPEED 300      // 拨盘电机速度，如果方向反了，改变正负号
+#define MAX_DIAL_SPEED 300     // 拨盘电机速度，如果方向反了，改变正负号
 #define MAX_FRICTION_SPEED 800 // 摩擦轮电机速度，可以适当增大，可以改变正负号
 
 shooter_t shooter; // 发射机构信息结构体
@@ -108,5 +108,4 @@ static void shooter_current_given(void)
     shooter.motor_info[2].set_current = pid_calc(&shooter.pid_friction, shooter.motor_info[2].rotor_speed, shooter.friction_speed_target[0]); // 摩擦轮电机
     shooter.motor_info[3].set_current = pid_calc(&shooter.pid_friction, shooter.motor_info[3].rotor_speed, shooter.friction_speed_target[1]); // 摩擦轮电机
     set_motor_current_shoot(0, shooter.motor_info[0].set_current, shooter.motor_info[2].set_current, shooter.motor_info[3].set_current, 0);
-    // set_curruent(MOTOR_3508_1, hcan1, shooter.motor_info[0].set_current, shooter.motor_info[1].set_current, shooter.motor_info[2].set_current, shooter.motor_info[3].set_current);
 }
